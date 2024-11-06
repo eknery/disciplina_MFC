@@ -91,7 +91,7 @@ plot(x = ts,
 lines(x = markov2$ts,
      y = markov2$Y,
      type = "s",
-     col = "red",
+     col = "red"
 )
 
 ##################### SIMULANDO TENDÊNCIAS E RESTRIÇÕES ########################
@@ -126,5 +126,5 @@ plot(x = ts,
 lines(x = markov3$ts,
       y = markov3$Y,
       type = "s",
-      col = "darkgreen",
+      col = "darkgreen"
 )
