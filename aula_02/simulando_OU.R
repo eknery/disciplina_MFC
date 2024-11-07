@@ -146,5 +146,53 @@ lines(x = ts,
       lty = 2)
 
 ### PARA PENSAR:
-## Qual processo poderia levar a uma taxa de reversão maior? E uma taxa menor?
+## Qual processo biológico poderia aumentar ou diminuir a taxa de reversão? 
+
+
+################### EFEITO DE DIFERENTES TAXAS DE REVERSÃO ####################
+
+## Parâmetros do modelo OU
+# Taxa de variação
+sigma4 <- 0.1
+# Tendência central
+theta4 <- 1
+# Taxa de reversão
+alpha4 <- 0
+
+## Vetor para armazenar os valores da característica
+Y4 <- c()
+# valor inicial da característica
+Y4[1] <- 1 
+
+## Simualação
+for (i in 2:length(ts)) {
+  dS <- rnorm(1, mean = 0, sd = sigma4)  # variação estocástica
+  dD <- (alpha4 * (theta4 - Y4[i-1]) ) # variação determinística
+  Y4[i] <- Y4[i-1] + dD + dS
+}
+
+## Plot da simualação
+plot(x = ts, 
+     y = Y4, 
+     type = "l", 
+     col = "black", 
+     xlab = "Tempo (milhões de anos)", 
+     ylab = "Característica Y",
+     main = paste0(
+       "alpha (1): ", alpha, "  ",
+       "alpha (4): ", alpha4
+     )
+)
+lines(x = ts, 
+      y = Y, 
+      type = "l", 
+      col = "blue")
+lines(x = ts, 
+      y = rep(theta, length(ts)),
+      col = "blue",
+      type = "l", 
+      lty = 2)
+
+### PARA PENSAR:
+## O que representaria uma linhagem sem taxa de reversão? 
 
