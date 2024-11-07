@@ -1,12 +1,12 @@
 ############################ APRESENTAÇÃO DO MODELO ############################
 
 ## Parâmetros do modelo OU
+# Taxa de variação
+sigma <- 0.1
 # Tendência central
 theta <- 1  
 # Taxa de reversão
-alpha <- 0.25 
-# Taxa de variação
-sigma <- 3
+alpha <- 0.01
 
 ## Cenário temporal
 # tempo final (em milhões de anos)
@@ -21,26 +21,26 @@ Y <- c()
 # valor inicial da característica
 Y[1] <- 1 
 
-## Simulação do processo OU
+## Simualação
 for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma)  # variação estocástica
-  dD <- dt * (alpha * (theta - Y[i-1]) ) # variação determinística
+  dS <- rnorm(1, mean = 0, sd = sigma)  # variação estocástica
+  dD <- (alpha * (theta - Y[i-1]) ) # variação determinística
   Y[i] <- Y[i-1] + dD + dS
 }
 
-## Plot do processo OU
+## Plot da simualação
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
      
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
      main = paste0("Processo OU ",
+                   " sigma: ", sigma,
                    " theta: ", theta, 
-                   " alpha: ", alpha,
-                   " sigma: ", sigma
+                   " alpha: ", alpha
+                   
                   )
      )
 lines(x = ts, 
@@ -49,39 +49,38 @@ lines(x = ts,
       type = "l", 
       lty = 2)
 
-#################### SIMULANDO DIFERENTES ÓTIMOS ADAPTATIVOS ###################
+################### EFEITO DE DIFERENTES ÓTIMOS FENOTÍPICOS ###################
 
 ## Parâmetros do modelo OU
-# Tendência central
-theta2 <- 1.05
-# Taxa de reversão
-alpha2 <- 0.25 
 # Taxa de variação
-sigma2 <- 3
+sigma2 <- 0.1
+# Tendência central
+theta2 <- 2
+# Taxa de reversão
+alpha2 <- 0.01 
 
 ## Vetor para armazenar os valores da característica
-Y2 <- numeric(length(ts))
+Y2 <- c()
 # valor inicial da característica
 Y2[1] <- 1 
 
-## Simulação do processo OU
+## Simualação
 for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
-  dD <- dt * (alpha2 * (theta2 - Y[i-1]) ) # variação determinística
+  dS <- rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
+  dD <- (alpha2 * (theta2 - Y2[i-1]) ) # variação determinística
   Y2[i] <- Y2[i-1] + dD + dS
 }
 
-## Plot do processo OU
+## Plot da simualação
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica Y",
      main = paste0(
-              "theta1: ", theta, "  ",
-              "theta2: ", theta2
+              "theta (1): ", theta, "  ",
+              "theta (2): ", theta2
               )
      )
 lines(x = ts, 
@@ -94,44 +93,46 @@ lines(x = ts,
       type = "l", 
       lty = 2)
 lines(x = ts, 
-      y = rep(theta1, length(ts)),
+      y = rep(theta2, length(ts)),
       col = "red",
       type = "l", 
       lty = 2)
 
-################### SIMULANDO DIFERENTES PRESSÕES SELETIVAS ####################
+### PARA PENSAR:
+## O que faria duas linhagens-irmãs evoluírem ao redor de ótimos diferentes?
+
+################### EFEITO DE DIFERENTES TAXAS DE REVERSÃO ####################
 
 ## Parâmetros do modelo OU
+# Taxa de variação
+sigma3 <- 0.1
 # Tendência central
 theta3 <- 1
 # Taxa de reversão
-alpha3 <- 0.0025 
-# Taxa de variação
-sigma3 <- 3
+alpha3 <- 0.05 
 
 ## Vetor para armazenar os valores da característica
-Y3 <- numeric(length(ts))
+Y3 <- c()
 # valor inicial da característica
 Y3[1] <- 1 
 
-## Simulação do processo OU
+## Simualação
 for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
-  dD <- dt * (alpha3 * (theta3 - Y[i-1]) ) # variação determinística
+  dS <- rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
+  dD <- (alpha3 * (theta3 - Y3[i-1]) ) # variação determinística
   Y3[i] <- Y3[i-1] + dD + dS
 }
 
-## Plot do processo OU
+## Plot da simualação
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica Y",
      main = paste0(
-       "alpha1: ", alpha, "  ",
-       "alpha3: ", alpha3
+       "alpha (1): ", alpha, "  ",
+       "alpha (3): ", alpha3
         )
      )
 lines(x = ts, 
@@ -143,3 +144,7 @@ lines(x = ts,
       col = "blue",
       type = "l", 
       lty = 2)
+
+### PARA PENSAR:
+## Qual processo poderia levar a uma taxa de reversão maior? E uma taxa menor?
+

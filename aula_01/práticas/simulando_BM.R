@@ -170,4 +170,4 @@ lines(x = ts4,
       col = "black")
 
 ### PARA PENSAR:
-## A linhagem fóssil necessariamente reflete o fenótipo do último ancestral?
+## A linhagem fóssil necessariamente reflete o fenótipo do último ancestral comum?
