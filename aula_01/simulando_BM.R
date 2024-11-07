@@ -1,17 +1,13 @@
 ############################ APRESENTAÇÃO DO MODELO ############################
 
-## Parâmetros do modelo OU
-# Tendência central
-theta <- 1  
-# Taxa de reversão
-alpha <- 0.25 
+## Parâmetros do modelo BM
 # Taxa de variação
-sigma <- 3
+sigma <- 0.1
 
 ## Cenário temporal
 # tempo final (em milhões de anos)
 tf <- 1 
-# intervalo de tempo entre geração (em milhões de anos)
+# tempo entre geração (em milhões de anos)
 dt <- 0.0001  
 # vetor com o tempo de todas as gerações
 ts <- seq(0, tf, by = dt)  
@@ -21,125 +17,158 @@ Y <- c()
 # valor inicial da característica
 Y[1] <- 1 
 
-## Simulação do processo OU
+## Simulação do processo BM
 for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma)  # variação estocástica
-  dD <- dt * (alpha * (theta - Y[i-1]) ) # variação determinística
-  Y[i] <- Y[i-1] + dD + dS
+  dS <-  rnorm(1, mean = 0, sd = sigma)  # variação estocástica
+  Y[i] <- Y[i-1] + dS
 }
 
-## Plot do processo OU
+## Plot do processo BM
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
      
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
-     main = paste0("Processo OU ",
-                   " theta: ", theta, 
-                   " alpha: ", alpha,
+     main = paste0("BM ",
                    " sigma: ", sigma
                   )
      )
-lines(x = ts, 
-      y = rep(theta, length(ts)),
-      col = "blue",
-      type = "l", 
-      lty = 2)
 
-#################### SIMULANDO DIFERENTES ÓTIMOS ADAPTATIVOS ###################
+#################### SIMULANDO DIFERENTES TAXAS DE VARIAÇÂO ###################
 
-## Parâmetros do modelo OU
-# Tendência central
-theta2 <- 1.05
-# Taxa de reversão
-alpha2 <- 0.25 
+## Parâmetros do modelo BM
 # Taxa de variação
-sigma2 <- 3
+sigma2 <- 0.05
+
+## Cenário temporal
+# vetor com o tempo de todas as gerações
+ts2 <- ts
 
 ## Vetor para armazenar os valores da característica
-Y2 <- numeric(length(ts))
+Y2 <- c()
 # valor inicial da característica
 Y2[1] <- 1 
 
-## Simulação do processo OU
-for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
-  dD <- dt * (alpha2 * (theta2 - Y[i-1]) ) # variação determinística
-  Y2[i] <- Y2[i-1] + dD + dS
+## Simulação do processo BM
+for (i in 2:length(ts2)) {
+  dS <- rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
+  Y2[i] <- Y2[i-1] + dS
 }
 
 ## Plot do processo OU
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
+     
      xlab = "Tempo (milhões de anos)", 
-     ylab = "Característica Y",
-     main = paste0(
-              "theta1: ", theta, "  ",
-              "theta2: ", theta2
-              )
-     )
+     ylab = "Valor de Y",
+     main = paste0("BM ",
+                   " sigma (a): ", sigma,
+                   " sigma (b): ", sigma2
+                  )
+    )
 lines(x = ts, 
       y = Y2, 
       type = "l", 
       col = "red")
-lines(x = ts, 
-      y = rep(theta, length(ts)),
-      col = "blue",
-      type = "l", 
-      lty = 2)
-lines(x = ts, 
-      y = rep(theta1, length(ts)),
-      col = "red",
-      type = "l", 
-      lty = 2)
 
-################### SIMULANDO DIFERENTES PRESSÕES SELETIVAS ####################
+
+### PARA PENSAR:
+## O que faria duas linhagens-irmãs terem taxas de variação diferentes?
+
+
+################### SIMULANDO O EFEITO DO TEMPO DE GERAÇÃO ####################
 
 ## Parâmetros do modelo OU
-# Tendência central
-theta3 <- 1
-# Taxa de reversão
-alpha3 <- 0.0025 
 # Taxa de variação
-sigma3 <- 3
+sigma3 <- 0.1
+
+## Cenário temporal
+# intervalo de tempo entre geração (em milhões de anos)
+dt3 <- 0.001  
+# vetor com o tempo de todas as gerações
+ts3 <- seq(0, tf, by = dt3)  
 
 ## Vetor para armazenar os valores da característica
-Y3 <- numeric(length(ts))
+Y3 <- c()
 # valor inicial da característica
 Y3[1] <- 1 
 
 ## Simulação do processo OU
-for (i in 2:length(ts)) {
-  dS <- dt * rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
-  dD <- dt * (alpha3 * (theta3 - Y[i-1]) ) # variação determinística
-  Y3[i] <- Y3[i-1] + dD + dS
+for (i in 2:length(ts3)) {
+  dS <- rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
+  Y3[i] <- Y3[i-1] + dS
 }
 
 ## Plot do processo OU
 plot(x = ts, 
      y = Y, 
-     ylim = c(0.9,1.1),
      type = "l", 
      col = "blue", 
+     
      xlab = "Tempo (milhões de anos)", 
-     ylab = "Característica Y",
-     main = paste0(
-       "alpha1: ", alpha, "  ",
-       "alpha3: ", alpha3
-        )
+     ylab = "Valor de Y",
+     main = paste0("BM ",
+                   " dt (a): ", dt,
+                   " dt (c): ", dt3
      )
-lines(x = ts, 
+)
+lines(x = ts3, 
       y = Y3, 
       type = "l", 
       col = "purple")
-lines(x = ts, 
-      y = rep(theta, length(ts)),
-      col = "blue",
+
+
+### PARA PENSAR:
+## Qual é o efeito do tempo de geração sobre a evolução da característica?
+
+### IMPORTANTE:
+## Nos modelos de macroevolução, o tempo de geração é assumido como igual entre linhagens,
+## e apenas o tempo de divergência entre linhagens é levado em conta!
+
+############################# O DILEMA DOS FÓSSEIS ############################
+
+## Parâmetros do modelo OU
+# Taxa de variação
+sigma4 <- 0.1
+
+## Cenário temporal
+# intervalo de tempo entre geração (em milhões de anos)
+dt4 <- 0.0001  
+# vetor com o tempo de todas as gerações
+ts4 <- seq(0, tf/2, by = dt4)  
+
+## Vetor para armazenar os valores da característica
+Y4 <- c()
+# valor inicial da característica
+Y4[1] <- 1 
+
+## Simulação do processo OU
+for (i in 2:length(ts4) ) {
+  dS <- rnorm(1, mean = 0, sd = sigma4)  # variação estocástica
+  Y4[i] <- Y4[i-1] + dS
+}
+
+## Plot do processo OU
+plot(x = ts, 
+     y = Y, 
+     type = "l", 
+     col = "blue", 
+     
+     xlab = "Tempo (milhões de anos)", 
+     ylab = "Valor de Y",
+     main = paste0("BM ",
+                   " dt (a): ", dt,
+                   " dt (c): ", dt3
+     )
+)
+lines(x = ts4, 
+      y = Y4, 
       type = "l", 
-      lty = 2)
+      col = "black")
+
+### PARA PENSAR:
+## A linhagem fóssil necessariamente reflete o fenótipo do último ancestral?
