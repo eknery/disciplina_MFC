@@ -17,13 +17,13 @@ Y <- c()
 # valor inicial da característica
 Y[1] <- 1 
 
-## Simulação do processo BM
+## Simulação 
 for (i in 2:length(ts)) {
   dS <-  rnorm(1, mean = 0, sd = sigma)  # variação estocástica
   Y[i] <- Y[i-1] + dS
 }
 
-## Plot do processo BM
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 
@@ -51,13 +51,13 @@ Y2 <- c()
 # valor inicial da característica
 Y2[1] <- 1 
 
-## Simulação do processo BM
+## Simulação
 for (i in 2:length(ts2)) {
   dS <- rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
   Y2[i] <- Y2[i-1] + dS
 }
 
-## Plot do processo OU
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 
@@ -66,8 +66,8 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
      main = paste0("BM ",
-                   " sigma (a): ", sigma,
-                   " sigma (b): ", sigma2
+                   " sigma (1): ", sigma,
+                   " sigma (2): ", sigma2
                   )
     )
 lines(x = ts, 
@@ -79,10 +79,9 @@ lines(x = ts,
 ### PARA PENSAR:
 ## O que faria duas linhagens-irmãs terem taxas de variação diferentes?
 
-
 ################### SIMULANDO O EFEITO DO TEMPO DE GERAÇÃO ####################
 
-## Parâmetros do modelo OU
+## Parâmetros do modelo BM
 # Taxa de variação
 sigma3 <- 0.1
 
@@ -97,13 +96,13 @@ Y3 <- c()
 # valor inicial da característica
 Y3[1] <- 1 
 
-## Simulação do processo OU
+## Simulação
 for (i in 2:length(ts3)) {
   dS <- rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
   Y3[i] <- Y3[i-1] + dS
 }
 
-## Plot do processo OU
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 
@@ -112,8 +111,8 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
      main = paste0("BM ",
-                   " dt (a): ", dt,
-                   " dt (c): ", dt3
+                   " dt (1): ", dt,
+                   " dt (3): ", dt3
      )
 )
 lines(x = ts3, 
@@ -131,7 +130,7 @@ lines(x = ts3,
 
 ############################# O DILEMA DOS FÓSSEIS ############################
 
-## Parâmetros do modelo OU
+## Parâmetros do modelo BM
 # Taxa de variação
 sigma4 <- 0.1
 
@@ -152,7 +151,7 @@ for (i in 2:length(ts4) ) {
   Y4[i] <- Y4[i-1] + dS
 }
 
-## Plot do processo OU
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 
@@ -161,8 +160,8 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
      main = paste0("BM ",
-                   " dt (a): ", dt,
-                   " dt (c): ", dt3
+                   " tf (1): ", tf,
+                   " tf (4): ", tf/2
      )
 )
 lines(x = ts4, 
