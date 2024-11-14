@@ -63,8 +63,8 @@ plot(lambda_ar,las=1,cex.axis=0.9)
 K_gs<-phylosig(tree = bacteria.tree,
                x = genome_size,
                method= "K",
-               test= TRUE,
-               nsim=10000)
+               test = TRUE,
+               nsim = 10000)
 
 ### verificando resultados
 K_gs
@@ -72,8 +72,12 @@ plot(K_gs,las=1,cex.axis=0.9)
 
 
 ### testando sinal filogenético
-K_ar<-phylosig(bacteria.tree,ln_mutation,
-               test=TRUE,nsim=10000)
+K_ar<-phylosig(tree = bacteria.tree,
+               x = ln_mutation,
+               method= "K",
+               test = TRUE,
+               nsim = 10000)
+
 ### verificando resultados
 K_ar
 plot(K_ar,las=1,cex.axis=0.9)
