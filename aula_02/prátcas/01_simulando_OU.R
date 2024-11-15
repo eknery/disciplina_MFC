@@ -2,7 +2,7 @@
 
 ## Parâmetros do modelo OU
 # Taxa de variação
-sigma <- 0.1
+sigma_sq <- 0.1
 # Tendência central
 theta <- 1  
 # Taxa de reversão
@@ -23,7 +23,7 @@ Y[1] <- 1
 
 ## Simualação
 for (i in 2:length(ts)) {
-  dS <- rnorm(1, mean = 0, sd = sigma)  # variação estocástica
+  dS <- rnorm(1, mean = 0, sd = sqrt(sigma_sq) )  # variação estocástica
   dD <- (alpha * (theta - Y[i-1]) ) # variação determinística
   Y[i] <- Y[i-1] + dD + dS
 }
@@ -37,7 +37,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
      main = paste0("Processo OU ",
-                   " sigma: ", sigma,
+                   " sigma_sq: ", sigma_sq,
                    " theta: ", theta, 
                    " alpha: ", alpha
                    
@@ -53,9 +53,9 @@ lines(x = ts,
 
 ## Parâmetros do modelo OU
 # Taxa de variação
-sigma2 <- 0.1
+sigma_sq2 <- 0.1
 # Tendência central
-theta2 <- 2
+theta2 <- 3
 # Taxa de reversão
 alpha2 <- 0.01 
 
@@ -66,7 +66,7 @@ Y2[1] <- 1
 
 ## Simualação
 for (i in 2:length(ts)) {
-  dS <- rnorm(1, mean = 0, sd = sigma2)  # variação estocástica
+  dS <- rnorm(1, mean = 0, sd = sqrt(sigma_sq2) ) # variação estocástica
   dD <- (alpha2 * (theta2 - Y2[i-1]) ) # variação determinística
   Y2[i] <- Y2[i-1] + dD + dS
 }
@@ -105,7 +105,7 @@ lines(x = ts,
 
 ## Parâmetros do modelo OU
 # Taxa de variação
-sigma3 <- 0.1
+sigma_sq3 <- 0.1
 # Tendência central
 theta3 <- 1
 # Taxa de reversão
@@ -118,7 +118,7 @@ Y3[1] <- 1
 
 ## Simualação
 for (i in 2:length(ts)) {
-  dS <- rnorm(1, mean = 0, sd = sigma3)  # variação estocástica
+  dS <- rnorm(1, mean = 0, sd = sqrt(sigma_sq3) ) # variação estocástica
   dD <- (alpha3 * (theta3 - Y3[i-1]) ) # variação determinística
   Y3[i] <- Y3[i-1] + dD + dS
 }
@@ -149,11 +149,11 @@ lines(x = ts,
 ## Qual processo biológico poderia aumentar ou diminuir a taxa de reversão? 
 
 
-################### EFEITO DE DIFERENTES TAXAS DE REVERSÃO ####################
+################### EFEITO DE TAXAS DE REVERSÃO NULA ####################
 
 ## Parâmetros do modelo OU
 # Taxa de variação
-sigma4 <- 0.1
+sigma_sq4 <- 0.1
 # Tendência central
 theta4 <- 1
 # Taxa de reversão
@@ -166,7 +166,7 @@ Y4[1] <- 1
 
 ## Simualação
 for (i in 2:length(ts)) {
-  dS <- rnorm(1, mean = 0, sd = sigma4)  # variação estocástica
+  dS <- rnorm(1, mean = 0, sd = sqrt(sigma_sq4) ) # variação estocástica
   dD <- (alpha4 * (theta4 - Y4[i-1]) ) # variação determinística
   Y4[i] <- Y4[i-1] + dD + dS
 }
@@ -194,5 +194,5 @@ lines(x = ts,
       lty = 2)
 
 ### PARA PENSAR:
-## O que representaria uma linhagem sem taxa de reversão? 
+## O que representaria uma característica sem taxa de reversão? 
 
