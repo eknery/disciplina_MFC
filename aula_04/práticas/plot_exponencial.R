@@ -4,16 +4,26 @@ fx_exponencial = function(x, lambda) {lambda*exp(1)^(-lambda*x)}
 ### definindo parâmetos
 x_range <- seq(0, 10, by=0.1)
 
+q_vl = 0.32
 ### Criando o gráfico
-plot(x_range, fx_exponencial(lambda = 0.84, x = x_range), 
-     type="l", col="darkred",lwd=4,
-     xlab="tempo para transição", ylab="p(x)")
-lines(x = x_range,
-      y = fx_exponencial(lambda = 0.53, x = x_range),
-      type = "l", col = "orange", lwd=4
-)
-lines(x = x_range,
-      y = fx_exponencial(lambda = 0.16, x = x_range),
-      type = "l",col = "purple", lwd=4
+plot(x = x_range, 
+     y= dexp(x = x_range, rate = q_vl, log = FALSE) , 
+     type="l", col="darkgray",lwd= 6,
+     main = paste0("vermelho para laranja, q = ", q_vl),
+     xlab="tempo até a transição", ylab="p(x)"
 )
 
+q_vr = 0.35
+### Criando o gráfico
+plot(x = x_range, 
+     y= dexp(x = x_range, rate = q_vr, log = FALSE) , 
+     type="l", col="darkgray",lwd= 6,
+     main = paste0("vermelho para roxo, q = ", q_vr),
+     xlab="tempo até a transição", ylab="p(x)"
+)
+
+
+nloglik<- function(x,q) sum(-dexp(x=x,rate=q,log=T))
+
+xs = c(2.25)
+optimize(f= nloglik,x= xs,interval = c(0,10))

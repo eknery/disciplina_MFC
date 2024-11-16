@@ -2,12 +2,11 @@
 
 ## Parâmetros do modelo de Markov
 # Estados 
-estados <- c("0", "1", "2")
+estados <- c("0", "1")
 # taxas de transição entre estados (em milhões de anos)
-matriz_q <- matrix(c(1, 1, 1,
-                     1, 1, 1,
-                     1, 1, 1), 
-                   nrow = 3, byrow = TRUE)
+matriz_q <- matrix(c(-0.5, 0.5,
+                      0.5,-0.5), 
+                   nrow = 2, byrow = TRUE)
 rownames(matriz_q) <- estados
 colnames(matriz_q) <- estados
 # ver  matriz de transição
@@ -28,23 +27,18 @@ Y = yi
 
 while (ti < tf) {
     # Taxa de saída do estado atual
-    taxa <- matriz_q[yi, yi]
-    
+    q <- matriz_q[yi, yi]
     # Tempo até a próxima transição 
-    dt <- rexp(1, rate = taxa)
-    
+    dt <- rexp(1, rate = -q)
     # Rodar simulação até o tempo final
     if (ti + dt > tf) break
-      
       # Atualização de tempo
       ti <- ti + dt
       ts <- c(ts, ti)
-    
       # Probabilidades de transição para os outros estados
       probs_transicao <- matriz_q[yi, ]
       probs_transicao[yi] <- 0  # Não podemos mudar para o estado atual
-      probs_transicao <- probs_transicao / taxa  # Normalizar para probabilidades
-    
+      probs_transicao <- probs_transicao / (-q)  # Normalizar para probabilidades
       # Escolher o próximo estado
       yi <- sample(estados, 1, prob = probs_transicao)
       # Armazenar estado novo
@@ -52,8 +46,8 @@ while (ti < tf) {
 }
 
 plot(x = ts, 
-     y = Y, 
-     type = "s",
+     y = as.numeric(Y), 
+     type = "l",
      col = "blue",
      xlab = "Tempo (milhões de anos)", 
      ylab = "Estado de Y",
