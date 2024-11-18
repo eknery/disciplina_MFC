@@ -1,5 +1,3 @@
-### http://www.phytools.org/Rbook/ 
-
 ### bibliotecas
 library(phytools)
 library(geiger)
@@ -18,7 +16,7 @@ plotTree(bacteria.tree,
          fsize=0.5,
          lwd=1,
          mar=c(2.1,2.1,0.1,1.1)
-         )
+)
 axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
 
 ### verificando correspondÊncia entre dados e filogenia
@@ -34,13 +32,36 @@ genome_size
 ### verificando a distribuição dos valores
 hist(genome_size)
 
-### ajustando o modelo BM aos valores
+### ajustando BM
 fitBM_gs<-fitContinuous(phy = bacteria.tree,
                         dat = genome_size,
-                        model ="BM"
-                        )
-## verificar resultados!
+                        model="BM")
+## verificar resultados
 fitBM_gs
+
+### ajustando OU
+fitOU_gs<-fitContinuous(phy = bacteria.tree,
+                        dat = genome_size,
+                        model="OU")
+## ARENTÇÃO PARA A MENSAGEM DE AVISO !
+## verificar resultados
+fitOU_gs
+
+### ajustando OU com margens maiores para alfa
+fitOU_gs<-fitContinuous(bacteria.tree,genome_size,
+                        model="OU",
+                        bounds=list(alpha=c(0,10))
+                        )
+## verificar resultados
+fitOU_gs
+
+### comparando ajuste de modelos 
+aic_gs<-setNames(c(AIC(fitBM_gs),AIC(fitOU_gs)),c("BM","OU"))
+aic_gs
+
+### 'peso' relativo dos modelos
+aic.w(aic_gs)
+
 
 #### ACÚMULO DE MUTAÇÕES
 
@@ -57,11 +78,3 @@ ln_mutation <- log(mutation)
 
 ### verificando a distribuição dos valores
 hist(ln_mutation)
-
-### ajustando o modelo BM aos valores
-fitBM_ar<-fitContinuous(phy = bacteria.tree,
-                        dat = ln_mutation,
-                        model ="BM"
-                        )
-## verificar resutlados!
-fitBM_ar 
