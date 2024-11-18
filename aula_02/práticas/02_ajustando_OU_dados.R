@@ -62,6 +62,9 @@ aic_gs
 ### 'peso' relativo dos modelos
 aic.w(aic_gs)
 
+### PARA PENSAR:
+### Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
+### indica sobre como essa caractarística evoluíu?
 
 #### ACÚMULO DE MUTAÇÕES
 
@@ -78,3 +81,31 @@ ln_mutation <- log(mutation)
 
 ### verificando a distribuição dos valores
 hist(ln_mutation)
+
+### ajustando OU
+fitBM_ar<-fitContinuous(phy = bacteria.tree,
+                        dat = ln_mutation,
+                        model="BM"
+                        )
+
+### ajustando OU
+fitOU_ar<-fitContinuous(phy = bacteria.tree,
+                        dat = ln_mutation,
+                        model="OU",
+                        bounds=list(alpha=c(0,100))
+                        )
+
+### comparando ajuste de modelos
+aic_ar<-setNames(c(AIC(fitBM_ar),AIC(fitOU_ar)),c("BM","OU"))
+aic_ar
+
+### 'peso' relativo dos modelos
+aic.w(aic_ar)
+
+### PARA PENSAR:
+### Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
+### indica sobre como essa caractarística evoluíu?
+
+### PARA PENSAR:
+### Comparando as estimativas de alfa para o tamanho do genoma e para o acúmulo de mutações,
+### o que pode ser inferido sobre a evolução dessas caracterísitcas?
