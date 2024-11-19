@@ -1,8 +1,8 @@
 ### http://www.phytools.org/Rbook/ 
 
 ### bibliotecas
-library(phytools)
-library(geiger)
+if (!require("phytools")) install.packages("phytools"); library("phytools")
+if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
 bacteria.data<-read.csv("dados/bac_rates.csv", row.names=1)

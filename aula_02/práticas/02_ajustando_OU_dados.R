@@ -1,16 +1,23 @@
+# Nessa prática vamos inferir como características do genoma evoluíram
+# entre gêneros distintos de bactérias. Para isso, vamos reavaliar 
+# os dados da última prática, mas agora também considerando o modelo OU.
+
+
+######################## CARREGANDO DADOS E BIBLIOTECAS ########################
+
 ### bibliotecas
-library(phytools)
-library(geiger)
+if (!require("phytools")) install.packages("phytools"); library("phytools")
+if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
 bacteria.data<-read.csv("dados/bac_rates.csv", row.names=1)
 head(bacteria.data,3)
 
-### carregando filogenia
+### carregando árvore filogenética
 bacteria.tree<-read.tree("dados/bac_rates.phy")
 print(bacteria.tree,printlen=2)
 
-### gráfico da filogenia
+### gráfico da árvore filogenética
 plotTree(bacteria.tree,
          ftype="i",
          fsize=0.5,
@@ -19,10 +26,10 @@ plotTree(bacteria.tree,
 )
 axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
 
-### verificando correspondÊncia entre dados e filogenia
+### verificando correspondÊncia entre dados e árvore
 name.check(bacteria.tree,bacteria.data)
 
-#### TAMANHO DO GENOMA
+########################## TAMANHO DO GENOMA ###################################
 
 ### valores de interesse em um vetor nomeado
 genome_size<-bacteria.data[,"Genome_Size_Mb"]
@@ -43,7 +50,7 @@ fitBM_gs
 fitOU_gs<-fitContinuous(phy = bacteria.tree,
                         dat = genome_size,
                         model="OU")
-## ARENTÇÃO PARA A MENSAGEM DE AVISO !
+## ATENÇÃO PARA A MENSAGEM DE AVISO !
 ## verificar resultados
 fitOU_gs
 
@@ -62,11 +69,11 @@ aic_gs
 ### 'peso' relativo dos modelos
 aic.w(aic_gs)
 
-### PARA PENSAR:
-### Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
-### indica sobre como essa caractarística evoluíu?
+# PARA PENSAR:
+# Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
+# indica sobre como essa caractarística evoluíu?
 
-#### ACÚMULO DE MUTAÇÕES
+########################## ACÚMULO DE MUTAÇÕES #################################
 
 ### valores de interesse em um vetor nomeado
 mutation<-bacteria.data[,"Accumulation_Rate"]
@@ -99,13 +106,13 @@ fitOU_ar<-fitContinuous(phy = bacteria.tree,
 aic_ar<-setNames(c(AIC(fitBM_ar),AIC(fitOU_ar)),c("BM","OU"))
 aic_ar
 
-### 'peso' relativo dos modelos
+### peso relativo dos modelos
 aic.w(aic_ar)
 
-### PARA PENSAR:
-### Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
-### indica sobre como essa caractarística evoluíu?
+# PARA PENSAR:
+# Qual modelo teve o melhor ajuste ao tamanho do genoma? O que esse modelo
+# indica sobre como essa caractarística evoluíu?
 
-### PARA PENSAR:
-### Comparando as estimativas de alfa para o tamanho do genoma e para o acúmulo de mutações,
-### o que pode ser inferido sobre a evolução dessas caracterísitcas?
+# PARA PENSAR:
+# Comparando as estimativas de alfa para o tamanho do genoma e para o acúmulo de mutações,
+# o que pode ser inferido sobre a evolução dessas caracterísitcas?
