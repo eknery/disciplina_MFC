@@ -141,3 +141,4 @@ legend("topright",levels(anole.ecomorph[,1]),
 # PARA PENSAR: 
 # Linhagens ocupando o mesmo habitat são mais similares ou mais diferentes com
 # relação aos valores de PC3? 
+# Os valores de PC3 são similares ou diferentes entre os tipos de habitat?
