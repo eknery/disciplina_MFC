@@ -48,7 +48,7 @@ add.simmap.legend(colors=cols,
 
 ############################# TRATANDO OS DADOS ################################
 
-### verificando correspondÊncia entre dados e árvore
+### verificando correspondência entre dados e árvore
 chk<-name.check(ecomorph.tree,anole.morphology)
 summary(chk)
 
@@ -59,23 +59,24 @@ ecomorph.data<-anole.morphology[-which(rownames(anole.morphology)%in%chk$data_no
 chk<-name.check(ecomorph.tree,ecomorph.data)
 chk
 
-############################# PREPARANDO OS DADOS ##############################
+############################# ORDENAÇÃO DOS DADOS ##############################
 
 ### PCA filogenética = relação entre medições, consideração correlação filogenética
 pca<-phyl.pca(ecomorph.tree,ecomorph.data)
-print(pca)
 
+### verificar relação entre as variáveis
+print(pca)
 ## IMPORTANTE:
 # o eixo PC3 está positivamente relacionado com o comprimento dos membros 
 # anteriores (forelimb, FLL) e com o comprimento dos membros posteriores 
 # (hindlimb, HLL), mas negativamente ralacionado com o número de lamelas
 # (lamellae number, LAM).
 
-### dados de hábito e dos membros dos lagartos
+### organizando dados de interesse
 ouwie.data<-data.frame(Genus_species=rownames(scores(pca)),
                        Reg=anole.ecomorph[rownames(scores(pca)),],
                        X=as.numeric(scores(pca)[,3]))
-head(ouwie.data,n=10)
+ouwie.data
 
 ############################### AJUSTANDO MODELOS #############################
 

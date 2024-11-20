@@ -1,32 +1,55 @@
 
-################################ CARREGANDO DADOS #############################
+######################## CARREGANDO DADOS E BIBLIOTECAS ########################
 
-library(geiger)
+### bibliotecas
+if (!require("phytools")) install.packages("phytools"); library("phytools")
+if (!require("geiger")) install.packages("geiger"); library("geiger")
 
-## read data matrix
+### carregando dados fenotípicos
 sqData<-read.csv("dados/squamate_data.csv",row.names=1)
 sqData
 
-## read phylogenetic tree
+### carregando árvore filogenética
 sqTree<-read.nexus("dados/squamate.tre")
 print(sqTree,printlen=2)
 
-## plot our tree
+### visualizando árvore
 plotTree(sqTree,type="fan",lwd=1,fsize=0.3,ftype="i")
 
-############################### PROCESSANDO DADOS ##############################
+############################# TRATANDO OS DADOS ################################
 
-## check name matching
+### verificando correspondência entre dados e árvore
 chk<-name.check(sqTree,sqData)
 summary(chk)
 
-## drop tips of tree that are missing from data matrix
+### retirando terminais ausentes nos dados fenotípicos
 sqTree.pruned<-drop.tip(sqTree,chk$tree_not_data)
-## drop rows of matrix that are missing from tree
+
+### retirando dados fenotípicos ausentes na árvore
 sqData.pruned<-sqData[!(rownames(sqData)%in%
                           chk$data_not_tree),,drop=FALSE]
 
-## extract discrete trait
+### organizando dados fenotípicos num vetor nomeado
 toes<-setNames(as.factor(sqData.pruned[,"rear.toes"]),
                rownames(sqData.pruned))
 toes
+
+###################### AJUSTANDO MATRIZES COM TAXAS IGUAIS ######################
+
+### ajustando matriz com uma única taxa
+fitER<-fitDiscrete(phy = sqTree.pruned,
+                   dat = toes,
+                   model= "ER")
+plot(fitER)
+
+### ajustando matriz com taxas simétricas
+fitSYM<-fitDiscrete(phy = sqTree.pruned,
+                   dat = toes,
+                   model= "SYM")
+plot(fitSYM)
+
+### ajustando matriz com todas as taxas diferentes
+fitARD<-fitDiscrete(phy = sqTree.pruned,
+                    dat = toes,
+                    model= "ARD")
+plot(fitARD)
