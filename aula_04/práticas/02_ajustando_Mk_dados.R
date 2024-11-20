@@ -34,7 +34,7 @@ toes<-setNames(as.factor(sqData.pruned[,"rear.toes"]),
                rownames(sqData.pruned))
 toes
 
-###################### AJUSTANDO MATRIZES COM TAXAS IGUAIS ######################
+########################## AJUSTANDO MATRIZES PADRÃO ###########################
 
 ### ajustando matriz com uma única taxa
 fitER<-fitDiscrete(phy = sqTree.pruned,
@@ -53,3 +53,39 @@ fitARD<-fitDiscrete(phy = sqTree.pruned,
                     dat = toes,
                     model= "ARD")
 plot(fitARD)
+
+###################### AJUSTANDO MATRIZES CUSTOMIZADA ##########################
+
+### marriz com estados ordenados
+ordered.model<-matrix(c(
+  0,1,0,0,0,0,
+  2,0,3,0,0,0,
+  0,4,0,5,0,0,
+  0,0,6,0,7,0,
+  0,0,0,8,0,9,
+  0,0,0,0,10,0),6,6,byrow=TRUE,
+  dimnames=list(0:5,0:5))
+
+### ver matriz
+ordered.model
+
+# IMPORTANTE:
+#   Nas matrizes customizadas, os números NÃO indicam os valores das taxas de 
+#   transição, mas sim o 'grupo' ao qual aquela transição pertence. Apenas o valor
+#   zero (0) indica que a taxa é nula.
+
+## fit bi-directional ordered model
+fitOrdered<-fitDiscrete(phy = sqTree.pruned,
+                        dat = toes,
+                        model = ordered.model,
+                        surpressWarnings=TRUE)
+
+plot(fitOrdered, show.zeros=FALSE)
+
+############################### COMPARANDO MODELOS #############################
+
+aic<-setNames(c(AIC(fitER),AIC(fitSYM),AIC(fitARD), AIC(fitOrdered)),
+              c("ER","SYM","ARD", "Ordered"))
+aic
+
+aic.w(aic)

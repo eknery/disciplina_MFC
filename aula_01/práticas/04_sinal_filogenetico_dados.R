@@ -1,4 +1,3 @@
-### http://www.phytools.org/Rbook/ 
 
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
@@ -24,7 +23,8 @@ axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
 ### verificando correspondÊncia entre dados e filogenia
 name.check(bacteria.tree,bacteria.data)
 
-#### TAMANHO DO GENOMA
+################################ PROCESSANDO DADOS #############################
+
 ### valores de interesse em um vetor nomeado
 genome_size<-bacteria.data[,"Genome_Size_Mb"]
 names(genome_size)<-rownames(bacteria.data)
@@ -81,3 +81,4 @@ K_ar<-phylosig(tree = bacteria.tree,
 ### verificando resultados
 K_ar
 plot(K_ar,las=1,cex.axis=0.9)
+

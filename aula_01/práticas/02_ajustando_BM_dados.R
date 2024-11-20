@@ -24,7 +24,7 @@ axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
 ### verificando correspondÊncia entre dados e filogenia
 name.check(bacteria.tree,bacteria.data)
 
-#### TAMANHO DO GENOMA
+############################## TAMANHO DO GENOMA ###############################
 
 ### valores de interesse em um vetor nomeado
 genome_size<-bacteria.data[,"Genome_Size_Mb"]
@@ -42,7 +42,7 @@ fitBM_gs<-fitContinuous(phy = bacteria.tree,
 ## verificar resultados!
 fitBM_gs
 
-#### ACÚMULO DE MUTAÇÕES
+############################# ACÚMULO DE MUTAÇÕES ###############################
 
 ### valores de interesse em um vetor nomeado
 mutation<-bacteria.data[,"Accumulation_Rate"]
@@ -63,5 +63,5 @@ fitBM_ar<-fitContinuous(phy = bacteria.tree,
                         dat = ln_mutation,
                         model ="BM"
                         )
-## verificar resutlados!
+## verificar resultados!
 fitBM_ar 

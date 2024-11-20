@@ -76,8 +76,8 @@ lines(x = ts,
       col = "red")
 
 
-### PARA PENSAR:
-## O que faria duas linhagens-irmãs terem taxas de variação diferentes?
+# PARA PENSAR:
+#   O que faria duas linhagens-irmãs terem taxas de variação diferentes?
 
 ################### SIMULANDO O EFEITO DO TEMPO DE GERAÇÃO ####################
 
@@ -121,12 +121,13 @@ lines(x = ts3,
       col = "purple")
 
 
-### PARA PENSAR:
-## Qual é o efeito do tempo de geração sobre a evolução da característica?
+# PARA PENSAR:
+#  Qual é o efeito do tempo de geração sobre a evolução da característica?
 
-### IMPORTANTE:
-## Nos modelos de macroevolução, o tempo de geração é assumido como igual entre linhagens,
-## e apenas o tempo de divergência entre linhagens é levado em conta!
+# IMPORTANTE:
+#  Nos modelos de macroevolução, o tempo de geração é assumido como igual 
+#  entre as linhagens. Assim, apenas o tempo de divergência entre linhagens é 
+#  considerado para inferir a taxa de evolução.
 
 ############################# O DILEMA DOS FÓSSEIS ############################
 
@@ -169,5 +170,5 @@ lines(x = ts4,
       type = "l", 
       col = "black")
 
-### PARA PENSAR:
-## A linhagem fóssil necessariamente reflete o fenótipo do último ancestral comum?
+# PARA PENSAR:
+#  A linhagem fóssil reflete o fenótipo do último ancestral comum?

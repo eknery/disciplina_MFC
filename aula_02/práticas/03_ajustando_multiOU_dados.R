@@ -118,8 +118,8 @@ aic
 aic.w(aic)
 
 # PARA PENSAR: 
-# Qual modelo teve o melhor ajuste aos dados? Que modo de evolução esse mdoelo
-# representa? O que indicam os parâmetros desse modelo?
+#  Qual modelo teve o melhor ajuste aos dados? Que modo de evolução esse modelo
+#  representa? O que indicam os parâmetros desse modelo?
 
 ##################################### GRÁFICO ##################################
 
@@ -140,6 +140,6 @@ legend("topright",levels(anole.ecomorph[,1]),
        pch=22,pt.bg=cols,pt.cex=1.5,cex=0.9)
 
 # PARA PENSAR: 
-# Linhagens ocupando o mesmo habitat são mais similares ou mais diferentes com
-# relação aos valores de PC3? 
-# Os valores de PC3 são similares ou diferentes entre os tipos de habitat?
+# Como os valores de PC3 estão distribuídos entre as linhagens?
+# Os valores tendem a serem iguais entre linhagens próximas? O tipo de hábito
+# parece ter alguma relação com os valores de PC3?
