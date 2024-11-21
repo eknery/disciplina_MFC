@@ -70,9 +70,9 @@ ordered.model<-matrix(c(
 ordered.model
 
 # IMPORTANTE:
-#   Nas matrizes customizadas, os números NÃO indicam os valores das taxas de 
-#   transição, mas sim o 'grupo' ao qual aquela transição pertence. Apenas o valor
-#   zero (0) indica que a taxa é nula.
+#   Os números NÃO indicam os valores das taxas de transição, mas sim o 'grupo' 
+#   de taxas ao qual aquela transição pertence. Números iguais indicam que as 
+#   transições seguem a mesma taxa. Apenas o zero (0) indica que a taxa é nula.
 
 ## fit bi-directional ordered model
 fitOrdered<-fitDiscrete(phy = sqTree.pruned,
@@ -84,8 +84,14 @@ plot(fitOrdered, show.zeros=FALSE)
 
 ############################### COMPARANDO MODELOS #############################
 
+### extraindo valores de AIC
 aic<-setNames(c(AIC(fitER),AIC(fitSYM),AIC(fitARD), AIC(fitOrdered)),
               c("ER","SYM","ARD", "Ordered"))
 aic
 
+### peso relativo dos modelos
 aic.w(aic)
+
+# PARA PENSAR: 
+#   Qual modelo obeteve maior sustentação? Com base nesse modelo, O que podemos 
+#   inferir sobre a evolução dos dígitos nos lagartos?

@@ -8,7 +8,8 @@
 
 ## Parâmetros do modelo de Markov
 # Estados 
-estados <- c("-1", "0", "1")
+estados <- c("1", "2", "3")
+
 # taxas de transição entre estados (em milhões de anos)
 matriz_q <- matrix(c( -1, 0.5, 0.5,
                      0.5,  -1, 0.5,
@@ -29,7 +30,7 @@ ti <- 0
 ts = ti
 
 # estado atual
-yi = "0"
+yi = "1"
 ## vetor para armazenar todos os estados
 Y = yi
 
@@ -83,7 +84,7 @@ ti <- 0
 ts2 = ti
 
 # estado atual
-yi = "0"
+yi = "1"
 ## vetor para armazenar todos os estados
 Y2 = yi
 
@@ -121,12 +122,16 @@ lines(x = ts2,
      col = "red"
 )
 
-############## EFEITO DA MATRIZ COM TODAS AS TAXAS DIFERENTES ##################
+# PARA PENSAR:
+#   Comparando as duas simulações, existem diferenças aparentes na frequência 
+#   de algum tipo de transição? Qual?
+    
+####################### EFEITO DA MATRIZ COM TAXAS ORDENADAS ###################
 
 # taxas de transição entre estados (em milhões de anos)
-matriz_q3 <- matrix(c(-0.5,   0,  0.5,
-                       0.5,  -1,  0.5,
-                       0,   0.5, -0.5
+matriz_q3 <- matrix(c(-0.5, 0.5, 0,
+                       0,  -0.5, 0.5,
+                       0,   0,   0
                       ), 
                       nrow = 3, byrow = TRUE)
 rownames(matriz_q3) <- estados
@@ -143,7 +148,7 @@ ti <- 0
 ts3 = ti
 
 # estado atual
-yi = "0"
+yi = "1"
 ## vetor para armazenar todos os estados
 Y3 = yi
 
@@ -180,3 +185,7 @@ lines(x = ts3,
       col = "darkgreen"
 )
 
+# PARA PENSAR:
+#   A matriz utilizada possuia valores zerados para algumas taxas. Qual foi o efeito
+#   dessas taxas zeradas nas transições? Que tipo de hipótese biológica esse
+#   tipo de matriz representatia?
