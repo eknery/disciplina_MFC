@@ -1,3 +1,8 @@
+# Nessa prática vamos simular a evolução de uma característica hipotética (Y) sob
+# movimento Browniano (BM). A simulação é uma forma de ver os efeitos dos parâmetros
+# do modelo sobre os valores da característica. Em outras palavras, vamos poder ver
+# como a característica evolui sob diferentes cenários de BM.
+
 ############################ APRESENTAÇÃO DO MODELO ############################
 
 ## Parâmetros do modelo BM
@@ -36,7 +41,7 @@ plot(x = ts,
                   )
      )
 
-#################### SIMULANDO DIFERENTES TAXAS DE VARIAÇÂO ###################
+#################### SIMULANDO DIFERENTES TAXAS DE VARIAÇÃO ###################
 
 ## Parâmetros do modelo BM
 # Taxa de variação

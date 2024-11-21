@@ -1,3 +1,8 @@
+# Nessa prática vamos simular a evolução de uma característica hipotética (Y) sob o
+# processo Ornstein–Uhlenbeck (OU). A simulação é uma forma de ver os efeitos dos parâmetros
+# do modelo sobre os valores da característica. Em outras palavras, vamos poder ver
+# como a característica evolui sob diferentes cenários de OU.
+
 ############################ APRESENTAÇÃO DO MODELO ############################
 
 ## Parâmetros do modelo OU
@@ -195,4 +200,3 @@ lines(x = ts,
 
 ### PARA PENSAR:
 ## O que representaria uma característica sem taxa de reversão? 
-
