@@ -45,8 +45,8 @@ abline(fit.ols, lwd=2,col="darkgray")
 
 # PARA PENSAR:
 #   A relação entre o tamanho corpóreo e o tamanho da área de ocorrência
-#   tem sustentação no modelo de regressão convencional? O modelo de regressão 
-#   (a reta) parece descrever bem essa relação?
+#   tem sustentação estatística? O modelo de regressão (a reta) parece 
+#   descrever a relação entre os dois fenótipos?
 
 ############################# CALCULANDO OS CONTRASTES ########################
 
@@ -66,7 +66,7 @@ pic.bodymass<-pic(log(bodyMass),mammal.tree)
 pic.homerange
 pic.bodymass
 
-################### AJUSTANDO MODELO LINEAR COM CONTRASTES ######################
+################### AJUSTANDO MODELO LINEAR AOS CONTRASTES ######################
 
 ### ajustando regressão linear - passando pela origem
 fit.pic<-lm(pic.homerange~pic.bodymass+0)
@@ -77,10 +77,10 @@ plot(pic.homerange~pic.bodymass,
      ylab="PICs for log(range size)",
      pch=21,bg="gray",cex=1.2,las=1,
      cex.axis=0.7,cex.lab=0.9,bty="n")
-## reset graphing limits of the plot to the
-## x/y range of our PICs
-clip(min(pic.bodymass),max(pic.bodymass),
-     min(pic.homerange),max(pic.homerange))
 ## graph our fitted line
 abline(fit.pic,lwd=2,col="darkgray")
 
+# PARA PENSAR:
+#   Comparando os modelos de regressão, existe diferença na sustentação estatístca?
+#   E quanto ao ajuste dos modelos? As relações inferidas são as mesmas, ou existem
+#   direnças quanto a direção e a intensidade (inclinação da reta)?
