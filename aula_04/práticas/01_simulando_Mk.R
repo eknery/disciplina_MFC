@@ -1,8 +1,8 @@
 # Nessa prática vamos simular a evolução de uma característica hipotética (Y) que 
-# possui três estados (-1, 0 e 1). Para isso, vamos construir a matriz de transição (Q)
-# dessa característica e simular as transições de estado ao longo de uma linhagem
-# com um tempo de vida muito longo (10 milhões de anos). Posteriormente, vamos
-# modificar a matriz de transição para ver os efeitos sobre a evolução da característica.
+# possui três estados (1, 2 e 3) ao longo de uma linhagem longeva (10 milhões de anos). 
+# Para isso, vamos construir diferentes matrizes de transição (Q) para
+# essa característica e simular as transições de estado. Assim, poderemos verificar
+# como modificações na matriz alteram a forma de evolução da característica.
 
 ############################ MATRIZ COM TAXA ÚNICA ############################
 

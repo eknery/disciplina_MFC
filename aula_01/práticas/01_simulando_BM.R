@@ -1,7 +1,9 @@
 # Nessa prática vamos simular a evolução de uma característica hipotética (Y) sob
-# movimento Browniano (BM). A simulação é uma forma de ver os efeitos dos parâmetros
-# do modelo sobre os valores da característica. Em outras palavras, vamos poder ver
-# como a característica evolui sob diferentes cenários de BM.
+# movimento Browniano (BM) ao longo de linhagens que duraram um milhões de anos.
+# Nós vamos modificar diferentes parâmetros do modelo para verificar seus efeitos
+# sobre como a característica evolue e seus valores  finais. Em outras palavras, 
+# vamos 'brincar' de ver a evolução em tempo real, fazendo 'experimentos' com
+# a nossa características hipotética.
 
 ############################ APRESENTAÇÃO DO MODELO ############################
 
