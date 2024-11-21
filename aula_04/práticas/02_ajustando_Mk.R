@@ -1,5 +1,5 @@
 # Nessa prática vamos investigar a evolução do número de dígitos nas patas traseiras
-# dos lagartos (Squamata). Mais especificamente queremos saber se a ausência
+# dos lagartos (Squamata).Mais especificamente queremos saber se a ausência
 # de dígitos evoluiu de forma gradativa (perdas consecutivas de dígitos) ou 
 # de forma abrupta (perda total de todos os dígitos)
 
