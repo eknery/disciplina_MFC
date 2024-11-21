@@ -1,3 +1,7 @@
+# Nessa prática vamos investigar a evolução do número de dígitos nas patas traseiras
+# dos lagartos (Squamata). Mais especificamente queremos saber se a ausência
+# de dígitos evoluiu de forma gradativa (perdas consecutivas de dígitos) ou 
+# de forma abrupta (perda total de todos os dígitos)
 
 ######################## CARREGANDO DADOS E BIBLIOTECAS ########################
 
@@ -34,6 +38,34 @@ toes<-setNames(as.factor(sqData.pruned[,"rear.toes"]),
                rownames(sqData.pruned))
 toes
 
+############################# VISUALIZANDO DADOS ##############################
+
+### cores para cada estado
+cols<-c("0" = "white",
+        "1" = "lightblue",
+        "2" = "darkblue",
+        "3" = "purple",
+        "4" = "red",
+        "5" = "darkred")
+
+### plotando árvore com estados
+dotTree(tree = sqTree.pruned,
+        x = toes,
+        colors=cols,
+        fsize = 0.3,
+        pt.cex = 0.3,
+        legend = F)
+legend("bottomleft",
+       legend=names(cols),
+       pch=22,
+       pt.cex=1.5,
+       pt.bg=cols,
+       bty="n",
+       cex=0.8)
+
+# PARA PENSAR:
+#   Baseado na figura, o estado de nenhum dígito (0) teria evoluído mais de uma vez?
+
 ########################## AJUSTANDO MATRIZES PADRÃO ###########################
 
 ### ajustando matriz com uma única taxa
@@ -54,7 +86,7 @@ fitARD<-fitDiscrete(phy = sqTree.pruned,
                     model= "ARD")
 plot(fitARD)
 
-###################### AJUSTANDO MATRIZES CUSTOMIZADA ##########################
+######################## AJUSTANDO MATRIZ CUSTOMIZADA ##########################
 
 ### marriz com estados ordenados
 ordered.model<-matrix(c(
@@ -93,5 +125,5 @@ aic
 aic.w(aic)
 
 # PARA PENSAR: 
-#   Qual modelo obeteve maior sustentação? Com base nesse modelo, O que podemos 
-#   inferir sobre a evolução dos dígitos nos lagartos?
+#   Qual modelo obeteve maior sustentação? Com base nesse modelo, o que podemos 
+#   inferir sobre a evolução dos dígitos nas linhagens de lagartos?
