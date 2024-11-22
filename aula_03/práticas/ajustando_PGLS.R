@@ -85,6 +85,10 @@ if(best_model == "OU" ){
   cor_str = corMartins(value = alpha, phy=mammal.tree, form=~spp, fixed = T)
 }
 
+# IPORTANTE:
+#   Note que a estrutura de correlação é calculada com base em diferentes parâmetros,
+#   dependendo do modelo que foi escolhido para representar a evolução da característica. 
+
 ################################### AJUSTANDO PGLS #############################
 
 ### ajustando PGLS aos dados
