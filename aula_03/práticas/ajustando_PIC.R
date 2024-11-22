@@ -19,7 +19,7 @@ mammal.tree<-read.tree("dados/mammalHR.phy")
 ############################## VISUALIZANDO DADOS ##############################
 
 ### visualizando a distribuição dos dados 
-plot(homeRange~bodyMass,data=mammalHR,
+plot(homeRange~bodyMass, data=mammalHR,
      xlab="body mass (kg)",
      ylab=expression(paste("home range (km"^"2",")")),
      pch=21,bg="gray",cex=1.2,log="xy",las=1,cex.axis=0.7,
@@ -32,14 +32,19 @@ plot(homeRange~bodyMass,data=mammalHR,
 ####################### AJUSTANDO MODELO LINEAR ORDINÁRIO ######################
 
 ### ajustando regressão linear ordinária
-fit.ols<-lm(log(homeRange)~log(bodyMass),data=mammalHR)
+fit.ols<-lm(log(homeRange)~log(bodyMass), data=mammalHR)
+
+### verificando Normalidade dos resíduos
+shapiro.test(resid(fit.ols))
+
+### verificando sustentação
 summary(fit.ols)
 
 ### visualizando modelo ordinário
 plot(log(homeRange) ~ log(bodyMass),data=mammalHR,
      xlab="log(body mass)",
      ylab="log(home range)",
-     pch=21,bg="gray",cex=1.2,log="xy",las=1,
+     pch=21,bg="gray",cex=1.2,las=1,
      cex.axis=0.7,cex.lab=0.9,bty="n")
 abline(fit.ols, lwd=2,col="darkgray")
 
@@ -70,6 +75,11 @@ pic.bodymass
 
 ### ajustando regressão linear - passando pela origem
 fit.pic<-lm(pic.homerange~pic.bodymass+0)
+
+### verificando Normalidade dos resíduos
+shapiro.test(resid(fit.pic))
+
+### verificando sustentação 
 summary(fit.pic)
 
 plot(pic.homerange~pic.bodymass,
