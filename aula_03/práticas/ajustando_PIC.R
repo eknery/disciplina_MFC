@@ -91,6 +91,6 @@ plot(pic.homerange~pic.bodymass,
 abline(fit.pic,lwd=2,col="darkgray")
 
 # PARA PENSAR:
-#   Comparando os modelos de regressão, existe diferença na sustentação estatístca?
+#   Comparando os modelos de regressão, existe diferença na sustentação estatística?
 #   E quanto ao ajuste dos modelos? As relações inferidas são as mesmas, ou existem
 #   direnças quanto a direção e a intensidade (inclinação da reta)?
