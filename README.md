@@ -11,7 +11,7 @@ Fundamentar a teoria sobre os métodos filogenéticos comparativos e demonstrar 
  - Justificar a escolha de métodos e modelos com base nas hipóteses biológicas de interesse;
 
 ## Público-alvo: 
-Estudantes de pós-graduação regularmente matriculados do PPG-EVD e estudantes externos.
+Estudantes de pós-graduação em biologia e áreas afins.
 
 ## Pré-requisitos: 
 A disciplina requer que os estudantes tenham familiaridade com a linguagem de programação R para executar as atividades práticas. Conhecimentos básicos sobre estatística são desejáveis para compreensão do conteúdo teórico.
