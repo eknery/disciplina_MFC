@@ -17,7 +17,7 @@ Estudantes de pós-graduação em biologia e áreas afins.
 A disciplina requer que os estudantes tenham familiaridade com a linguagem de programação R para executar as atividades práticas. Conhecimentos básicos sobre estatística são desejáveis para compreensão do conteúdo teórico.
 
 ## Ementa:
-Modelo de evolução por movimento browniano; conceito de sinal filogenético; modelo de evolução pelo processo Ornstein–Uhlenbeck; conceito de estase evolutiva; conceito de dependência filogenética; método dos contrastes filogenéticos;  método dos mínimos quadrados generalizados; métodos de reconstrução de estado de carácter; conceito de diversificação; métodos de dinâmica de diversificação;
+Tempo e modo de evolução; modelo de movimento browniano; sinal filogenético; estase evolutiva; modelo Ornstein–Uhlenbeck; dependência filogenética; método dos contrastes filogenéticos;  método dos mínimos quadrados generalizados filogenéticos; reconstrução de estados ancestrais; cadeais de Markov; diversificação de linhagens; modelo de Nascimento-Morte;
 
 ## Metodologia de aula: 
 O curso terá aulas teóricas e práticas. As aulas teóricas serão tanto expositivas quanto dialogadas, evolvendo a leitura e a discussão de textos indicados. As aulas práticas utilizarão computadores com o ambiente R. As práticas envolverão o desenvolvimento de rotinas de códigos (scripts) para a aplicação dos métodos que serão abordados nas aulas teóricas.
