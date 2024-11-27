@@ -12,19 +12,7 @@ head(bacteria.data,3)
 bacteria.tree<-read.tree("dados/bac_rates.phy")
 print(bacteria.tree,printlen=2)
 
-### gráfico da filogenia
-plotTree(bacteria.tree,
-         ftype="i",
-         fsize=0.5,
-         lwd=1,
-         mar=c(2.1,2.1,0.1,1.1)
-         )
-axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
-
-### verificando correspondÊncia entre dados e filogenia
-name.check(bacteria.tree,bacteria.data)
-
-############################## TAMANHO DO GENOMA ###############################
+############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
 genome_size<-bacteria.data[,"Genome_Size_Mb"]
@@ -34,34 +22,42 @@ genome_size
 ### verificando a distribuição dos valores
 hist(genome_size)
 
-### ajustando o modelo BM aos valores
-fitBM_gs<-fitContinuous(phy = bacteria.tree,
+### verificando correspondência entre dados e filogenia
+name.check(bacteria.tree,bacteria.data)
+
+### gráfico da filogenia
+plotTree.barplot(tree = bacteria.tree,
+              x = genome_size,
+              args.plotTree=list(fsize=0.7)
+)
+axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
+
+############################### AJUSTANDO MODELOS ##############################
+
+### ajustando o modelo White Noise
+fitWN <-fitContinuous(phy = bacteria.tree,
                         dat = genome_size,
-                        model ="BM"
+                        model ="white"
                         )
+
 ## verificar resultados!
-fitBM_gs
+fitWN
 
-############################# ACÚMULO DE MUTAÇÕES ###############################
+### ajustando o modelo BM
+fitBM <-fitContinuous(phy = bacteria.tree,
+                      dat = genome_size,
+                      model ="BM"
+)
 
-### valores de interesse em um vetor nomeado
-mutation<-bacteria.data[,"Accumulation_Rate"]
-names(mutation)<-rownames(bacteria.data)
-mutation
-
-### verificando a distribuição dos valores
-hist(mutation)
-
-### transformação em log
-ln_mutation <- log(mutation)
-
-### verificando a distribuição dos valores
-hist(ln_mutation)
-
-### ajustando o modelo BM aos valores
-fitBM_ar<-fitContinuous(phy = bacteria.tree,
-                        dat = ln_mutation,
-                        model ="BM"
-                        )
 ## verificar resultados!
-fitBM_ar 
+fitBM
+
+### ajustando o modelo Direcional
+fitEB <-fitContinuous(phy = bacteria.tree,
+                      dat = genome_size,
+                      model ="EB"
+)
+
+## verificar resultados!
+fitEB
+
