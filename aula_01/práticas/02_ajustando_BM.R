@@ -5,59 +5,107 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
-bacteria.data<-read.csv("dados/bac_rates.csv", row.names=1)
-head(bacteria.data,3)
+miconia.data<-read.csv("dados/miconia.csv", row.names=1, h= T)
+head(miconia.data)
 
 ### carregando filogenia
-bacteria.tree<-read.tree("dados/bac_rates.phy")
-print(bacteria.tree,printlen=2)
+miconia.tree<-read.tree("dados/miconia.nwk")
+print(miconia.tree,printlen=2)
 
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-genome_size<-bacteria.data[,"Genome_Size_Mb"]
-names(genome_size)<-rownames(bacteria.data)
-genome_size
+plant.size<-miconia.data[,"plant.size"]
+names(plant.size)<-rownames(miconia.data)
+plant.size
 
 ### verificando a distribuição dos valores
-hist(genome_size)
+hist(plant.size)
 
 ### verificando correspondência entre dados e filogenia
-name.check(bacteria.tree,bacteria.data)
+name.check(miconia.tree, miconia.data)
 
 ### gráfico da filogenia
-plotTree.barplot(tree = bacteria.tree,
-              x = genome_size,
+plotTree.barplot(tree = miconia.tree,
+              x = plant.size,
               args.plotTree=list(fsize=0.7)
 )
-axis(1,at=seq(0,1,length.out=5),cex.axis=0.8)
+
+PARA PENSAR:
+  Baseado apenas no grafico, 
 
 ############################### AJUSTANDO MODELOS ##############################
 
-### ajustando o modelo White Noise
-fitWN <-fitContinuous(phy = bacteria.tree,
-                        dat = genome_size,
-                        model ="white"
-                        )
-
-## verificar resultados!
-fitWN
-
-### ajustando o modelo BM
-fitBM <-fitContinuous(phy = bacteria.tree,
-                      dat = genome_size,
-                      model ="BM"
+### ajustando modelo Pontuado
+fitPunctual <-fitContinuous(phy = miconia.tree,
+                            dat = plant.size,
+                            model ="kappa"
 )
 
-## verificar resultados!
-fitBM
-
-### ajustando o modelo Direcional
-fitEB <-fitContinuous(phy = bacteria.tree,
-                      dat = genome_size,
-                      model ="EB"
+### ajustando modelo de Random Walk
+fitRWalk <-fitContinuous(phy = miconia.tree,
+                         dat = plant.size,
+                         model ="BM"
 )
 
-## verificar resultados!
-fitEB
+### ajustando modelo Direcional
+fitDirectional <-fitContinuous(phy = miconia.tree,
+                               dat = plant.size,
+                               model ="mean_trend"
+)
 
+################################ COMPARANDO MODELOS ############################
+
+### valores de AIC
+aic = setNames(c(fitPunctual$opt$aic,
+                 fitRWalk$opt$aic,
+                 fitDirectional$opt$aic),
+               c("Punctual","Random Walk","Directional")
+               )
+### ver valores de AIC
+aic
+
+# PARA PENSAR:
+#   Baseado apenas no AIC, qual modelo evolutivo teve o melhor ajuste ao
+#   tamanho das plantas nesse clado de Miconia? As diferernças de AIC são 
+#   contrastantes?
+
+### número de parâmetros dos modelos
+k = setNames(c(fitPunctual$opt$k,
+                 fitRWalk$opt$k,
+                 fitDirectional$opt$k),
+               c("Punctual","Random Walk","Directional")
+)
+
+### ver número de parâmetros
+
+# PARA PENSAR:
+#   Existe diferença na complexidade dos modelos? Qual o modelo mais simples?
+#   Os modelos mais complexos tem um ganho muito maior de ajuste? 
+
+### estimativas de taxa evolutiva
+sigma.sq = setNames(c(fitPunctual$opt$sigsq,
+                      fitRWalk$opt$sigsq,
+                      fitDirectional$opt$sigsq),
+                    c("Punctual","Random Walk","Directional")
+                    )
+
+### ver taxas evolutivas
+sigma.sq
+
+# PARA PENSAR:
+#   As estimativas de taxas evolutivas diferiram muito entre os modelos? 
+
+### estimativas de fenótipo ancestral
+z0= setNames(c(fitPunctual$opt$z0,
+               fitRWalk$opt$z0,
+               fitDirectional$opt$z0),
+             c("Punctual","Random Walk","Directional")
+)
+
+### ver estimativas de fenótipo ancestral
+z0
+
+# PARA PENSAR:
+#   As estimativas de fenótipo ancestral diferiram muito? Essas estimativas 
+#   fazem sentido biologicamente?
