@@ -47,8 +47,8 @@ lambda_gs
 plot(lambda_gs,las=1,cex.axis=0.9)
 
 # PARA PENSAR:
-#   O valor de lambda foi alto ou baixo? O que isso significa? 
-#   O valor de P foi significativo? O que isso significa?
+#   O valor de lambda foi alto ou baixo? O que isso indica? 
+#   O valor de P foi significativo? O que isso indica?
 
 ### testando sinal filogenético por K de Bloomberg
 K_gs<-phylosig(tree = miconia.tree,
@@ -62,7 +62,7 @@ K_gs
 plot(K_gs,las=1,cex.axis=0.9)
 
 # PARA PENSAR:
-#   O valor de K foi alto ou baixo? O que isso significa? 
-#   O valor de P foi significativo? O que isso significa?
+#   O valor de K foi alto ou baixo? O que isso indica? 
+#   O valor de P foi significativo? O que isso indica?
 
 
