@@ -1,4 +1,8 @@
-### http://www.phytools.org/Rbook/ 
+# Nessa prática vamo investigar qual foi o modo de evolução mais provável do 
+# tamamnho das plantas de um clado de Miconia. Essas plantas são lenhosas e ocorrem
+# tanto em ambientes abertos quanto em florestas úmida da América do Sul. Nós vamos
+# considerar três modos de evolução: equilibrio pontuado, caminha aleatória e
+# evolução direcional.
 
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
@@ -15,7 +19,7 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-plant.size<-miconia.data[,"plant.size"]
+plant.size<- miconia.data[,"plant.size"]
 names(plant.size)<-rownames(miconia.data)
 plant.size
 
@@ -31,8 +35,8 @@ plotTree.barplot(tree = miconia.tree,
               args.plotTree=list(fsize=0.7)
 )
 
-PARA PENSAR:
-  Baseado apenas no grafico, 
+# PARA PENSAR:
+#   O tamanho das plantas parece ter evoluído rápido ou devagar entre as linhagens? 
 
 ############################### AJUSTANDO MODELOS ##############################
 
@@ -78,6 +82,7 @@ k = setNames(c(fitPunctual$opt$k,
 )
 
 ### ver número de parâmetros
+k 
 
 # PARA PENSAR:
 #   Existe diferença na complexidade dos modelos? Qual o modelo mais simples?
