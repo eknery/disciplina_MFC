@@ -14,19 +14,19 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-plant.size<- miconia.data[,"plant.size"]
-names(plant.size)<-rownames(miconia.data)
-plant.size
+leaf.size<- miconia.data[,"leaf.size"]
+names(leaf.size)<-rownames(miconia.data)
+leaf.size
 
 ### verificando a distribuição dos valores
-hist(plant.size)
+hist(leaf.size)
 
 ### verificando correspondência entre dados e filogenia
 name.check(miconia.tree, miconia.data)
 
 ### gráfico da filogenia
 plotTree.barplot(tree = miconia.tree,
-                 x = plant.size,
+                 x = leaf.size,
                  args.plotTree=list(fsize=0.7)
 )
 
@@ -37,7 +37,7 @@ plotTree.barplot(tree = miconia.tree,
 
 ### testando sinal filogenético por lambda de Pagel
 lambda_gs = phylosig(tree = miconia.tree,
-                     x = plant.size,
+                     x = leaf.size,
                      method="lambda",
                      test = TRUE
                      )
@@ -52,7 +52,7 @@ plot(lambda_gs,las=1,cex.axis=0.9)
 
 ### testando sinal filogenético por K de Bloomberg
 K_gs<-phylosig(tree = miconia.tree,
-               x = plant.size,
+               x = leaf.size,
                method= "K",
                test = TRUE,
                nsim = 10000)

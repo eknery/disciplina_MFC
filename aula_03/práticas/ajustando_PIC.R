@@ -1,8 +1,8 @@
-For example, one might wonder why some species of mammals have such large home range
-areas, while others have home ranges that are quite small (Garland et al. 1992). One reasonable
-hypothesis is that range size is driven by body size, and if so, then we might expect range size
-and body size to evolve together. When body size increases, so should range size. If body size
-evolves to be smaller, range size should concordantly shrink
+# Nessa prática vamos investigar se existe uma correlaçao evolutiva entre o 
+# tamanho das folhas e das inflorescências dentro de um clado de Miconia.
+# A expectativa é que a evolução de folhas maiores aumente a assimilação de 
+# de carbono e consequentemente permita sustentar inflorescências maiores.
+# Para isso, vamos usar os contrastes filogenéticos independentes(PICs).
 
 ####################### CARREGANDO BIBLIOTECAS E DADOS #########################
 
@@ -11,28 +11,30 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
-mammalHR<-read.csv("dados/mammalHR.csv",row.names=1)
+miconia.data<-read.csv("dados/miconia.csv", row.names=1, h= T)
+head(miconia.data)
 
-### carregando árvore filogenética
-mammal.tree<-read.tree("dados/mammalHR.phy")
+### carregando filogenia
+miconia.tree<-read.tree("dados/miconia.nwk")
+print(miconia.tree,printlen=2)
 
 ############################## VISUALIZANDO DADOS ##############################
 
 ### visualizando a distribuição dos dados 
-plot(homeRange~bodyMass, data=mammalHR,
-     xlab="body mass (kg)",
-     ylab=expression(paste("home range (km"^"2",")")),
+plot(inflor.size~leaf.size, data=miconia.data,
+     xlab="tamanho da folha (cm)",
+     ylab="tamanho da inflorescência (cm)",
      pch=21,bg="gray",cex=1.2,log="xy",las=1,cex.axis=0.7,
      cex.lab=0.9,bty="n")
 
 # PARA PENSAR:
-#   Baseado no gráfico, existe uma relação entre o tamanho corpóreo e 
-#   o tamanho da área de ocorrência dos mamíferos?
+#   Baseado no gráfico, existe uma relação entre o tamanho das inflorescências e 
+#   das folhas nesse clado de plantas?
 
 ####################### AJUSTANDO MODELO LINEAR ORDINÁRIO ######################
 
 ### ajustando regressão linear ordinária
-fit.ols<-lm(log(homeRange)~log(bodyMass), data=mammalHR)
+fit.ols<-lm(log(inflor.size)~log(leaf.size), data=miconia.data)
 
 ### verificando Normalidade dos resíduos
 shapiro.test(resid(fit.ols))
@@ -41,40 +43,40 @@ shapiro.test(resid(fit.ols))
 summary(fit.ols)
 
 ### visualizando modelo ordinário
-plot(log(homeRange) ~ log(bodyMass),data=mammalHR,
-     xlab="log(body mass)",
-     ylab="log(home range)",
+plot(log(inflor.size)~log(leaf.size),data=miconia.data,
+     xlab="log(tamanho da folha)",
+     ylab="log(tamanho da inflorescência)",
      pch=21,bg="gray",cex=1.2,las=1,
      cex.axis=0.7,cex.lab=0.9,bty="n")
 abline(fit.ols, lwd=2,col="darkgray")
 
 # PARA PENSAR:
-#   A relação entre o tamanho corpóreo e o tamanho da área de ocorrência
+#   A relação entre o tamanho da inflorescência e o tamanho da folha
 #   tem sustentação estatística? O modelo de regressão (a reta) parece 
 #   descrever a relação entre os dois fenótipos?
 
 ############################# CALCULANDO OS CONTRASTES ########################
 
 ### visualizando a árvores filogenética
-plotTree(mammal.tree,ftype="i",fsize=0.7,lwd=1)
+plotTree(miconia.tree,ftype="i",fsize=0.7,lwd=1)
 nodelabels(bg="white",cex=0.5,frame="circle")
 
 ### gerando vetores distintos para fenótipo 
-homeRange<-setNames(mammalHR[,"homeRange"], rownames(mammalHR))
-bodyMass<-setNames(mammalHR[,"bodyMass"], rownames(mammalHR))
+leaf.size<-setNames(miconia.data[,"leaf.size"], rownames(miconia.data))
+inflor.size<-setNames(miconia.data[,"inflor.size"], rownames(miconia.data))
 
 ### calculando os contrastes para cada fenótipo
-pic.homerange<-pic(log(homeRange),mammal.tree)
-pic.bodymass<-pic(log(bodyMass),mammal.tree)
+pic.leaf<-pic(log(leaf.size),miconia.tree)
+pic.inflor<-pic(log(inflor.size),miconia.tree)
 
 ### verificar valores dos contrastes
-pic.homerange
-pic.bodymass
+pic.leaf
+pic.inflor
 
 ################### AJUSTANDO MODELO LINEAR AOS CONTRASTES ######################
 
 ### ajustando regressão linear - passando pela origem
-fit.pic<-lm(pic.homerange~pic.bodymass+0)
+fit.pic<-lm(pic.inflor~pic.leaf+0)
 
 ### verificando Normalidade dos resíduos
 shapiro.test(resid(fit.pic))
@@ -82,15 +84,16 @@ shapiro.test(resid(fit.pic))
 ### verificando sustentação 
 summary(fit.pic)
 
-plot(pic.homerange~pic.bodymass,
-     xlab="PICs for log(body mass)",
-     ylab="PICs for log(range size)",
+plot(pic.inflor~pic.leaf,
+     xlab="PICs log(tamanho da folha)",
+     ylab="PICs log(tamanho da inflorescência)",
      pch=21,bg="gray",cex=1.2,las=1,
-     cex.axis=0.7,cex.lab=0.9,bty="n")
+     cex.axis=0.7,cex.lab=0.9,bty="n"
+     )
 ## graph our fitted line
 abline(fit.pic,lwd=2,col="darkgray")
 
 # PARA PENSAR:
-#   Comparando os modelos de regressão, existe diferença na sustentação estatística?
-#   E quanto ao ajuste dos modelos? As relações inferidas são as mesmas, ou existem
-#   direnças quanto a direção e a intensidade (inclinação da reta)?
+#   Comparando os modelo com dados brutos e com PICs, existe diferença na 
+#   sustentação estatística? E quanto ao ajuste dos modelos? 
+#   As relações inferidas são as mesmas (inclinação da reta)?
