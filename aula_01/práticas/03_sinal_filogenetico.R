@@ -1,5 +1,9 @@
+# Nessa prática vamos investigar o sinal filogenético do tamanho das folhas e
+# das inflorescências dentro de um clado de Miconia. Nossa expectativa é que 
+# características relacionadas à reprodução tenham sido mais conservadas e,
+# portanto, mantiveram maior similaridade entre as espécies. 
+# Nós vamos considerar duas medidas de sinal filogenético: lambda e K.
 
-### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
@@ -14,7 +18,7 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-leaf.size<- miconia.data[,"leaf.size"]
+leaf.size<- miconia.data[,"inflor.size"]
 names(leaf.size)<-rownames(miconia.data)
 leaf.size
 
@@ -33,7 +37,7 @@ plotTree.barplot(tree = miconia.tree,
 # PARA PENSAR:
 #   Existe algum padrão de similaridade de tamanho entre linhagens próximas?
 
-################################ LAMBDA DE PAGEL ###############################
+################################ MEDINDO SINAL ###############################
 
 ### testando sinal filogenético por lambda de Pagel
 lambda_gs = phylosig(tree = miconia.tree,

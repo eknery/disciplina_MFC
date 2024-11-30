@@ -1,7 +1,9 @@
-# Nessa prática vamo investigar qual foi o modo de evolução do tamanho 
+# Nessa prática vamos investigar qual foi o modo e o tempo de evolução do tamanho 
 # das folhas e das inflorescências dentro de um clado de Miconia. 
 # Essas plantas são lenhosas e ocorrem tanto em ambientes abertos quanto 
-# em florestas úmida da América do Sul. Nós vamos considerar três modos 
+# em florestas úmidas da América do Sul. Nossa expectativa é que as folhas 
+# teriam evoluído mais rápido em resposta aos diferentes ambientes ocupados 
+# pelas espécies de Miconia. Nós vamos considerar três modos 
 # de evolução: equilibrio pontuado, caminha aleatória e evolução direcional.
 
 ### bibliotecas
