@@ -1,5 +1,5 @@
-# Nessa prática vamos simular a evolução de uma característica hipotética (Y) sob
-# processo Ornstein–Uhlenbeck (OU) ao longo de linhagens que duraram um milhões de anos.
+# Nessa prática vamos simular a evolução de uma característica hipotética (Y) 
+# em linhagens de um milhões de anos sob o processo Ornstein–Uhlenbeck (OU).
 # Nós vamos modificar diferentes parâmetros do modelo para verificar seus efeitos
 # sobre como a característica evolue e seus valores  finais. Em outras palavras, 
 # vamos 'brincar' de ver a evolução em tempo real, fazendo 'experimentos' com
@@ -155,7 +155,6 @@ lines(x = ts,
 ### PARA PENSAR:
 ## Qual processo biológico poderia aumentar ou diminuir a taxa de reversão? 
 
-
 ################### EFEITO DE TAXAS DE REVERSÃO NULA ####################
 
 ## Parâmetros do modelo OU
@@ -201,4 +200,4 @@ lines(x = ts,
       lty = 2)
 
 ### PARA PENSAR:
-## O que representaria uma característica sem taxa de reversão? 
+## O que representaria uma linhagem sem taxa de reversão? 

@@ -1,7 +1,7 @@
 # Nessa prática vamos investigar o sinal filogenético do tamanho das folhas e
 # das inflorescências dentro de um clado de Miconia. Nossa expectativa é que 
-# características relacionadas à reprodução tenham sido mais conservadas e,
-# portanto, mantiveram maior similaridade entre as espécies. 
+# o tamanho da inflorescência tenha sido mais conservado na evolução
+# devido ao seu papel na polinização, ques restringiria grandes mudanças. 
 # Nós vamos considerar duas medidas de sinal filogenético: lambda e K.
 
 if (!require("phytools")) install.packages("phytools"); library("phytools")

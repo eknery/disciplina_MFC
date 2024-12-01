@@ -1,5 +1,5 @@
-# Nessa prática vamos simular a evolução de uma característica hipotética (Y) sob
-# movimento Browniano (BM) ao longo de linhagens que duraram um milhões de anos.
+# Nessa prática vamos simular a evolução de uma característica hipotética (Y) 
+# em linhagens de um milhões de anos sob o movimento Browniano (BM).
 # Nós vamos modificar diferentes parâmetros do modelo para verificar seus efeitos
 # sobre como a característica evolue e seus valores  finais. Em outras palavras, 
 # vamos 'brincar' de ver a evolução em tempo real, fazendo 'experimentos' com
