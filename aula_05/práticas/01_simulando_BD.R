@@ -1,4 +1,7 @@
 
+
+################### PROCESSO DE NASCIMENTO-MORTE SIMPLES #######################
+
 ## Parâmetros do modelo Birth-Death
 # Taxa de especiação por unidade de tempo
 lambda <- 0.5
@@ -15,34 +18,37 @@ ts = ti
 
 ## Cenário de diversidade
 # número atual de espécies 
-n <- 10
+n <- 1
 # Vetor de diversidade de espécies
-n_spp <- nt
+n_spp <- n
 
 while (ti < tf) {
-  # Tempo até a próxima especiação  e extinção
-  lambda_t <- rexp(1, rate = lambda)
-  mu_t <- rexp(1, rate = mu)
-  # se a especiação acontece primeiro
-  if(lambda_t < mu_t){
-    # adicionar uma espécie
-    n = n + 1
-    # atualizar vetor de diversidade
-    n_spp = c(n_spp, n)
-    # atualizar tempo
-    ti = ti + lambda_t
-  }
-  # se a extinção acontece primeiro
-  if(lambda_t > mu_t){
-    # remover uma espécie
-    n = n - 1
-    # atualizar vetor de diversidade
-    n_spp = c(n_spp, n)
-    # atualizar tempo
-    ti = ti + mu_t
-  }
-  # armazenar novo tempo após especiação/extinção
-  ts = c(ts, ti)
+    # Tempo até a próxima especiação 
+    lambda_t <- rexp(1, rate = lambda)
+    # tempo até a próxima extinção
+    mu_t <- rexp(1, rate = mu)
+    # se a especiação acontece primeiro
+    if(lambda_t < mu_t){
+      if (lambda_t + ti > tf) break
+      # adicionar uma espécie
+      n = n + 1
+      # atualizar vetor de diversidade
+      n_spp = c(n_spp, n)
+      # atualizar tempo
+      ti = ti + lambda_t
+    }
+    # se a extinção acontece primeiro
+    if(lambda_t > mu_t){
+      if (mu_t + ti > tf) break
+      # remover uma espécie
+      n = n - 1
+      # atualizar vetor de diversidade
+      n_spp = c(n_spp, n)
+      # atualizar tempo
+      ti = ti + mu_t
+    }
+    # armazenar novo tempo após especiação/extinção
+    ts = c(ts, ti)
 }
 
 # Visualiza os resultados
