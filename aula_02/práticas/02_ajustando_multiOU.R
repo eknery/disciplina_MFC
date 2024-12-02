@@ -1,10 +1,10 @@
 # Nessa prática vamos investigar uma hipótese de evolução convergente entre
 # os lagartos do gênero Anolis. Mais especificamente, queremos saber se lagartos
-# que habtiam o tronco das árvores evoluíram patas com fenótipo similares. 
+# que habitam o tronco das árvores evoluíram patas com fenótipos similares. 
 # Para isso, vamos focar no comprimento das patas e no seu número de lamelas 
 # (escama expandidas que aumentam o atrito com a superfície).  
 
-######################### CARREGANDOBIBLIOTECAS E DADOS #######################
+######################### CARREGANDO BIBLIOTECAS E DADOS #######################
 
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
@@ -60,7 +60,7 @@ ouwie.data
 
 ############################### VISULIZANDO DADOS ##############################
 
-### cores para cada ecomorfo
+### cores para cada hábito
 cols = c(
   "CG" = "darkblue", 
   "GB" = "darkgreen", 
@@ -139,5 +139,5 @@ aic.w(aic)
 
 # PARA PENSAR: 
 #  Qual modelo teve o melhor ajuste aos dados? Que modo de evolução esse modelo
-#  representa? O que indicam os parâmetros desse modelo?
+#  representa? O que indicam as estimativas dos parâmetros desse modelo?
 

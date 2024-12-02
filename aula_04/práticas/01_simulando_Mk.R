@@ -1,5 +1,5 @@
 # Nessa prática vamos simular a evolução de uma característica hipotética (Y) que 
-# possui três estados (1, 2 e 3) ao longo de uma linhagem longeva (10 milhões de anos). 
+# possui três estados (1, 2 e 3) ao longo de uma linhagem de 10 milhões de anos. 
 # Para isso, vamos construir diferentes matrizes de transição (Q) para
 # essa característica e simular as transições de estado. Assim, poderemos verificar
 # como modificações na matriz alteram a forma de evolução da característica.
@@ -80,7 +80,7 @@ matriz_q2
 tf <- 10
 # tempo atual 
 ti <- 0
-# vetor para armazenar o tempo de todos os estados
+# vetor para armazenar o tempo 
 ts2 = ti
 
 # estado atual
