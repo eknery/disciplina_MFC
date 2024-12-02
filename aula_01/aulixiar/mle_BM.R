@@ -2,13 +2,13 @@ library(emdbook) # Para a função mvrnorm
 
 ##################################### FUNÇÃO BM ################################
 
-lnlBM <- function(x1, x2, dt, sigma2) {
+lnlBM <- function(x1, x2, t, s, sigma2) {
   # Média esperada do ancestral igual à média
   mu <- mean(c(x1, x2))
   mean_vector <- c(mu, mu)
   # Matriz de covariância
-  cov_matrix <- sigma2 * matrix(c(dt, 0, 
-                                  0, dt), 
+  cov_matrix <- sigma2 * matrix(c(t, s, 
+                                  s, t), 
                                 nrow = 2, ncol = 2)
   # Vetor com fenótipo observados
   traits <- c(x1, x2)
