@@ -1,5 +1,7 @@
 # Disciplina de Métodos Filogenéticos Comparativos
 
+https://github.com/eknery/disciplina_MFC/auxiliar/logo.png
+
 ## Objetivos 
 ### Principal: 
 Fundamentar a teoria sobre os métodos filogenéticos comparativos e demonstrar o uso desses métodos em estudos de ecologia e evolução. 
