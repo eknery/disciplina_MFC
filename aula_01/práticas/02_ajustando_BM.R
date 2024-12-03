@@ -6,6 +6,8 @@
 # pelas espécies de Miconia. Nós vamos considerar três modos 
 # de evolução: equilibrio pontuado, caminha aleatória e evolução direcional.
 
+######################### CARREGANDO BIBLIOTECAS E DADOS ########################
+
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
