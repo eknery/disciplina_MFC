@@ -6,14 +6,14 @@
 # Taxa de especiação por unidade de tempo
 lambda <- 0.5
 # Taxa de extinção por unidade de tempo
-mu <- 0.05  
+mu <- 0.01
 
 ## Cenário temporal
 # tempo final (em milhões de anos)
-tf <- 20
-# tempo atual 
-ti <- 0
-# vetor para armazenar o tempo 
+tf <- 10
+# tempo atual
+ti = 0
+# vetor de tempo
 ts = ti
 
 ## Cenário de diversidade
@@ -22,33 +22,36 @@ n <- 1
 # Vetor de diversidade de espécies
 n_spp <- n
 
+## iterarar pelo tempo total
 while (ti < tf) {
-    # Tempo até a próxima especiação 
-    lambda_t <- rexp(1, rate = lambda)
-    # tempo até a próxima extinção
-    mu_t <- rexp(1, rate = mu)
-    # se a especiação acontece primeiro
-    if(lambda_t < mu_t){
-      if (lambda_t + ti > tf) break
-      # adicionar uma espécie
-      n = n + 1
-      # atualizar vetor de diversidade
-      n_spp = c(n_spp, n)
-      # atualizar tempo
-      ti = ti + lambda_t
-    }
-    # se a extinção acontece primeiro
-    if(lambda_t > mu_t){
-      if (mu_t + ti > tf) break
-      # remover uma espécie
-      n = n - 1
-      # atualizar vetor de diversidade
-      n_spp = c(n_spp, n)
-      # atualizar tempo
-      ti = ti + mu_t
-    }
-    # armazenar novo tempo após especiação/extinção
-    ts = c(ts, ti)
+      # tempo até a próxima especiação 
+      lambda_t <- rexp(1, rate = lambda)
+      # tempo até a próxima extinção
+      mu_t <- rexp(1, rate = mu)
+      # se a especiação acontece primeiro
+      if( lambda_t < mu_t ){
+        # está dentro to tempo de simulação?
+        if(lambda_t + ti > tf) next
+        # adicionar uma espécie
+        n = n + 1
+        # adicionar tempo
+        ti = ti + lambda_t
+        ts = c(ts, ti)
+      }
+      # se a extinção acontece primeiro
+      if( lambda_t > mu_t ){
+        # está dentro to tempo de simulação?
+        if(mu_t + ti > tf) next
+        # remover uma espécie
+        n = n - 1
+        # adicionar tempo
+        ti = ti + mu_t
+        ts = c(ts, ti)
+      }
+  # se extinção, parar!
+  if(n <= 0) break
+  # atualizar vetor de diversidade
+  n_spp = c(n_spp, n)
 }
 
 # Visualiza os resultados
