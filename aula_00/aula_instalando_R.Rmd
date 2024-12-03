@@ -1,0 +1,62 @@
+---
+title: "Aula 0 - Instalação da plataforma R"
+author:
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Olá pessoal, sejam bem-vind@s 
+
+Nessa aula iremos instalar a plataforma R que será usada durante o curso. Você poderá executar as atividades dessa aula por conta própria, antes do começo do curso. É recomendável que você tente executar a instalação antes do curso para detectar possíveis problemas e evitar atrasos que prejudiquem seu acompanhamento. Caso não consiga instalar ou executar o R, você poderá utilizar o RStudio Cloud, uma versão *online*. O acesso ao RStudio Cloud está descrito no fim desta aula. Também é recomendável que você faça o seu registro no RStudio Cloud com antecedência.
+
+
+### Afinal, o que é o R?
+
+O [R](https://www.r-project.org/) é um *software* gratuito que foi especialmente idealizado para estatística computacional e apresentação gráfica. Esse *software* funciona através de "linhas de comando", ou seja, instruções escritas para o computador executar. Essas instruções devem ser escritas numa linguagem de programação, de mesmo nome que o *software*, R. Ao longo deste minicurso, nós iremos aprender a "falar" na linguagem de programação R para que o computador possa entender nossas instruções.
+
+### Quem criou o R?
+
+A plataforma R foi inicialmente desenvolvida por **R**obert Gentleman and **R**oss Ihaka (R & R), e atualmente é mantida por uma comunidade de programadores, o [*R Development Core Team*](https://www.r-project.org/contributors.html). Esses programadores não ganham nada por esse trabalho. Portanto, se você utilizar o R, cite essa comudidade de programadores (R Development Core Team, ANO).
+
+### Quem sustenta o R?
+
+A plataforma e todas as suas extensões são armazenadas em computadores ao redor do mundo, ou seja, servidores. A manutenção dessa rede de computadores é financiada por [doadores](https://www.r-project.org/foundation/donors.html). Qualquer um pode fazer [doações](https://www.r-project.org/foundation/donations.html).
+
+### Como baixar o R?
+
+A plataforma R está disponível no CRAN (*Comprehensive R Archive Network*). Para baixar, clique [aqui](https://cran.r-project.org/); escolha a opção referente ao sistema operacional do seu computador (e.g. Windowns, Linux, mcOS); escolha a opção *install R for the first time*; clique em *Download R 4.1.0* (ou a versão mais atual disponível). Com isto, um arquivo .exe será baixado na pasta de *downloads* do seu computador (ou na pasta designada como tal). 
+
+### Instalação do R
+
+Execute o arquivo .exe que foi baixado (e.g. R-4.1.0-win.exe). Escolha a lingua de preferência (e.g. português Brasil); aceite os termos de uso; escolha a pasta para instalação do software (e.g. C:/Program Files/R/R-4.1.0); escolha a instalação padrão (*standard*). Ao final do processo, fica a seu critério criar um atalho (*shortcut*) do R na sua área de trabalho.
+
+Se tudo deu certo, você será capaz de abrir a plataforma R no seu computador. Para isso, procure pelo R nos seus programas ou clique no atalho criado na sua área de trabalho. A interface da plataforma será semelhante à seguinte:
+
+
+![](C:/Users/eduar/OneDrive/Desktop/GitHub/disciplina_MFC/aula_00/auxiliar/R.png)
+
+### Opcional: R Studio
+
+A interface do R pode parecer pouco amigável, principalmente para usuários novos. Pensando nisso, a empresa RStudio desenvolveu uma IDE (*Integrated Development Environment*), o [RStudio](https://www.rstudio.com/). O RStudio facilita a utilização do R, ajudando o usuário a programar e fornecendo ferramentas adicionais de compartilhamento e visualização. Para baixar o RStudio, clique [aqui](https://www.rstudio.com/products/rstudio/download/); escolha a opção gratuíta (*free*); e um arquivo .exe será baixado em seu computador. 
+
+A instalação do RStudio requer que o R esteja instalado no seu computador. Execute o arquivo .exe (e.g. RStudio-1.4.1106.exe); escolha as opções padrões. Fica a seu critério criar um atalho na sua área de trabalho.
+
+Se tudo deu certo, você será capaz de abrir o RStudio no seu computador. A interface do RStudio será semelhante à seguinte:
+
+![](C:/Users/eduar/OneDrive/Desktop/GitHub/disciplina_MFC/aula_00/auxiliar/RStudio.png)
+
+### Opcional: RStudio Cloud
+
+Você pode estar com um computador com memória cheia, que talvez não suporte o R ou o RStudio. Isso não será um impedimento para que você acompanhe o curso. Existe uma opção *online* do RStudio, o [RStudio Cloud](https://rstudio.cloud/). Para ter acesso ao RStudio Cloud, faça seu registro [aqui](https://login.rstudio.cloud/register?redirect=%2Foauth%2Fauthorize%3Fredirect_uri%3Dhttps%253A%252F%252Frstudio.cloud%252Flogin%26client_id%3Drstudio-cloud%26response_type%3Dcode%26show_auth%3D0%26show_login%3D1%26show_setup%3D0&setup=False). Feito o registro, faça *login* na sua conta. A primeira página será a área dos seus projetos (*Your Workspace*); clique em novo projeto (*New Project*) para carregar a interface do RStudio *online*. Se tudo deu certo, você terá acesso a uma página semelhante a essa:
+
+![](C:/Users/eduar/OneDrive/Desktop/GitHub/disciplina_MFC/aula_00/auxiliar/RStudio_cloud.png)
+
+### Dificuldades?
+
+Se ao longo desta aula você não conseguiu instalar/executar o R ou acessar o RStudio Cloud, por favor, entre em contato comigo (eduardo.k.nery@gmail.com).
