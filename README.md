@@ -1,6 +1,6 @@
 # Disciplina de Métodos Filogenéticos Comparativos
 
-![logo](https://github.com/eknery/disciplina_MFC/auxiliar/logo.png)
+![logo](https://github.com/eknery/disciplina_MFC/auxiliar/logo.jpg)
 
 ## Objetivos 
 ### Principal: 
