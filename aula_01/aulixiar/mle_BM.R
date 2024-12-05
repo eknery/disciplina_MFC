@@ -1,31 +1,51 @@
 library(emdbook) # Para a função mvrnorm
+library(stats4)
+library(ape)
 
-##################################### FUNÇÃO BM ################################
+############################### FUNÇÃO ML PARA BM ##############################
 
-lnlBM <- function(x1, x2, t, s, sigma2) {
-  # Média esperada do ancestral igual à média
+lnlBM <- function(sigma_sq, x1, x2, t, s) {
+  # Vetor com fenótipo observados
+  traits <- c(x1, x2)
+  # Fenótipo ancestral igual à média
   mu <- mean(c(x1, x2))
   mean_vector <- c(mu, mu)
   # Matriz de covariância
-  cov_matrix <- sigma2 * matrix(c(t, s, 
-                                  s, t), 
+  cov_matrix <- sigma_sq * matrix(c(t, s, 
+                                    s, t), 
                                 nrow = 2, ncol = 2)
-  # Vetor com fenótipo observados
-  traits <- c(x1, x2)
   # Calculo da log-verossimilhança
-  lnL <- -dmvnorm(x = traits, 
+  lnl <- -dmvnorm(x = traits, 
                   mu = mean_vector, 
                   Sigma = cov_matrix, 
                   log = TRUE
                 )
-  return(lnL)
+  # Retorna a log-verossimilhança
+  return(lnl)
 }
 
-##########################
+###################################### MLE ###################################
 
-optimize(f= lnlBM,
-         x1 = 0.1,
-         x2 = 0.3, 
-         dt = 1,
-         interval = c(0,10)
-         )
+## árvore 
+text.string<-"((A:0.25,B:0.25):0.75);"
+tree = read.tree(text = text.string)
+plot(tree)
+
+### valores observados
+t = 1
+s = 0.75
+x1 =  1.5
+x2 = 0.5
+
+### achar MLE
+mle(minuslogl = lnlBM, 
+    start = list(sigma_sq = 1, x1 = x1, x2 = x2, t = t, s = s), 
+    fixed = list(x1 = x1, x2 = x2, t = t, s = s),
+    method = "BFGS"
+    )
+
+plot(x = c(0.75, 0.5, 0.25, 0),
+     y = c(1, 0.5, 0.33, 0.25),
+     xlab = "Cov X",
+     ylab = "MLE sigma"
+    )
