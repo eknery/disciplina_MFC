@@ -6,6 +6,6 @@ O projeto final da disciplina consiste em testar uma hipótese evolutiva com o u
  - Justificar os métodos empregados;
  - Explicitar os padrões esperados que confirmariam as hipóteses (expectativas);
  - Explicitar os padrões obtidos com a aplicação dos métodos (resultados);
- - Interpretar de fomra biológica os padrões obtidos (discussão);
+ - Interpretar os padrões obtidos de forma biológica (discussão);
 
 Outros pontos podem ser apresentados e compartilhados, tais como dificuldades técnicas ou dúvidas teóricas. É opcional o preparo de *slides* ou outras ferramentas que auxiliam na apresentação. O principal é expor as hipóteses testadas e discutir a aplicação dos métodos empregados nos projetos.
