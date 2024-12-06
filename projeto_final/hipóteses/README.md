@@ -1,3 +1,3 @@
 ## Hipóteses para testar:
 
-1) A família botânica Melastomataceae ocorre 
+1) A família botânica Melastomataceae é extremamente comum nas regiões tropicais da Terra. Essa distribuição comum têm sido atribuída à forma de dispersão dos frutos das melastomatáceas. Por um lado, a dispersão abiótica é sugerida como uma facilitadora da distribuição comum, permitindo que as plantas propaguem seus descendentes mesmo na ausência de animais dispersores. Nessa perspectiva, a dispersão abiótica teria trazido mais vantagens adaptativas e, consequentemente, tornaria-se um estado mais estável nas melastomatáceas. Por outro lado, a dispersão biótica também é sugerida como uma facilitadora da distribuição comum, permitindo que as plantas propaguem seus descendentes por maiores distâncias e colonizem novos ambientes rapidamente. 
