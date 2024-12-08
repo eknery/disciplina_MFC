@@ -3,10 +3,10 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 ############################ SIMULANDO APENAS ESPECIAÇÃO ########################
 
 ## tempo total das simulações
-tf = 20
+tf = 50
 
 ## determinar taxa de especiação
-lambda = 0.2
+lambda = 0.1
 
 ## simular árvore apenas com especiação
 tree_b <-pbtree(b= lambda,
@@ -48,8 +48,8 @@ abline(lm.fit1, lwd=2,col="darkgray")
 
 ########################## SIMULANDO ESPECIAÇÃO E EXTINÇÃO #####################
 
-## determinar taxa de extinção
-mu = 0.1
+## determinar taxa de especiação e extinção
+mu = 0.01
 
 ## simular árvore apenas com especiação
 tree_bd <-pbtree(b = lambda,
