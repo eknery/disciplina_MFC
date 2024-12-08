@@ -1,26 +1,87 @@
-library(phytools)
+# Nessa prática vamos investigar a diversificação do gênero Chamaecrista. 
+# Essas plantas são leguminosas lenhosas que ocupam principalmente ambientes abertos 
+# da América do Sul. Esses ambientes provavelmente passaram por ciclos de expansão
+# e contração durante o Quaternário (~ 2.8 mya), o que pode ter propiciado tanto
+# o aumento da especiação quanto da extinção das linhagens de plantas.
 
+########################## CARREGANDO BIBLIOTECAS E DADOS #####################
 
-## simulate a pure-birth (Yule) tree using pbtree
-tree<-pbtree(n=12,scale=100)
-## split our plotting area in two
-par(mfrow=c(2,1))
+if (!require("phytools")) install.packages("phytools"); library("phytools")
+if (!require("geiger")) install.packages("geiger"); library("geiger")
 
-## graph our phylogeny
-plotTree(tree,ftype="off",mar=c(4.1,4.1,2.1,1.1))
-## compute the lineages through time using ltt
-obj<-ltt(tree,plot=FALSE)
-## draw vertical lines at each lineage accumulation event
-abline(v=obj$times,lty="dotted",
-       col=make.transparent("blue",0.5))
-## add a horizontal axis and plot label
-axis(1,cex.axis=0.8)
-mtext("(a)",line=1,at=-10)
-## create a second plot graphing our LTT
-plot(obj,mar=c(5.1,4.1,2.1,1.1),bty="n",
-     log.lineages=FALSE,las=1,cex.axis=0.8)
-## add the same vertical lines as in panel a)
-abline(v=obj$times,lty="dotted",
-       col=make.transparent("blue",0.5))
-## label our plot
-mtext("(b)",line=1,at=-10)
+### carregando filogenia
+tree = read.tree("dados/chamaecrista.tree")
+
+### visulizando árvores
+plotTree(tree,
+         type= "fan",
+         fsize= 0.3,
+         lwd=1,
+         part=0.88)
+### altura máxima 
+hmax = as.integer(max(nodeHeights(tree)))
+### escala de tempo
+obj<-axis(1,
+          pos=-1,
+          at= seq(from = 0, to = hmax, by = 14),
+          padj = -3.5,
+          cex.axis=0.4,
+          labels=T)
+
+################################# PROCESSANDO DADOS ############################
+
+### retirando linhagens fora do gênero
+tree_prun = keep.tip(tree, tip = tree$tip.label[grepl("C_", tree$tip.label)] )
+
+### visulizando árvores
+plotTree(tree_prun,
+         type= "fan",
+         fsize= 0.3,
+         lwd=1,
+         part=0.88)
+### altura máxima 
+hmax = as.integer(max(nodeHeights(tree_prun)))
+### escala de tempo
+obj<-axis(1,
+          pos=-1,
+          at= seq(from = 0, to = hmax, by = 10.25),
+          padj = -3.5,
+          cex.axis=0.4,
+          labels=T)
+
+############################## TESTE DE PURO NASCIMENTO ########################
+
+### teste de desvio do puro nascimento
+ltt_obj <- ltt(tree_prun, log.lineages=T)
+ltt_obj
+
+### considerando amostragem parcial
+mccr_obj <- mccr(ltt_obj,
+                 rho= Ntip(tree_prun)/366,
+                 nsim=500
+                 )
+mccr_obj
+
+### visualizando teste
+plot(mccr_obj,
+     las=1,
+     cex.axis=0.8)
+
+############################## AJUSTANDO MODELOS ################################
+
+### ajustando modelo de puro nascimento
+yule_obj<-fit.yule(tree_prun,
+                   rho = Ntip(tree_prun)/366
+                   )
+### vendo estimativas
+yule_obj
+
+### ajustando modelo BD
+bd_obj = fit.bd(tree_prun,
+               rho = Ntip(tree_prun)/366
+               )
+### vendo estimativas
+bd_obj
+
+### comparando modelos
+AIC(yule_obj, bd_obj)
