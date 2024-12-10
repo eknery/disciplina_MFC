@@ -24,7 +24,7 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-leaf.size<- miconia.data[,"leaf.size"]
+leaf.size<- miconia.data[,"inflor.size"]
 names(leaf.size)<-rownames(miconia.data)
 leaf.size
 
