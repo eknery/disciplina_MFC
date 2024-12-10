@@ -2,9 +2,10 @@
 # das folhas e das inflorescências dentro de um clado de Miconia. 
 # Essas plantas são lenhosas e ocorrem tanto em ambientes abertos quanto 
 # em florestas úmidas da América do Sul. Nossa expectativa é que as folhas 
-# teriam evoluído mais rápido em resposta aos diferentes ambientes ocupados 
-# pelas espécies de Miconia. Nós vamos considerar três modos 
-# de evolução: equilibrio pontuado, caminha aleatória e evolução direcional.
+# teriam evoluído mais rápido do que as inflorescências
+# em resposta aos diferentes ambientes ocupados pelas espécies. 
+# Nós vamos considerar três modos de evolução: equilibrio pontuado, 
+# caminha aleatória e evolução direcional.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS ########################
 
