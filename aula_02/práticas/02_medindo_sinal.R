@@ -1,7 +1,7 @@
 # Nessa prática vamos investigar o sinal filogenético do tamanho das folhas e
 # das inflorescências dentro de um clado de Miconia. Nossa expectativa é que 
 # o tamanho da inflorescência tenha sido mais conservado na evolução
-# devido ao seu papel na polinização, ques restringiria grandes mudanças. 
+# devido ao seu papel na polinização, que restringiria grandes mudanças. 
 # Nós vamos considerar duas medidas de sinal filogenético: lambda e K.
 
 if (!require("phytools")) install.packages("phytools"); library("phytools")
@@ -18,30 +18,30 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-inflor.size<- miconia.data[,"leaf.size"]
-names(inflor.size)<-rownames(miconia.data)
-inflor.size
+trait<- miconia.data[,"leaf.size"]
+names(trait)<-rownames(miconia.data)
+trait
 
 ### verificando a distribuição dos valores
-hist(inflor.size)
+hist(trait)
 
 ### verificando correspondência entre dados e filogenia
 name.check(miconia.tree, miconia.data)
 
 ### gráfico da filogenia
 plotTree.barplot(tree = miconia.tree,
-                 x = inflor.size,
+                 x = trait,
                  args.plotTree=list(fsize=0.7)
 )
 
 # PARA PENSAR:
-#   Existe algum padrão de similaridade de tamanho entre linhagens próximas?
+# Existe algum padrão de similaridade de tamanho entre linhagens próximas?
 
 ################################ MEDINDO SINAL ###############################
 
 ### testando sinal filogenético por lambda de Pagel
 lambda_gs = phylosig(tree = miconia.tree,
-                     x = inflor.size,
+                     x = trait,
                      method="lambda",
                      test = TRUE
                      )
@@ -56,7 +56,7 @@ plot(lambda_gs,las=1,cex.axis=0.9)
 
 ### testando sinal filogenético por K de Bloomberg
 K_gs<-phylosig(tree = miconia.tree,
-               x = inflor.size,
+               x = trait,
                method= "K",
                test = TRUE,
                nsim = 10000)
