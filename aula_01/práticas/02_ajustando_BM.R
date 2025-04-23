@@ -5,7 +5,7 @@
 # teriam evoluído mais rápido do que as inflorescências
 # em resposta aos diferentes ambientes ocupados pelas espécies. 
 # Nós vamos considerar três modos de evolução: equilibrio pontuado, 
-# caminha aleatória e evolução direcional.
+# caminhada aleatória e evolução direcional.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS ########################
 
@@ -24,42 +24,42 @@ print(miconia.tree,printlen=2)
 ############################## VISUALIZANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-leaf.size<- miconia.data[,"inflor.size"]
-names(leaf.size)<-rownames(miconia.data)
-leaf.size
+trait<- miconia.data[,"leaf.size"]
+names(trait)<-rownames(miconia.data)
+trait
 
 ### verificando a distribuição dos valores
-hist(leaf.size)
+hist(trait)
 
 ### verificando correspondência entre dados e filogenia
 name.check(miconia.tree, miconia.data)
 
 ### gráfico da filogenia
 plotTree.barplot(tree = miconia.tree,
-                 x = leaf.size,
-                 args.plotTree=list(fsize=0.7)
+                 x = trait,
+                 args.plotTree=list(fsize=0.4)
 )
 
 # PARA PENSAR:
-# O tamanho das folhas parece ter seguido alguma tendência? 
+# A característica parece ter seguido alguma tendência? 
 
 ############################### AJUSTANDO MODELOS ##############################
 
 ### ajustando modelo Pontuado
 fitPunctual <-fitContinuous(phy = miconia.tree,
-                            dat = leaf.size,
+                            dat = trait,
                             model ="kappa"
 )
 
-### ajustando modelo de Random Walk
+### ajustando modelo de Caminhada Aleatória
 fitRWalk <-fitContinuous(phy = miconia.tree,
-                         dat = leaf.size,
+                         dat = trait,
                          model ="BM"
 )
 
 ### ajustando modelo Direcional
 fitDirectional <-fitContinuous(phy = miconia.tree,
-                               dat = leaf.size,
+                               dat = trait,
                                model ="mean_trend"
 )
 
@@ -75,8 +75,8 @@ aic = setNames(c(fitPunctual$opt$aic,
 aic
 
 # PARA PENSAR:
-#   Baseado apenas no AIC, qual modelo evolutivo teve o melhor ajuste ao
-#   tamanho das plantas nesse clado de Miconia? As diferernças de AIC são 
+#   Baseado apenas no AIC, qual modelo evolutivo teve o melhor ajuste a
+#   característica nesse clado de Miconia? As diferernças de AIC são 
 #   contrastantes?
 
 ### número de parâmetros dos modelos
@@ -85,7 +85,6 @@ k = setNames(c(fitPunctual$opt$k,
                  fitDirectional$opt$k),
                c("Punctual","Random Walk","Directional")
 )
-
 ### ver número de parâmetros
 k 
 
@@ -99,12 +98,11 @@ sigma.sq = setNames(c(fitPunctual$opt$sigsq,
                       fitDirectional$opt$sigsq),
                     c("Punctual","Random Walk","Directional")
                     )
-
 ### ver taxas evolutivas
 sigma.sq
 
-# PARA PENSAR:
-#   As estimativas de taxas evolutivas diferiram muito entre os modelos? 
+## PARA PENSAR:
+# As estimativas de taxas evolutivas diferiram muito entre os modelos? 
 
 ### estimativas de fenótipo ancestral
 z0= setNames(c(fitPunctual$opt$z0,
@@ -112,10 +110,9 @@ z0= setNames(c(fitPunctual$opt$z0,
                fitDirectional$opt$z0),
              c("Punctual","Random Walk","Directional")
 )
-
 ### ver estimativas de fenótipo ancestral
 z0
 
-# PARA PENSAR:
-#   As estimativas de fenótipo ancestral diferiram muito? Essas estimativas 
-#   fazem sentido biologicamente?
+## PARA PENSAR:
+# As estimativas de fenótipo ancestral diferiram muito? Essas estimativas 
+# fazem sentido biologicamente?
