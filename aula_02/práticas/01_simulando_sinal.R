@@ -1,16 +1,18 @@
-################################# SIMULANDO BM #################################
 
-## Parâmetros do modelo BM
-# Taxa de variação
-sigma_sq <- 0.1
+############################## CENÁRIO TEMPORAL GERAL ##########################
 
-## Cenário temporal
 # tempo final (em milhões de anos)
 tf <- 1 
 # tempo entre geração (em milhões de anos)
 dt <- 0.0001  
 # vetor com o tempo de todas as gerações
 ts <- seq(0, tf, by = dt)  
+
+################################# SIMULANDO BM #################################
+
+## Parâmetros do modelo BM
+# Taxa de variação
+sigma_sq <- 0.1
 
 ## vetores para armazenar os valores das características
 Ybm1 <- c() 
@@ -45,8 +47,9 @@ lines(x = ts,
       col = "blue")
 
 # PARA PENSAR:
-#  Qual a diferença da característica entre as linhagens-irmãs ao final da simulação?
-#  Guarde o valor da diferença: 
+#  Calcule a dissimilaridades entre as linhagens-irmãs ao final da simulação:
+abs(Ybm1[length(ts)] - Ybm2[length(ts)])  # Diferença modular
+#  Guarde o valor de dissimilaridade sob BM: 
 
 ########################## SIMULANDO EVOLUÇÃO DIRECIONAL #########################
 
@@ -55,14 +58,6 @@ lines(x = ts,
 sigma_sq <- 0.1
 # Tendência evolutiva
 mu = 0.01
-
-## Cenário temporal
-# tempo final (em milhões de anos)
-tf <- 1 
-# tempo entre geração (em milhões de anos)
-dt <- 0.0001  
-# vetor com o tempo de todas as gerações
-ts <- seq(0, tf, by = dt)  
 
 ## vetores para armazenar os valores das características
 Yde1 <- c() 
@@ -97,11 +92,13 @@ lines(x = ts,
       col = "red")
 
 # PARA PENSAR:
-#  Qual a diferença da característica entre as linhagens-irmãs ao final da simulação?
-#  Guarde o valor da diferença: 
+#  Calcule a dissimilaridades entre as linhagens-irmãs ao final da simulação:
+abs(Yde1[length(ts)] - Yde2[length(ts)])  # Diferença modular
+#  Guarde o valor da dissimilaridades sob DE: 
 
-######################## COMPARANDO DIFERENÇAS ENTRE MODELOS ###################
+############################### COMPARANDO MODELOS ############################
 
+## Plotar resultado de todas as simulações
 plot(x = ts, 
      y = Yde1, 
      type = "l", 
@@ -126,3 +123,25 @@ lines(x = ts,
       type = "l", 
       col = "blue")
 
+## PARA PENSAR:
+# Qual dos dois modelos gerou maior dissimilaridade entre as linhagens-irmãs?
+
+## EM GRUPO:
+# Agora vamos testar se os modelos geram dissimilaridades de magnitude distintas: 
+
+## dissimilaridades calculadas pela turma
+dif_bm = c() ## dissimilaridades sob BM
+dif_de = c() ## dissimilaridades sob DE
+dif = c(dif_bm, dif_de)
+
+## vetor para diferenciar resultados de cada modelo
+model = c(rep("BM", length(dif_bm)), rep("DE", length(dif_de)))
+
+## organizar em tabela
+table = as.data.frame(cbind(dif,modelo) )
+
+## testar diferença com ANOVA
+summary(aov(dif ~ model, data = table))
+
+## PARA PENSAR:
+# Segundo a ANOVA, os modelos produzem dissimilaridades de magnitude distintas?
