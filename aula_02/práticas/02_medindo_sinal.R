@@ -69,7 +69,6 @@ plot(K_gs,las=1,cex.axis=0.9)
 # O valor de K foi alto ou baixo? O que isso indica? 
 # O valor de P foi significativo? O que isso indica?
 
-
 ## EM GRUPO:
 # Execute o script para a folha e para a inflorescência, anotando os valores de
 # lambda e K para cada uma das características. Os valores de sinal filogenético
