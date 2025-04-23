@@ -31,7 +31,7 @@ name.check(miconia.tree, miconia.data)
 ### gráfico da filogenia
 plotTree.barplot(tree = miconia.tree,
                  x = trait,
-                 args.plotTree=list(fsize=0.7)
+                 args.plotTree =list(fsize=0.4)
 )
 
 # PARA PENSAR:
@@ -51,8 +51,8 @@ lambda_gs
 plot(lambda_gs,las=1,cex.axis=0.9)
 
 # PARA PENSAR:
-#   O valor de lambda foi alto ou baixo? O que isso indica? 
-#   O valor de P foi significativo? O que isso indica?
+# O valor de lambda foi alto ou baixo? O que isso indica? 
+# O valor de P foi significativo? O que isso indica?
 
 ### testando sinal filogenético por K de Bloomberg
 K_gs<-phylosig(tree = miconia.tree,
@@ -65,8 +65,13 @@ K_gs<-phylosig(tree = miconia.tree,
 K_gs
 plot(K_gs,las=1,cex.axis=0.9)
 
-# PARA PENSAR:
-#   O valor de K foi alto ou baixo? O que isso indica? 
-#   O valor de P foi significativo? O que isso indica?
+## PARA PENSAR:
+# O valor de K foi alto ou baixo? O que isso indica? 
+# O valor de P foi significativo? O que isso indica?
 
+
+## EM GRUPO:
+# Execute o script para a folha e para a inflorescência, anotando os valores de
+# lambda e K para cada uma das características. Os valores de sinal filogenético
+# parecem ter alguma relação com os modelos de melhor ajuste dessas características?
 
