@@ -1,4 +1,4 @@
-# Nessa prática vamos investigar se existe uma correlaçao evolutiva entre o 
+# Nesta prática vamos investigar se existe uma correlaçao evolutiva entre o 
 # tamanho das folhas e das inflorescências dentro de um clado de Miconia.
 # A expectativa é que a evolução de folhas maiores aumente a assimilação de 
 # de carbono e consequentemente permita sustentar inflorescências maiores.
