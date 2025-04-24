@@ -1,4 +1,4 @@
-# Nessa prática vamos investigar se existe uma correlaçao evolutiva entre o 
+# Nesta prática vamos investigar se existe uma correlaçao evolutiva entre o 
 # tamanho das folhas e das inflorescências dentro de um clado de Miconia.
 # A expectativa é que a evolução de folhas maiores aumente a assimilação de 
 # de carbono e consequentemente permita sustentar inflorescências maiores.
@@ -86,18 +86,18 @@ spp = rownames(miconia.data)
 ### nome do melhor modelo
 best_model = names(which(aicw == max(aicw)))
 
-### calculando correlação de acordo com melhor modelo
-if(best_model == "BM" ){
+### CALCULANDO VCV: 
+
+## Se BM for o melhor modelo:
   sigma_sq = fitBM$opt$sigsq
   cor_str = corBrownian(value = sigma_sq, phy=miconia.tree, form=~spp)
-}
-if(best_model == "OU" ){
+
+## Se OU for o melhor modelo:
   alpha = fitOU$opt$alpha
   cor_str = corMartins(value = alpha, phy=miconia.tree, form=~spp, fixed = T)
-}
 
 # IPORTANTE:
-#   Note que a estrutura de correlação é calculada com base em diferentes parâmetros,
+#   Note que a estrutura de correlação é calculada com base em diferentes parâmetros
 #   dependendo do modelo que foi escolhido para representar a evolução da característica. 
 
 ################################### AJUSTANDO PGLS #############################
