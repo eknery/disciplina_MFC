@@ -1,4 +1,4 @@
-# Nessa prática vamos investigar uma hipótese de evolução convergente entre
+# Nesta prática vamos investigar uma hipótese de evolução convergente entre
 # os lagartos do gênero Anolis. Mais especificamente, queremos saber se lagartos
 # que habitam o tronco das árvores evoluíram patas com fenótipos similares. 
 # Para isso, vamos focar no comprimento das patas e no seu número de lamelas 
@@ -82,7 +82,7 @@ tips<-getStates(ecomorph.tree,"tips")
 ## cores para as espécies atuais
 tip.cols<-cols[tips]
 
-### plot da árvores mais as características 
+### plot da árvores mais a característica
 plotTree.barplot(tree = ecomorph.tree,
                  x = scores(pca)[,3],
                  args.plotTree=list(fsize=0.4),
