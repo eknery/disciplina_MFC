@@ -1,3 +1,9 @@
+# Nesta prática vamos simular a evolução de característica hipotéticas (Y) em 
+# duas linhagens-irmãs. Essas características evoluíram sob diferentes modelos.
+# Após as simulações, vamos quantificar a similaridade das caracteríticas entre 
+# as linhagens-irmãs para avaliar se essa similaridade foi afetada pelos modelos
+# evolutivos que geraram as características.
+
 
 ############################## CENÁRIO TEMPORAL GERAL ##########################
 
@@ -100,7 +106,6 @@ simDE = 1/(1+dissimDE)
 simDE
 
 ############################### COMPARANDO MODELOS ############################
-
 
 ## PARA PENSAR:
 # Qual dos dois modelos gerou maior similaridade entre as linhagens-irmãs?
