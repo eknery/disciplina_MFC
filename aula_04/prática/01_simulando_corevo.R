@@ -1,6 +1,7 @@
-
-
- 
+# Nesta prática vamos simular a evolução correlacionada de duas características
+# hipotéticas, Y e Z, em uma mesma linhagem. Vamos quantificar a correlação padrão
+# das simulações e contrastar com as correlações evolutivas para verificar se
+# existe relação entre essas medidas.
 
 ######################## SIMULANDO EVOLUÇÃO CORRELACIONADA  ####################
 
@@ -12,14 +13,15 @@ dt <- 0.0001
 # vetor com o tempo de todas as gerações
 ts <- seq(0, tf, by = dt) 
 
-## Parâmetros do modelo BM
-# Taxa de variação de Y
-sigma_sqY <- 0.05 # inicial: 0.05
-# Taxa de variação de Z
-sigma_sqZ <- 0.005 # inicial: 0.05
+## Parâmetros do modelo BM correlacionado:
 
-## Correlação evolutiva entre Y e Z
-corevo <- 0.07 # incial: 0.7
+# Matriz VCV
+vcv <- matrix(c(0.1, 0.09, 
+                0.09, 0.1), 
+                nrow = 2)
+
+# Correlação evolutiva
+corevo = sqrt(vcv[1,2])
 
 ## vetores para armazenar os valores das características
 Y <- c() 
@@ -30,10 +32,9 @@ Z <- 1
 
 ## Simulação 
 for (i in 2:length(ts)) {
-  dY <-  rnorm(1, mean = 0, sd = sqrt(sigma_sqY) )  # variação estocástica de Y
-  dZ <-  rnorm(1, mean = 0, sd = sqrt(sigma_sqZ) )  # variação estocástica de Z
-  Y[i] <- Y[i-1] + dY + (corevo * dZ) 
-  Z[i] <- Z[i-1] + dZ + (corevo * dY)
+  dS = MASS::mvrnorm(n = 1, mu = c(0, 0), Sigma = vcv)
+  Y[i] <- Y[i-1] + dS[1]
+  Z[i] <- Z[i-1] + dS[2] 
 }
 
 ## Plot da simulação
@@ -63,15 +64,15 @@ Y[length(ts)]
 Z[length(ts)]
 
 # Vamos armazenar os valores finais de Y e Z das nossas simulações:
-Ys = c(-11.6, -17.4, -2.49, -22.6)
-Zs = c(-11.9, -8.0, 14.0, 2.6)
+Ys = c()
+Zs = c()
 
 # Vamos calcular a correlação padrão entre as características
 cor(Ys,Zs)
 
 # Agora vamos comparar a correlação padrão e a correlação evolutiva.
 # Os valores são similares? 
-c("Padrão" = cor(Ys,Zs), "Evolutiva" = corevo)
+c("Padrão" = cor(Ys,Zs), "Evolutiva" = corevo )
 
 ## NOVOS EXPERIMENTOS:
 # 2) Produza uma simulação com uma correlação evolutiva 10X menor que o valor inicial.
