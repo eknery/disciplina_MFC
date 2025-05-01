@@ -1,7 +1,8 @@
 # Nesta prática vamos simular a evolução correlacionada de duas características
-# hipotéticas, Y e Z, em uma mesma linhagem. Vamos quantificar a correlação padrão
-# das simulações e contrastar com as correlações evolutivas para verificar se
-# existe relação entre essas medidas.
+# hipotéticas, Y e Z, em uma mesma linhagem. Faremos simulações considerando
+# diferentes cenários de taxas e correlação evolutiva. Ao final das simulações,
+# vamos quantificar a correlação padrão das características e avaliar sua relação
+# com a correlação evolutiva.
 
 ######################## SIMULANDO EVOLUÇÃO CORRELACIONADA  ####################
 
@@ -13,15 +14,20 @@ dt <- 0.0001
 # vetor com o tempo de todas as gerações
 ts <- seq(0, tf, by = dt) 
 
-## Parâmetros do modelo BM correlacionado:
+## modelo BM multivariado:
 
-# Matriz VCV
-vcv <- matrix(c(0.1, 0.09, 
-                0.09, 0.1), 
-                nrow = 2)
+# Matriz R
+R <- matrix(c(0.05, 0.04, 
+              0.04, 0.05), 
+               nrow = 2)
+
+# Taxas evolutivas
+sigmaY <- R[1, 1]
+sigmaZ <- R[2, 2]
+covYZ <- R[1, 2]
 
 # Correlação evolutiva
-corevo = sqrt(vcv[1,2])
+corevo = covYZ/ sqrt(sigmaY*sigmaZ)
 
 ## vetores para armazenar os valores das características
 Y <- c() 
@@ -32,7 +38,7 @@ Z <- 1
 
 ## Simulação 
 for (i in 2:length(ts)) {
-  dS = MASS::mvrnorm(n = 1, mu = c(0, 0), Sigma = vcv)
+  dS = MASS::mvrnorm(n = 1, mu = c(0, 0), Sigma = R)
   Y[i] <- Y[i-1] + dS[1]
   Z[i] <- Z[i-1] + dS[2] 
 }
@@ -46,8 +52,8 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Características",
      main = paste0("BM",
-                   "; sigma_sq Y: ", sigma_sqY,
-                   "; sigma_sq Z: ", sigma_sqZ,
+                   "; sigma_sq Y: ", sigmaY,
+                   "; sigma_sq Z: ", sigmaZ,
                    "; Corr Evo: ", corevo
                    
      )
