@@ -83,5 +83,4 @@ c("Padrão" = cor(Ys,Zs), "Evolutiva" = corevo )
 ## NOVOS EXPERIMENTOS:
 # 2) Produza uma simulação com uma correlação evolutiva 10X menor que o valor original.
 #
-# 3) Produza uma simulação sem correlação evolutiva, e com taxas evolutivas 
-# 10X menores que os valores originais.
+# 3) Produza uma simulação sem correlação evolutiva e com tempo 10 X menor que o original.
