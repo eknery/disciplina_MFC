@@ -43,10 +43,10 @@ plot(x = ts,
      
      xlab = "Tempo (milhões de anos)", 
      ylab = "Valor de Y",
-     main = paste0("Processo OU ",
-                   " sigma_sq: ", sigma_sq,
-                   " theta: ", theta, 
-                   " alpha: ", alpha
+     main = paste0("Processo OU",
+                   "; sigma_sq: ", sigma_sq,
+                   "; theta: ", theta, 
+                   "; alpha: ", alpha
                    
                   )
      )
@@ -86,7 +86,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica Y",
      main = paste0(
-              "theta (1): ", theta, "  ",
+              "theta (1): ", theta, "; ",
               "theta (2): ", theta2
               )
      )
@@ -138,7 +138,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica Y",
      main = paste0(
-       "alpha (1): ", alpha, "  ",
+       "alpha (1): ", alpha, "; ",
        "alpha (3): ", alpha3
         )
      )
@@ -185,7 +185,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica Y",
      main = paste0(
-       "alpha (1): ", alpha, "  ",
+       "alpha (1): ", alpha, "; ",
        "alpha (4): ", alpha4
      )
 )
