@@ -5,6 +5,17 @@
 # vamos 'brincar' de ver a evolução em tempo real, fazendo 'experimentos' com
 # a nossa características hipotética.
 
+
+########################### CENÁRIO TEMPORAL COMUM ############################
+
+## Cenário temporal
+# tempo final (em milhões de anos)
+tf <- 1 
+# intervalo de tempo entre geração (em milhões de anos)
+dt <- 0.0001  
+# vetor com o tempo de todas as gerações
+ts <- seq(0, tf, by = dt)  
+
 ############################ APRESENTAÇÃO DO MODELO ############################
 
 ## Parâmetros do modelo OU
@@ -14,14 +25,6 @@ sigma_sq <- 0.1
 theta <- 1  
 # Taxa de reversão
 alpha <- 0.01
-
-## Cenário temporal
-# tempo final (em milhões de anos)
-tf <- 1 
-# intervalo de tempo entre geração (em milhões de anos)
-dt <- 0.0001  
-# vetor com o tempo de todas as gerações
-ts <- seq(0, tf, by = dt)  
 
 ## vetor para armazenar os valores da característica
 Y <- c() 
@@ -35,7 +38,7 @@ for (i in 2:length(ts)) {
   Y[i] <- Y[i-1] + dD + dS
 }
 
-## Plot da simualação
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 

@@ -1,9 +1,8 @@
-# Nesta prática vamos simular a evolução de característica hipotéticas (Y) em 
-# duas linhagens-irmãs. Essas características evoluíram sob diferentes modelos.
-# Após as simulações, vamos quantificar a similaridade das caracteríticas entre 
-# as linhagens-irmãs para avaliar se essa similaridade foi afetada pelos modelos
-# evolutivos que geraram as características.
-
+# Nesta prática vamos simular a evolução de uma característica hipotéticas (Y) 
+# em duas linhagens-irmãs. A evolução ocorrerá sob diferentes modelos.
+# Após as simulações, vamos quantificar a similaridade da caracteríticas entre 
+# as duas linhagens-irmãs e avaliar se essa similaridade foi afetada pelos 
+# modelos evolutivos que geraram as características.
 
 ############################## CENÁRIO TEMPORAL GERAL ##########################
 
@@ -43,7 +42,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica",
      main = paste0("BM ",
-                   " sigma_sq: ", sigma_sq
+                   "; sigma_sq: ", sigma_sq1
                    
      )
 )
@@ -56,7 +55,7 @@ lines(x = ts,
 dissimBM = abs(Ybm1[length(ts)] - Ybm2[length(ts)]) # desvio absoluto
 simBM = 1/(1+dissimBM)
 
-#  Guarde o valor de similaridade sob BM: 
+#  O valor de similaridade sob BM: 
 simBM
 
 ########################## SIMULANDO EVOLUÇÃO DIRECIONAL #########################
@@ -90,7 +89,7 @@ plot(x = ts,
      xlab = "Tempo (milhões de anos)", 
      ylab = "Característica",
      main = paste0("Direcional ",
-                   " sigma_sq: ", sigma_sq,
+                   " sigma_sq: ", sigma_sq2,
                    " mu: ", mu
      )
 )
@@ -102,7 +101,7 @@ lines(x = ts,
 #  Calcule a similaridades entre as linhagens-irmãs ao final da simulação:
 dissimDE = abs(Yde1[length(ts)] - Yde2[length(ts)]) # desvio absoluto
 simDE = 1/(1+dissimDE)
-#  Guarde o valor da similaridades sob DE: 
+# O valor de similaridades sob DE: 
 simDE
 
 ############################### COMPARANDO MODELOS ############################
