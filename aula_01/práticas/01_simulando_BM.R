@@ -5,11 +5,7 @@
 # vamos observar a evolução em tempo real, fazendo 'experimentos' com
 # a nossa características hipotética.
 
-############################ APRESENTAÇÃO DO MODELO ############################
-
-## Parâmetros do modelo BM
-# Taxa de variação
-sigma_sq <- 0.1
+############################ CENÁRIO TEMPORAL GERAL ############################
 
 ## Cenário temporal
 # tempo final (em milhões de anos)
@@ -18,6 +14,12 @@ tf <- 1
 dt <- 0.0001  
 # vetor com o tempo de todas as gerações
 ts <- seq(0, tf, by = dt)  
+
+############################ APRESENTAÇÃO DO MODELO ############################
+
+## Parâmetros do modelo BM
+# Taxa de variação
+sigma_sq <- 0.1
 
 ## vetor para armazenar os valores da característica
 Y <- c() 
