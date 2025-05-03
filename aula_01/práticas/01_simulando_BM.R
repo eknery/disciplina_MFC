@@ -180,4 +180,5 @@ lines(x = ts4,
       col = "black")
 
 # PARA PENSAR:
-#  A linhagem fóssil reflete o fenótipo do último ancestral comum?
+# A linhagem fóssil tem um fenótipo similar ao do último ancestral comum?
+# Logo, podemos assumir que todos os fósseis possuem características 'primitivas'?
