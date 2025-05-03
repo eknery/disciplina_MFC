@@ -3,7 +3,7 @@
 
 ## Parâmetros do modelo PB (Yule)
 # Taxa de nascimento
-lambda <- 0.5
+lambda1 <- 0.3
 
 ## Cenário temporal
 t <- 0  # tempo atual
@@ -17,7 +17,7 @@ N1 <- n  # número de espécies ao longo da simulação
 # Simulação do processo Pure Birth
 while (t < tf) {
   # tempos até o próximos evento de nascimento
-  t_birth <- rexp(1, n*lambda)
+  t_birth <- rexp(1, n * lambda1)
   # atualizando o tempo
   t <- t + t_birth
   ts1 <- c(ts1, t)
@@ -27,7 +27,7 @@ while (t < tf) {
 }
 
 ## Plot da simulação
-par(mfrow = c(1,2))
+par(mfrow = c(1,1))
 plot(
   x = ts1, 
   y = N1, 
@@ -39,24 +39,18 @@ plot(
                 "; lambda: ", lambda
   )
 )
-plot(
-  x = ts1, 
-  y = log(N1), 
-  type = "l", 
-  col = "blue", 
-  xlab = "Tempo (milhões de anos)", 
-  ylab = "ln(N de espécies)",
-  main = paste0("LTT")
-)
 
+# Veja o número final de espécies da simulação
+Nb= N1[length(N1)]
+Nb
 
 ############################## MODELO BIRTH-DEATH #############################
 
 ## Parâmetros do modelo BD
 # Taxa de nascimento
-lambda <- 0.5 
+lambda2 <- 0.35
 # Taxa de morte
-mu <- 0.2 
+mu2 <- 0.05 
 
 ## Cenário temporal
 t <- 0  # tempo atual
@@ -70,8 +64,8 @@ N2 <- n  # número de espécies ao longo da simulação
 # Simulação do processo Birth-Death
 while (t < tf) {
   # tempos até os próximos eventos de nascimento e morte
-  t_birth <- rexp(1, n *lambda)
-  t_death <- rexp(1, n * mu)
+  t_birth <- rexp(1, n * lambda2)
+  t_death <- rexp(1, n * mu2)
   # qual evento ocorre antes?
   ti <- min(t_birth, t_death)
   # atualizando o tempo
@@ -87,7 +81,7 @@ while (t < tf) {
 }
 
 ## Plot da simulação
-par(mfrow = c(1,2))
+par(mfrow = c(1,1))
 plot(
   x = ts2, 
   y = N2, 
@@ -96,17 +90,35 @@ plot(
   xlab = "Tempo (milhões de anos)", 
   ylab = "N de espécies",
   main = paste0("Processo BD",
-                 "; lambda: ", lambda, 
-                 "; mu: ", mu
+                "; lambda: ", lambda2, 
+                "; mu: ", mu2
+  )
+)
+
+# Veja o número final de espécies da simulação
+Nbd = N2[length(N2)]
+Nbd
+
+############################### COMPARANDO MODELOS #############################
+
+## Plot das duas simulações
+par(mfrow = c(1,1))
+plot(
+  x = ts1, 
+  y = N1, 
+  type = "l", 
+  col = "blue", 
+  xlab = "Tempo (milhões de anos)", 
+  ylab = "N de espécies",
+  main = paste0("Pure Birth: Azul;  BD: Vermelho"
                 )
 )
-plot(
+lines(
   x = ts2, 
-  y = log(N2), 
+  y = N2, 
   type = "l", 
-  col = "red", 
-  xlab = "Tempo (milhões de anos)", 
-  ylab = "ln(N de espécies)",
-  main = paste0("LTT")
+  col = "red"
 )
+
+
 
