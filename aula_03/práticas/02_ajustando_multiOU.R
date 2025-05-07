@@ -21,44 +21,45 @@ anole.ecomorph<-read.csv("dados/ecomorph.csv",
                          stringsAsFactors=TRUE)
 
 ### carregando árvore filogenética 'mapeada'
-ecomorph.tree<-read.simmap(file="dados/anolis_mapped.nexus",
+anole.tree<-read.simmap(file="dados/anolis_mapped.nexus",
                            format="nexus",
                            version=1.5)
-ecomorph.tree
+anole.tree
 
 ############################# TRATANDO OS DADOS ################################
 
 ### verificando correspondência entre dados e árvore
-chk<-name.check(ecomorph.tree,anole.morphology)
+chk<-name.check(anole.tree,anole.morphology)
 summary(chk)
 
 ### retirando dados das espécies ausentes na árvore
-ecomorph.data<-anole.morphology[-which(rownames(anole.morphology)%in%chk$data_not_tree),]
+anole.data<-anole.morphology[-which(rownames(anole.morphology)%in%chk$data_not_tree),]
 
 ### verificando correspondência entre dados e árvore
-chk<-name.check(ecomorph.tree,ecomorph.data)
+chk<-name.check(anole.tree,anole.data)
 chk
 
-############################# ORDENAÇÃO DOS DADOS ##############################
+############################# ORGANIZANDO DOS DADOS ##############################
 
-### PCA filogenética = relação entre medições, consideração correlação filogenética
-pca<-phyl.pca(ecomorph.tree,ecomorph.data)
+### selecionando característica de interesse
+trait = anole.data[,"FLL"]
 
-### verificar relação entre as variáveis
-print(pca)
 ## IMPORTANTE:
-# o eixo PC3 está positivamente relacionado com o comprimento dos membros 
-# anteriores (forelimb, FLL) e com o comprimento dos membros posteriores 
-# (hindlimb, HLL), mas negativamente ralacionado com o número de lamelas
-# (lamellae number, LAM).Essa variável então representerá o fenótipo das patas.
+# Para testar nossa hipótese, mas investigar três características:
+# o comprimento dos membros anteriores (forelimb, FLL) 
+# o comprimento dos membros posteriores (hindlimb, HLL)
+# o número de lamelas (lamellae number, LAM).
+# Essa variáveis representa o fenótipo das patas.
 
-### organizando dados de interesse
-ouwie.data<-data.frame(Genus_species=rownames(scores(pca)),
-                       Reg=anole.ecomorph[rownames(scores(pca)),],
-                       X=as.numeric(scores(pca)[,3]))
+### organizando dados na tabela OUwie
+ouwie.data<-data.frame(species = rownames(anole.data),
+                       regime = anole.ecomorph[rownames(anole.data),],
+                       trait = trait
+                       )
 ouwie.data
 
-############################### VISULIZANDO DADOS ##############################
+### nomeando vetor da característica
+names(trait) = rownames(anole.data)
 
 ### cores para cada hábito
 cols = c(
@@ -77,31 +78,43 @@ cols = c(
 # Tr = Trunk
 # tw = Twig
 
+############################### VISUALIZANDO DADOS ##############################
+
 ### estados das espécies atuais
-tips<-getStates(ecomorph.tree,"tips")
+tips<-getStates(anole.tree,"tips")
 ## cores para as espécies atuais
 tip.cols<-cols[tips]
 
 ### plot da árvores mais a característica
-plotTree.barplot(tree = ecomorph.tree,
-                 x = scores(pca)[,3],
-                 args.plotTree=list(fsize=0.4),
+plotTree.barplot(tree = anole.tree,
+                 x = trait,
+                 args.plotTree=list(fsize=0.3),
                  args.barplot=list(col=tip.cols,
-                                   xlab=expression(paste("PC3")),
-                                   cex.lab=0.8))
-## adicionar legenda
-legend("topright",levels(anole.ecomorph[,1]),
-       pch=22,pt.bg=cols,pt.cex=1.5,cex=0.9)
+                                   cex.lab=0.5))
+legend("topright",
+       levels(anole.ecomorph[,1]),
+       pch=22,
+       pt.bg=cols,
+       pt.cex=1,
+       cex=0.5)
 
 # PARA PENSAR: 
-# Como os valores de PC3 estão distribuídos entre as linhagens?
-# Os valores tendem a serem iguais entre linhagens próximas? O tipo de hábito
-# parece ter alguma relação com os valores de PC3?
+# Como os valores estão distribuídos entre as linhagens?
+# Os valores tendem a serem iguais entre linhagens próximas? 
+# O tipo de hábito parece ter alguma relação com os valores da característica?
 
 ############################### AJUSTANDO MODELOS #############################
 
+### ajustando "Ruído branco"
+fitWN <-fitContinuous(phy = anole.tree,
+                            dat = trait,
+                            model ="white"
+                            )
+## verificar resultados
+fitWN
+
 ### ajustando BM com uma única taxa de variação
-fitBM<-OUwie(phy = ecomorph.tree,
+fitBM<-OUwie(phy = anole.tree,
              data = ouwie.data,
              model ="BM1",
              simmap.tree = TRUE
@@ -110,7 +123,7 @@ fitBM<-OUwie(phy = ecomorph.tree,
 fitBM
 
 ### ajustando BM com múltiplas taxas de variação
-fitBMS<-OUwie(phy = ecomorph.tree,
+fitBMS<-OUwie(phy = anole.tree,
               data = ouwie.data,
               model ="BMS",
               simmap.tree = TRUE
@@ -119,7 +132,7 @@ fitBMS<-OUwie(phy = ecomorph.tree,
 fitBMS
 
 ### ajustando OU com múltiplos ótimos
-fitOUM<-OUwie(phy = ecomorph.tree,
+fitOUM<-OUwie(phy = anole.tree,
               data = ouwie.data,
               model ="OUM",
               simmap.tree = TRUE
@@ -130,14 +143,15 @@ fitOUM
 ############################## COMPARANDO MODELOS ##############################
 
 ### extraindo valores de AIC 
-aic<-setNames(c(fitBM$AIC,fitBMS$AIC,fitOUM$AIC),
-              c("BM1","BMS","OUM"))
+aic<-setNames(c(fitWN$opt$aic,fitBM$AIC,fitBMS$AIC,fitOUM$AIC),
+              c("WN","BM","BMS","OUM"))
 aic
 
 ### peso ralativo dos modelos
 aic.w(aic)
 
 # PARA PENSAR: 
-#  Qual modelo teve o melhor ajuste aos dados? Que modo de evolução esse modelo
-#  representa? O que indicam as estimativas dos parâmetros desse modelo?
+# Qual modelo teve o melhor ajuste aos dados? 
+# Que processo evolutivo esse modelo representa? 
+# O que indicam as estimativas dos parâmetros desse modelo?
 
