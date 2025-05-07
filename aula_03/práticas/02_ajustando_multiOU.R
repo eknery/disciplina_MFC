@@ -61,6 +61,8 @@ ouwie.data
 ### nomeando vetor da característica
 names(trait) = rownames(anole.data)
 
+############################### VISUALIZANDO DADOS ##############################
+
 ### cores para cada hábito
 cols = c(
   "CG" = "darkblue", 
@@ -78,19 +80,31 @@ cols = c(
 # Tr = Trunk
 # tw = Twig
 
-############################### VISUALIZANDO DADOS ##############################
-
 ### estados das espécies atuais
 tips<-getStates(anole.tree,"tips")
 ## cores para as espécies atuais
 tip.cols<-cols[tips]
+
+### visualizar estados de hábito
+plotSimmap(tree = anole.tree,
+           colors = cols,
+           fsize= 0.5,
+           )
+legend("topright",
+       levels(anole.ecomorph[,1]),
+       pch=22,
+       pt.bg=cols,
+       pt.cex=1,
+       cex=0.5)
+
 
 ### plot da árvores mais a característica
 plotTree.barplot(tree = anole.tree,
                  x = trait,
                  args.plotTree=list(fsize=0.3),
                  args.barplot=list(col=tip.cols,
-                                   cex.lab=0.5))
+                                   cex.lab=0.5)
+                 )
 legend("topright",
        levels(anole.ecomorph[,1]),
        pch=22,
