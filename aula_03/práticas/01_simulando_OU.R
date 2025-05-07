@@ -21,9 +21,9 @@ ts <- seq(0, tf, by = dt)
 ## Parâmetros do modelo OU
 # Taxa de variação
 sigma_sq <- 0.1
-# Tendência central
+# Ótimo fenotípico
 theta <- 1  
-# Taxa de reversão
+# Taxa de reversão (ou de arraste)
 alpha <- 0.01
 
 ## vetor para armazenar os valores da característica
@@ -64,7 +64,7 @@ lines(x = ts,
 ## Parâmetros do modelo OU
 # Taxa de variação
 sigma_sq2 <- 0.1
-# Tendência central
+# Ótimo fenotípico
 theta2 <- 3
 # Taxa de reversão
 alpha2 <- 0.01 
