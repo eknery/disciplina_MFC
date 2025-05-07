@@ -119,13 +119,13 @@ sim_de = c() ## similaridades sob DE
 sim = c(sim_bm, sim_de)
 
 ## vetor para diferenciar resultados de cada modelo
-model = c(rep("BM", length(sim_bm)), rep("DE", length(sim_de)))
+modelo = c(rep("BM", length(sim_bm)), rep("DE", length(sim_de)))
 
 ## organizar em tabela
 table = as.data.frame(cbind(sim,modelo) )
 
 ## testar diferença ente modelos com ANOVA
-summary(aov(sim ~ model, data = table))
+summary(aov(sim ~ modelo, data = table))
 
 ## PARA PENSAR:
 # Segundo a ANOVA, os modelos produzem similaridades de magnitude distintas?
