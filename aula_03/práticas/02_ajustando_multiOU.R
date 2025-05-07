@@ -1,8 +1,8 @@
-# Nesta prática vamos investigar uma hipótese de evolução convergente entre
-# os lagartos do gênero Anolis. Mais especificamente, queremos saber se lagartos
-# que habitam o tronco das árvores evoluíram patas com fenótipos similares. 
-# Para isso, vamos focar no comprimento das patas e no seu número de lamelas 
-# (escama expandidas que aumentam o atrito com a superfície).  
+# Nesta prática vamos investigar se o hábito de vida influenciou a evolução 
+# das patas dos lagartos do gênero Anolis. Para isso, vamos inferir o 
+# modo e tempo de evolução de diferentes características das patas que foram
+# medidas em espécies de com distintos hábitos de vida. Vamos considerar 
+# diferentes modelos para cada uma dessas características.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS #######################
 
