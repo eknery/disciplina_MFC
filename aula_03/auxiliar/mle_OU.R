@@ -5,8 +5,10 @@ likelihood_ou_two_species <- function(x1, x2, t, s, sigma2, alpha, theta) {
   mean_vector <- c(theta, theta)
   
   # Calcula os elementos da matriz de covariância
-  v <-  (1 - exp(-2 * alpha * t)) # Variância
-  c <-  (1 - exp(-2 * alpha * s) * exp(-2 * alpha * (t-s) )) # Covariância
+  # Variância
+  v <-  (1 - exp(-2 * alpha * t)) 
+  # Covariância
+  c <-  (1 - exp(-2 * alpha * s) ) * ( exp(-2 * alpha * (t-s) )) 
   
   # Matriz de covariância
   cov_matrix <- (sigma2 / (2 * alpha)) * matrix(c(v, c, 
