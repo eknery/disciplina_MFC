@@ -44,24 +44,29 @@ for (i in 2:length(ts)) {
 }
 
 ## Plot da simulação
+par(mfrow = c(1,2))
 plot(x = ts, 
      y = Y, 
      type = "l", 
      col = "blue", 
-     
      xlab = "Tempo (milhões de anos)", 
-     ylab = "Características",
-     main = paste0("BM",
-                   "; sigma_sq Y: ", sigmaY,
-                   "; sigma_sq Z: ", sigmaZ,
-                   "; Corr Evo: ", corevo
-                   
+     ylab = "Características Y",
+     main = paste0(
+                   "sigma_sq Y: ", sigmaY,
+                   "; Cor Evo: ", corevo
      )
 )
-lines(x = ts, 
-      y = Z, 
-      type = "l", 
-      col = "orange")
+plot(x = ts, 
+     y = Z, 
+     type = "l", 
+     col = "orange", 
+     xlab = "Tempo (milhões de anos)", 
+     ylab = "Características Z",
+     main = paste0(
+                   "sigma_sq Z: ", sigmaZ,
+                   "; Cor Evo: ", corevo
+     )
+)
 
 ## EM GRUPO:
 
@@ -79,6 +84,28 @@ cor(Ys,Zs)
 # Agora vamos comparar a correlação padrão e a correlação evolutiva.
 # Os valores são similares? 
 c("Padrão" = cor(Ys,Zs), "Evolutiva" = corevo )
+
+
+### EM GRUPO
+# Vamos coletar os valores de correlação padrão de todas as simulações.
+cor_vls = c(0.3, 0.9, 0.3)
+
+# Vamos calcular o intervalo de confiança da nossa média das correlações padrão.
+n = length(cor_vls)
+x = mean(cor_vls)
+s = sd(cor_vls)
+margin <- qt(0.975,df=n-1)*s/sqrt(n)
+lowerinterval <- x - margin
+upperinterval <- x + margin
+
+# Agora, vamos verificar se o valor de correlação evolutiva está
+# dentro do intervalo de confiança da correlção padrão.
+list( "intervalo" = c(lowerinterval, upperinterval),
+      "corevo "= corevo)
+
+## PARA PENSAR:
+# A correlação evolutiva está dentro do intervalo de confiança da correlação padrão?
+# O que isto significa?
 
 ## NOVOS EXPERIMENTOS:
 # 2) Produza uma simulação com uma correlação evolutiva 10X menor que o valor original.
