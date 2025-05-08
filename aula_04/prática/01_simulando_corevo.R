@@ -15,7 +15,6 @@ dt <- 0.0001
 ts <- seq(0, tf, by = dt) 
 
 ## modelo BM multivariado:
-
 # Matriz R
 R <- matrix(c(0.05, 0.04, 
               0.04, 0.05), 
@@ -80,32 +79,14 @@ Zs = c()
 
 # Vamos calcular a correlação padrão entre as características
 cor(Ys,Zs)
+# simulação 1 cor padrão = 0.86; cor evol = 0.8
+# simulação 2 cor padrão = 0.18; cor evol = 0.08
+# simulação 3 cor padrão = -0.63; cor evol = 0
 
 # Agora vamos comparar a correlação padrão e a correlação evolutiva.
 # Os valores são similares? 
 c("Padrão" = cor(Ys,Zs), "Evolutiva" = corevo )
 
-
-### EM GRUPO
-# Vamos coletar os valores de correlação padrão de todas as simulações.
-cor_vls = c(0.3, 0.9, 0.3)
-
-# Vamos calcular o intervalo de confiança da nossa média das correlações padrão.
-n = length(cor_vls)
-x = mean(cor_vls)
-s = sd(cor_vls)
-margin <- qt(0.975,df=n-1)*s/sqrt(n)
-lowerinterval <- x - margin
-upperinterval <- x + margin
-
-# Agora, vamos verificar se o valor de correlação evolutiva está
-# dentro do intervalo de confiança da correlção padrão.
-list( "intervalo" = c(lowerinterval, upperinterval),
-      "corevo "= corevo)
-
-## PARA PENSAR:
-# A correlação evolutiva está dentro do intervalo de confiança da correlação padrão?
-# O que isto significa?
 
 ## NOVOS EXPERIMENTOS:
 # 2) Produza uma simulação com uma correlação evolutiva 10X menor que o valor original.
