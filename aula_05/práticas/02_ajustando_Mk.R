@@ -1,4 +1,4 @@
-# Nessa prática vamos investigar a evolução do número de dígitos nas patas traseiras
+# Nesta prática vamos investigar a evolução do número de dígitos nas patas 
 # dos lagartos (Squamata).Mais especificamente queremos saber se a ausência
 # de dígitos evoluiu de forma gradativa (perdas consecutivas de dígitos) ou 
 # de forma abrupta (perda total de todos os dígitos)
@@ -18,7 +18,10 @@ sqTree<-read.nexus("dados/squamate.tre")
 print(sqTree,printlen=2)
 
 ### visualizando árvore
-plotTree(sqTree,type="fan",lwd=1,fsize=0.3,ftype="i")
+plotTree(sqTree,type="fan",
+         lwd=1,
+         fsize=0.3,
+         ftype="i")
 
 ############################# TRATANDO OS DADOS ################################
 
@@ -72,19 +75,22 @@ legend("bottomleft",
 fitER<-fitDiscrete(phy = sqTree.pruned,
                    dat = toes,
                    model= "ER")
-plot(fitER)
+
+plot(fitER, show.zeros=FALSE)
 
 ### ajustando matriz com taxas simétricas
 fitSYM<-fitDiscrete(phy = sqTree.pruned,
                    dat = toes,
                    model= "SYM")
-plot(fitSYM)
+
+plot(fitSYM, show.zeros=FALSE)
 
 ### ajustando matriz com todas as taxas diferentes
 fitARD<-fitDiscrete(phy = sqTree.pruned,
                     dat = toes,
                     model= "ARD")
-plot(fitARD)
+
+plot(fitARD, show.zeros=FALSE)
 
 ######################## AJUSTANDO MATRIZ CUSTOMIZADA ##########################
 

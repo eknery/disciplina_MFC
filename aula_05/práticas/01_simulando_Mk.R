@@ -1,4 +1,4 @@
-# Nessa prática vamos simular a evolução de uma característica hipotética (Y) que 
+# Nesta prática vamos simular a evolução de uma característica hipotética (Y) que 
 # possui três estados (1, 2 e 3) ao longo de uma linhagem de 10 milhões de anos. 
 # Para isso, vamos construir diferentes matrizes de transição (Q) para
 # essa característica e simular as transições de estado. Assim, poderemos verificar

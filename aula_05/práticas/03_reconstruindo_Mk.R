@@ -1,4 +1,4 @@
-# Nessa prática vamos reconstruir a evolução do número de dígitos nas patas traseiras
+# Nessa prática vamos reconstruir a evolução do número de dígitos nas patas 
 # dos lagartos (Squamata).Para isso, vamos utilizar o modelo de transição de 
 # melhor ajuste aos dados, mas considerando duas abordagens de reconstrução: 
 # 1) otimização global e 2) otimização marginal.
@@ -151,7 +151,7 @@ legend("bottomleft",
        cex=0.8)
 
 # PARA PENSAR:
-#   Qual é o estado mais provável para o último ancestral comum de todos os lagartos?
-#   Quantas vezes os dígitos foram totalmente perdidos ? Existem diferenças em 
-#   relação a reconstrução global?
+# Qual é o estado mais provável para o último ancestral comum de todos os lagartos?
+# Quantas vezes os dígitos foram totalmente perdidos? 
+# Existem diferenças em relação a reconstrução global?
   
