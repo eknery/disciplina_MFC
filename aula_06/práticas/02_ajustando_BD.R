@@ -1,8 +1,6 @@
-# Nessa prática vamos investigar a diversificação do gênero Chamaecrista. 
-# Essas plantas são leguminosas lenhosas que ocupam principalmente ambientes abertos 
-# da América do Sul. Esses ambientes provavelmente passaram por ciclos de expansão
-# e contração durante o Quaternário (~ 2.8 mya), o que pode ter propiciado tanto
-# o aumento da especiação quanto da extinção das linhagens de plantas.
+# Nesta prática vamos investigar a diversificação da tribo Cassieae.
+# Nós queremos estimar suas taxas de especiação e extinção e verificar se essas
+# estimativas produzem cenários razoáveis para nossa filogenia.
 
 ########################## CARREGANDO BIBLIOTECAS E DADOS #####################
 
@@ -10,12 +8,15 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando filogenia
-tree = read.tree("dados/chamaecrista.tree")
+tree = read.tree("dados/cassieae.tree")
+
+### filogenia ultramétrica
+tree = force.ultrametric(tree = tree)
 
 ### visulizando árvores
 plotTree(tree,
          type= "fan",
-         fsize= 0.3,
+         fsize= 0.1,
          lwd=1,
          part=0.88)
 ### altura máxima 
@@ -28,60 +29,66 @@ obj<-axis(1,
           cex.axis=0.4,
           labels=T)
 
-################################# PROCESSANDO DADOS ############################
-
-### retirando linhagens fora do gênero
-tree_prun = keep.tip(tree, tip = tree$tip.label[grepl("C_", tree$tip.label)] )
-
-### visulizando árvores
-plotTree(tree_prun,
-         type= "fan",
-         fsize= 0.3,
-         lwd=1,
-         part=0.88)
-### altura máxima 
-hmax = as.integer(max(nodeHeights(tree_prun)))
-### escala de tempo
-obj<-axis(1,
-          pos=-1,
-          at= seq(from = 0, to = hmax, by = 10.25),
-          padj = -3.5,
-          cex.axis=0.4,
-          labels=T)
-
 ############################## TESTE DE PURO NASCIMENTO ########################
 
 ### teste de desvio do puro nascimento
-ltt_obj <- ltt(tree_prun, log.lineages=T)
+ltt_obj <- ltt(tree, plot=FALSE)
 ltt_obj
 
-### considerando amostragem parcial
-mccr_obj <- mccr(ltt_obj,
-                 rho= Ntip(tree_prun)/366,
-                 nsim=500
-                 )
-mccr_obj
+### ltt esperado
+tf = max(nodeHeights(tree))
+expected_ltt = log(Ntip(tree)) /tf
 
 ### visualizando teste
-plot(mccr_obj,
-     las=1,
-     cex.axis=0.8)
+par(mfrow = c(1,1))
+plot(ltt_obj,
+     log.lineages=T,
+     lty="dotted",
+     lwd=2,
+     col="blue",
+     cex.axis=0.8
+)
+abline(a = 0, 
+       b = expected_ltt,
+       col = "blue",
+       lwd = 1.5
+)
 
 ############################## AJUSTANDO MODELOS ################################
 
-### ajustando modelo de puro nascimento
-yule_obj<-fit.yule(tree_prun,
-                   rho = Ntip(tree_prun)/366
-                   )
-### vendo estimativas
-yule_obj
+### ajustando modelo Pure Birth
+fitPure = fit.yule(tree, rho = 0.4)
 
-### ajustando modelo BD
-bd_obj = fit.bd(tree_prun,
-               rho = Ntip(tree_prun)/366
-               )
-### vendo estimativas
-bd_obj
+### ajustando modelo Birth-Death
+fitBD = fit.bd(tree, rho = 0.4)
 
 ### comparando modelos
-AIC(yule_obj, bd_obj)
+AIC(fitPure, fitBD)
+
+##################### SIMULANDO ÁRVORES COM MESMA DIVERSIFICAÇÃO ##############
+
+### tempo total das simulações
+tf = max(nodeHeights(tree))
+
+### IMPORTANTE: 
+#Colete as taxas de especiação (lambda) e extinção (mu) do melhor modelo!
+lambda = c()
+mu = c()
+
+### simulação de árvores
+sim_trees = pbtree(
+ b= lambda,
+ d= mu,
+ t= tf,
+ nsim = 25
+)
+
+### contrastando simualações e filogenia
+hist(Ntip(sim_trees),
+     breaks = 15,
+     main = "",
+     xlab= "Número de espécies simuladas"
+     )
+abline(v = Ntip(tree),
+       col = "blue"
+       )
