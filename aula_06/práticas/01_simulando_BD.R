@@ -1,147 +1,112 @@
 
-############################## MODELO PURE BIRTH #############################
 
-## Parâmetros do modelo PB (Yule)
-# Taxa de nascimento
-lambda1 = 0.3
 
-## Cenário temporal
-t = 0  # tempo atual
-ts1 = t  # tempo de todos os eventos
-tf = 20 # tempo máximo da simulação
+## carregando pacote
+if (!require("phytools")) install.packages("phytools"); library("phytools")
 
-## Cenário de diversidade
-n = 1   # número de espécies atual
-N1 = n  # número de espécies ao longo da simulação
+######################  SIMULANDO CENÁRIOS DE DIVERSIFICAÇÃO ###################
 
-# Simulação do processo Pure Birth
-while (t < tf) {
-  # tempos até o próximos evento de nascimento
-  t_birth = rexp(1, n * lambda1)
-  # atualizando o tempo
-  t = t + t_birth
-  ts1 = c(ts1, t)
-  # atualizando a diversidade
-  n = n + 1 # 'nasce' uma espécie
-  N1 = c(N1, n)
-}
+## tempo total das simulações (em milhões de anos)
+tf = 20
 
-## Plot da simulação
-par(mfrow = c(1,1))
-plot(
-  x = ts1, 
-  y = N1, 
-  type = "l", 
-  col = "blue", 
-  xlab = "Tempo (milhões de anos)", 
-  ylab = "N de espécies",
-  main = paste0("Processo Pure Birth",
-                "; lambda: ", lambda
-  )
+## diversificação Pure Birth
+evo_pure <- pbtree(b= 0.10,
+                   t= tf,
+                   method= "direct"
+                   )
+
+## diversificação Birth-Death
+evo_bd <- pbtree(b= 0.15,
+                 d= 0.05,
+                 t= tf,
+                 method= "direct"
+                 )
+
+## visualizando história evolutiva real
+par(mfrow = c(1,2))
+plot(ladderize(evo_pure), cex = 0.2, main = "Pure Birth")
+plot(ladderize(evo_bd), cex = 0.2, main = "Birth-Death")
+
+####################### OBTENDO RECONSTRUÇÕES FILOGENÉTICAS #############
+
+## amostrando todas as linhagens vivas
+phylo_pure<-drop.tip(evo_pure,
+                     getExtinct(evo_pure))
+
+## amostrando todas as linhagens vivas
+phylo_bd<-drop.tip(evo_bd,
+                  getExtinct(evo_bd))
+
+## visualizando reconstruções filogenéticas
+par(mfrow = c(1,2))
+plot(ladderize(phylo_pure), cex = 0.2, main = "Pure Birth")
+plot(ladderize(phylo_bd), cex = 0.2, main = "Birth-Death")
+
+####################### COMPARANDO NÚMERO DE ESPÉCIES ##########################
+
+# Extraindo número de espécies viventes para cada cenário
+N_pure = Ntip(phylo_pure)
+N_bd = Ntip(phylo_bd)
+
+# Comparando o número de espécies geradas pelos cenários de diversificação:
+c("Pure Birth" = N_pure, "Birth-Death"= N_bd)
+
+## EM GRUPO:
+# Vamos armazenar o número de espécies geradas por cada cenário:
+samp_pure = c()
+samp_bd = c()
+
+# Vamos testar se existe diferença no número de espécies entre cenários:
+t.test(x = samp_pure, 
+       y = samp_bd, 
+       alternative = "two.sided",
+       paired = FALSE, 
+       var.equal = FALSE
 )
 
-# Veja o número final de espécies da simulação
-Nf1 = N1[length(N1)]
-Nf1
+## PARA PENSAR:
+# Os cenários de diversificação produziram um número de espécies distinto?
+# Qual o motivo para esse padrão?
 
-############################## MODELO BIRTH-DEATH #############################
+####################### NÚMERO DE LINHAGENS NO TEMPO #########################
 
-## Parâmetros do modelo BD
-# Taxa de nascimento
-lambda2 = 0.35
-# Taxa de morte
-mu2 = 0.05 
+# calculando LTT empírico
+ltt_pure<-ltt(phylo_pure, plot=FALSE)
+ltt_bd<-ltt(phylo_bd, plot=FALSE)
 
-## Cenário temporal
-t = 0  # tempo atual
-ts2 = t  # tempo de todos os eventos
-tf = 20 # tempo máximo da simulação
+# estimando LTT teórico
+expected_pure = log(Ntip(phylo_pure)) /tf
+expected_bd = log(Ntip(phylo_bd)) /tf
 
-## Cenário de diversidade
-n = 1   # número de espécies atual
-N2 = n  # número de espécies ao longo da simulação
+# visualizando LTT
+par(mfrow = c(1,2))
+plot(ltt_pure,
+     log.lineages=T,
+     lty="dotted",
+     lwd=2,
+     col="blue",
+     cex.axis=0.8,
+     main = "Pure Birth"
+     )
+abline(a = 0, 
+       b = expected_pure,
+       col = "blue",
+       lwd = 1.5)
+plot(ltt_bd,
+     log.lineages=T,
+     lty="dotted",
+     lwd=2,
+     col="red",
+     main = "Birth-Death"
+     )
+abline(a = 0, 
+       b = expected_bd,
+       col = "red",
+       lwd = 1.5)
 
-# Simulação do processo Birth-Death
-while (t < tf) {
-  # tempos até os próximos eventos de nascimento e morte
-  t_birth = rexp(1, n * lambda2)
-  t_death = rexp(1, n * mu2)
-  # qual evento ocorre antes?
-  ti = min(t_birth, t_death)
-  # atualizando o tempo
-  t = t + ti
-  ts2 = c(ts2, t)
-  # atualizando a diversidade
-  if (ti == t_birth) {
-    n = n + 1 # 'nasce' uma espécie
-  } else {
-    n = n - 1 # 'morre' uma espécie
-  }
-  N2 = c(N2, n)
-}
+# Verificar probabilidade do teste Gamma
+c("Pure Birth" = ltt_pure$p,"Birth-Death"= ltt_bd$p)
 
-## Plot da simulação
-par(mfrow = c(1,1))
-plot(
-  x = ts2, 
-  y = N2, 
-  type = "l", 
-  col = "red", 
-  xlab = "Tempo (milhões de anos)", 
-  ylab = "N de espécies",
-  main = paste0("Processo BD",
-                "; lambda: ", lambda2, 
-                "; mu: ", mu2
-  )
-)
-
-# Veja o número final de espécies da simulação
-Nf2 = N2[length(N2)]
-Nf2
-
-############################### COMPARANDO MODELOS #############################
-
-## Plot das duas simulações
-par(mfrow = c(1,1))
-plot(
-  x = ts1, 
-  y = N1, 
-  type = "l", 
-  col = "blue", 
-  xlab = "Tempo (milhões de anos)", 
-  ylab = "N de espécies",
-  main = paste0("Pure Birth: Azul;  BD: Vermelho"
-                )
-)
-lines(
-  x = ts2, 
-  y = N2, 
-  type = "l", 
-  col = "red"
-)
-
-## EM GRUPO
-
-# Vamos armazenar os valores finais de diversidade dos dois tipos de modelo:
-Nb = c()
-Nbd = c()
-
-# Vamos armazenar os intervalos de tempo entre as especiações:
-tesp1 = ts1
-tesp2 = ts2[diff(N2) == 1]
-
-hist(
-  tesp1 ,
-  col = rgb(0,0,1, 0.5),
-  breaks = 10,
-  xlab = "Tempo entre especiações (milhões de anos)", 
-  ylab = "Frequência",
-  main = paste0("Pure Birth: Azul;  BD: Vermelho")
-)
-hist(
-  tesp2 ,
-  col = rgb(1,0,0, 0.5),
-  breaks = 10,
-  add = T
-)
-
+## PARA PENSAR
+# O número de linhagens acumuladas difere entre os cenários de diversificação?
+# O que o teste gamma aponta para cada um dos cenários de diversificação?
