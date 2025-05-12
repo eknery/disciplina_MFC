@@ -1,6 +1,3 @@
-
-
-
 ## carregando pacote
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 
