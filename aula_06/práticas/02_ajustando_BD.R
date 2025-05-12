@@ -71,7 +71,7 @@ AIC(fitPure, fitBD)
 tf = max(nodeHeights(tree))
 
 ### IMPORTANTE: 
-#Colete as taxas de especiação (lambda) e extinção (mu) do melhor modelo!
+# Colete as taxas de especiação (lambda) e extinção (mu) do melhor modelo!
 lambda = c()
 mu = c()
 
@@ -83,7 +83,7 @@ sim_trees = pbtree(
  nsim = 25
 )
 
-### contrastando simualações e filogenia
+### contrastando simulações e filogenia
 hist(Ntip(sim_trees),
      breaks = 15,
      main = "",
