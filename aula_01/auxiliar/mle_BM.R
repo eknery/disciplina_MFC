@@ -11,13 +11,13 @@ lnlBM <- function(sigma_sq, x1, x2, t, s) {
   mu <- mean(c(x1, x2))
   mean_vector <- c(mu, mu)
   # Matriz de covariância
-  cov_matrix <- sigma_sq * matrix(c(t, s, 
-                                    s, t), 
-                                nrow = 2, ncol = 2)
+  vcv <- sigma_sq * matrix(c(t, s, 
+                             s, t), 
+                           nrow = 2, ncol = 2)
   # Calculo da log-verossimilhança
   lnl <- -dmvnorm(x = traits, 
                   mu = mean_vector, 
-                  Sigma = cov_matrix, 
+                  Sigma = vcv, 
                   log = TRUE
                 )
   # Retorna a log-verossimilhança
@@ -42,10 +42,4 @@ mle(minuslogl = lnlBM,
     start = list(sigma_sq = 1, x1 = x1, x2 = x2, t = t, s = s), 
     fixed = list(x1 = x1, x2 = x2, t = t, s = s),
     method = "BFGS"
-    )
-
-plot(x = c(0.75, 0.5, 0.25, 0),
-     y = c(1, 0.5, 0.33, 0.25),
-     xlab = "Cov X",
-     ylab = "MLE sigma"
     )
