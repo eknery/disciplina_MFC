@@ -1,4 +1,4 @@
-# Disciplina de Métodos Filogenéticos Comparativos
+# Disciplina de Macroevolução
 
 ![logo](https://github.com/eknery/disciplina_MFC/blob/main/auxiliar/logo.jpg?raw=true)
 
