@@ -16,7 +16,7 @@ plot(x = tamanho,
 abline(fit.lm, lwd = 3, col = "gray",lty = 1)
 
 
-text.string<-"(((A:0.25,B:0.25):0.25,C:0.5):4.5,(D:0.25,E:0.25):4.75);"
+text.string<-"(((A:0.25,B:0.25):0.25,C:0.5):4.5,(D:25,E:25):4.75);"
 tree = read.tree(text = text.string)
 plot(tree)
 

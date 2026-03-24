@@ -1,5 +1,5 @@
-# Nessa prática vamos investigar qual foi o modo e o tempo de evolução do tamanho 
-# das folhas e das inflorescências dentro de um clado de Miconia. 
+# Nessa prática vamos investigar qual foi o modo e o tempo de evolução 
+# do tamanho e das folhas e das inflorescências dentro de um clado de Miconia. 
 # Essas plantas são lenhosas e ocorrem tanto em ambientes abertos quanto 
 # em florestas úmidas da América do Sul. Nossa expectativa é que as folhas 
 # teriam evoluído mais rápido do que as inflorescências
