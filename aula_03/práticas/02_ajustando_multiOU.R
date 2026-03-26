@@ -1,7 +1,7 @@
 # Nesta prática vamos investigar se o hábito de vida influenciou a evolução 
 # das patas dos lagartos do gênero Anolis. Para isso, vamos inferir o 
 # modo e tempo de evolução de diferentes características das patas que foram
-# medidas em espécies de com distintos hábitos de vida. Vamos considerar 
+# medidas em espécies com distintos hábitos de vida. Vamos considerar 
 # diferentes modelos para cada uma dessas características.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS #######################
@@ -39,7 +39,7 @@ anole.data<-anole.morphology[-which(rownames(anole.morphology)%in%chk$data_not_t
 chk<-name.check(anole.tree,anole.data)
 chk
 
-############################# ORGANIZANDO DOS DADOS ##############################
+############################# ORGANIZANDO OS DADOS ##############################
 
 ### selecionando característica de interesse
 trait = anole.data[,"FLL"]
@@ -78,7 +78,7 @@ cols = c(
 # TC = Trunk-crown
 # TG = Trunk-ground
 # Tr = Trunk
-# tw = Twig
+# Tw = Twig
 
 ### estados das espécies atuais
 tips<-getStates(anole.tree,"tips")
@@ -114,7 +114,7 @@ legend("topright",
 
 # PARA PENSAR: 
 # Como os valores estão distribuídos entre as linhagens?
-# Os valores tendem a serem iguais entre linhagens próximas? 
+# Os valores tendem a serem iguais entre linhagens próximas filogeneticamente? 
 # O tipo de hábito parece ter alguma relação com os valores da característica?
 
 ############################### AJUSTANDO MODELOS #############################

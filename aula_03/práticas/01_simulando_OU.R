@@ -5,7 +5,6 @@
 # vamos 'brincar' de ver a evolução em tempo real, fazendo 'experimentos' com
 # a nossa características hipotética.
 
-
 ########################### CENÁRIO TEMPORAL COMUM ############################
 
 ## Cenário temporal
@@ -23,7 +22,7 @@ ts <- seq(0, tf, by = dt)
 sigma_sq <- 0.1
 # Ótimo fenotípico
 theta <- 1  
-# Taxa de reversão (ou de arraste)
+# Taxa de arraste
 alpha <- 0.01
 
 ## vetor para armazenar os valores da característica
@@ -66,7 +65,7 @@ lines(x = ts,
 sigma_sq2 <- 0.1
 # Ótimo fenotípico
 theta2 <- 3
-# Taxa de reversão
+# Taxa de arraste
 alpha2 <- 0.01 
 
 ## Vetor para armazenar os valores da característica
@@ -81,7 +80,7 @@ for (i in 2:length(ts)) {
   Y2[i] <- Y2[i-1] + dD + dS
 }
 
-## Plot da simualação
+## Plot da simulação
 plot(x = ts, 
      y = Y, 
      type = "l", 
@@ -111,7 +110,7 @@ lines(x = ts,
 ### PARA PENSAR:
 ## O que faria duas linhagens-irmãs evoluírem ao redor de ótimos diferentes?
 
-################### EFEITO DE DIFERENTES TAXAS DE REVERSÃO ####################
+################### EFEITO DE DIFERENTES TAXAS DE ARRASTE ####################
 
 ## Parâmetros do modelo OU
 # Taxa de variação
@@ -126,7 +125,7 @@ Y3 <- c()
 # valor inicial da característica
 Y3[1] <- 1 
 
-## Simualação
+## Simulação
 for (i in 2:length(ts)) {
   dS <- rnorm(1, mean = 0, sd = sqrt(sigma_sq3) ) # variação estocástica
   dD <- (alpha3 * (theta3 - Y3[i-1]) ) # variação determinística
@@ -148,7 +147,7 @@ plot(x = ts,
 lines(x = ts, 
       y = Y3, 
       type = "l", 
-      col = "purple")
+      col = "orange")
 lines(x = ts, 
       y = rep(theta, length(ts)),
       col = "blue",
@@ -203,4 +202,4 @@ lines(x = ts,
       lty = 2)
 
 ### PARA PENSAR:
-## O que representaria uma linhagem sem taxa de reversão? 
+## O que representaria uma linhagem sem taxa de arraste? 

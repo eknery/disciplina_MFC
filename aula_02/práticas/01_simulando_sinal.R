@@ -1,6 +1,6 @@
 # Nesta prática vamos simular a evolução de uma característica hipotéticas (Y) 
 # em duas linhagens-irmãs. A evolução ocorrerá sob diferentes modelos.
-# Após as simulações, vamos quantificar a similaridade da caracteríticas entre 
+# Após as simulações, vamos quantificar a similaridade das caracteríticas entre 
 # as duas linhagens-irmãs e avaliar se essa similaridade foi afetada pelos 
 # modelos evolutivos que geraram as características.
 
