@@ -8,7 +8,7 @@
 
 ## Cenário temporal 
 # tempo total (em milhões de anos)
-tf <- 1 
+tf <- 0.1 
 # tempo entre geração (em milhões de anos)
 dt <- 0.0001  
 # vetor com o tempo de todas as gerações
@@ -16,8 +16,8 @@ ts <- seq(0, tf, by = dt)
 
 ## modelo BM multivariado:
 # Matriz R
-R <- matrix(c(0.05, 0.04, 
-              0.04, 0.05), 
+R <- matrix(c(0.05, 0, 
+              0.0, 0.05), 
                nrow = 2)
 
 # Taxas evolutivas
@@ -74,14 +74,14 @@ Y[length(ts)]
 Z[length(ts)]
 
 # Vamos armazenar os valores finais de Y e Z das nossas simulações:
-Ys = c()
-Zs = c()
+Ys = c(9,3,5,-4,-8,18,17,4)
+Zs = c(0.06,10,3,2,10,-14,-7,11)
 
 # Vamos calcular a correlação padrão entre as características
 cor(Ys,Zs)
-# simulação 1 cor padrão = 0.86; cor evol = 0.8
-# simulação 2 cor padrão = 0.18; cor evol = 0.08
-# simulação 3 cor padrão = -0.63; cor evol = 0
+# simulação 1 cor padrão = ; cor evol = 0.8
+# simulação 2 cor padrão = ; cor evol = 0.08
+# simulação 3 cor padrão = ; cor evol = 0
 
 # Agora vamos comparar a correlação padrão e a correlação evolutiva.
 # Os valores são similares? 

@@ -14,16 +14,21 @@ if (!require("OUwie")) install.packages("OUwie"); library("OUwie")
 ### carregando dados fenotípicos
 anole.morphology<-read.csv("dados/anole.data.csv",
                            row.names=1)
+### verificando dados
+anole.morphology
 
-### carregando dados fenotípicos
+### carregando dados de hábito
 anole.ecomorph<-read.csv("dados/ecomorph.csv",
                          row.names=1,
                          stringsAsFactors=TRUE)
+### verificando dados de hábito
+anole.ecomorph
 
 ### carregando árvore filogenética 'mapeada'
 anole.tree<-read.simmap(file="dados/anolis_mapped.nexus",
-                           format="nexus",
-                           version=1.5)
+                        format="nexus",
+                        version=1.5)
+### verificando árvore
 anole.tree
 
 ############################# TRATANDO OS DADOS ################################
