@@ -124,14 +124,6 @@ fit.marginal<-corHMM(phy = sqTree.pruned,
 )
 fit.marginal
 
-fit.marginal<-corHMM(phy = sqTree.pruned,
-                     data = toes.data,
-                     node.states= "marginal",
-                     rate.cat=1,
-                     rate.mat= ordered.model
-)
-fit.marginal
-
 ### visualizando reconstrução marginal
 dotTree(tree = sqTree.pruned,
         x = toes,

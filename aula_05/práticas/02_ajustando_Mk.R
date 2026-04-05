@@ -94,7 +94,7 @@ plot(fitARD, show.zeros=FALSE)
 
 ######################## AJUSTANDO MATRIZ CUSTOMIZADA ##########################
 
-### marriz com estados ordenados
+### matriz com estados ordenados
 ordered.model<-matrix(c(
   0,1,0,0,0,0,
   2,0,3,0,0,0,
@@ -112,7 +112,7 @@ ordered.model
 #   de taxas ao qual aquela transição pertence. Números iguais indicam que as 
 #   transições seguem a mesma taxa. Apenas o zero (0) indica que a taxa é nula.
 
-## fit bi-directional ordered model
+## ajustando matriz ordenada
 fitOrdered<-fitDiscrete(phy = sqTree.pruned,
                         dat = toes,
                         model = ordered.model,

@@ -186,6 +186,6 @@ lines(x = ts3,
 )
 
 # PARA PENSAR:
-#   A matriz utilizada possuia valores zerados para algumas taxas. Qual foi o efeito
-#   dessas taxas zeradas nas transições? Que tipo de hipótese biológica esse
-#   tipo de matriz representatia?
+#   A matriz utilizada possuia valores zerados para algumas taxas. 
+#   Qual foi o efeito dessas taxas zeradas nas transições?
+#   Que tipo de hipótese biológica esse tipo de matriz representatia?
