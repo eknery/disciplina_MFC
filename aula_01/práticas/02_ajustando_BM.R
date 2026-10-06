@@ -46,13 +46,13 @@ plotTree.barplot(tree = miconia.tree,
 ############################### AJUSTANDO MODELOS ##############################
 
 ### ajustando modelo Pontuado
-fitPunctual <-fitContinuous(phy = miconia.tree,
+fitPunctual <- fitContinuous(phy = miconia.tree,
                             dat = trait,
                             model ="kappa"
 )
 
 ### ajustando modelo de Caminhada Aleatória
-fitRWalk <-fitContinuous(phy = miconia.tree,
+fitRWalk <- fitContinuous(phy = miconia.tree,
                          dat = trait,
                          model ="BM"
 )
