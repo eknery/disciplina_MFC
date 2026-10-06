@@ -1,11 +1,11 @@
 # Nessa prática vamos investigar o sinal filogenético de diferentes caracteríticas
-# medidas em linhagens de primatas. Nós hipotezimaos que 
+# medidas em linhagens de primatas. Nós hipotezimaos que características que
+# evoluem mais rápido terão uma menor similaridade entre linhagens próximas.
+# Assim, nossa expectativa é que taxas evolutivas maiores estejam associadas
+# com valores de menores de sinal filogenético. Nós vamos considerar duas medidas 
+# de sinal filogenético: lambda de Pagel e K de Bloomberg.
 
-Nossa expectativa é que 
-# o tamanho da inflorescência tenha sido mais conservado na evolução
-# devido ao seu papel na polinização, que restringiria grandes mudanças. 
-# Nós vamos considerar duas medidas de sinal filogenético: lambda e K.
-
+### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
@@ -124,10 +124,7 @@ plot(kbloom,las=1,cex.axis=0.9)
 # O valor de K foi alto ou baixo? O que isso indica? 
 # O valor de P foi significativo? O que isso indica?
 
-
-## EM GRUPO:
-# Execute o script para as demais características, anotando os seus respectivos 
-# modelos evolutivos, valores de sigma, lambda e K de Bloomberg. 
-# Os modelos e os valores de sinal filogenético paracerem ter alguma relação?
+##################################### TAREFA ####################################
+# Infira os valores de sigma, lambda e K de Bloomber para as demais características. 
 # Os valores de sigma e de sinal filogenético parecem ter alguma relação? 
 
