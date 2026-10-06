@@ -8,69 +8,71 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
-miconia.data<-read.csv("dados/miconia.csv", row.names=1, h= T)
-head(miconia.data)
+data = read.csv("dados/primateEyes.csv",  h= T)
+head(data)
 
 ### carregando filogenia
-miconia.tree<-read.tree("dados/miconia.nwk")
-print(miconia.tree,printlen=2)
+tree = read.tree("dados/primate.tre")
+print(tree,printlen=2)
 
-############################## VISUALIZANDO DADOS ###############################
+############################## PROCESSANDO DADOS ###############################
 
 ### valores de interesse em um vetor nomeado
-trait<- miconia.data[,"leaf.size"]
-names(trait)<-rownames(miconia.data)
+trait = data[,"Skull_length"]
+names(trait) = data$Genus_species
 trait
 
-### verificando a distribuição dos valores
-hist(trait)
-
 ### verificando correspondência entre dados e filogenia
-name.check(miconia.tree, miconia.data)
+name.check(tree, trait)
+
+############################### VISUALIZANDO DADOS #############################
 
 ### gráfico da filogenia
-plotTree.barplot(tree = miconia.tree,
-                 x = trait,
-                 args.plotTree =list(fsize=0.4)
+plotTree.barplot(
+  tree = tree,
+  x = trait,
+  args.plotTree =list(fsize=0.4)
 )
 
 # PARA PENSAR:
-# Existe algum padrão de similaridade de tamanho entre linhagens próximas?
+# Existe algum padrão de similaridade entre linhagens próximas?
 
 ################################ MEDINDO SINAL ###############################
 
 ### testando sinal filogenético por lambda de Pagel
-lambda_gs = phylosig(tree = miconia.tree,
-                     x = trait,
-                     method="lambda",
-                     test = TRUE
-                     )
+lambda = phylosig(
+  tree = tree,
+  x = trait,
+  method="lambda",
+  test = TRUE
+  )
 
 ### verificando resultados
-lambda_gs
-plot(lambda_gs,las=1,cex.axis=0.9)
+lambda
+plot(lambda,las=1,cex.axis=0.9)
 
 # PARA PENSAR:
 # O valor de lambda foi alto ou baixo? O que isso indica? 
 # O valor de P foi significativo? O que isso indica?
 
 ### testando sinal filogenético por K de Bloomberg
-K_gs<-phylosig(tree = miconia.tree,
-               x = trait,
-               method= "K",
-               test = TRUE,
-               nsim = 10000)
+kbloom = phylosig(
+  tree = tree,
+  x = trait,
+  method= "K",
+  test = TRUE,
+  nsim = 10000
+  )
 
 ### verificando resultados
-K_gs
-plot(K_gs,las=1,cex.axis=0.9)
+kbloom
+plot(kbloom,las=1,cex.axis=0.9)
 
 ## PARA PENSAR:
 # O valor de K foi alto ou baixo? O que isso indica? 
 # O valor de P foi significativo? O que isso indica?
 
 ## EM GRUPO:
-# Execute o script para a folha e para a inflorescência, anotando os valores de
-# lambda e K para cada uma das características. Os valores de sinal filogenético
-# parecem ter alguma relação com os modelos de melhor ajuste dessas características?
+# Execute o script para as demais características, anotando os seus respectivos 
+# valores de lambda e K. Os valores de sinal filogenético parecem ter alguma relação com os modelos de melhor ajuste dessas características?
 
