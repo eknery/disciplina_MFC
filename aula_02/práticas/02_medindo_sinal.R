@@ -5,6 +5,8 @@
 # com valores de menores de sinal filogenético. Nós vamos considerar duas medidas 
 # de sinal filogenético: lambda de Pagel e K de Bloomberg.
 
+######################## CARREGANDO BIBLIOTECAS E DADOS #######################
+
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
