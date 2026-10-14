@@ -2,7 +2,7 @@
 # medidas em linhagens de primatas. Nós hipotezimaos que características que
 # evoluem mais rápido terão uma menor similaridade entre linhagens próximas.
 # Assim, nossa expectativa é que taxas evolutivas maiores estejam associadas
-# com valores de menores de sinal filogenético. Nós vamos considerar duas medidas 
+# com valores menores de sinal filogenético. Nós vamos considerar duas medidas 
 # de sinal filogenético: lambda de Pagel e K de Bloomberg.
 
 ######################## CARREGANDO BIBLIOTECAS E DADOS #######################
@@ -12,25 +12,23 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
-data = read.csv("dados/primateEyes.csv",  h= T)
+data = read.csv("dados/primate_data.csv",  h= T,  row.names=1)
 head(data)
 
 ### carregando filogenia
-tree = read.tree("dados/primate.tre")
+tree = read.tree("dados/primate_tree.nwk")
 print(tree,printlen=2)
 
 ############################## PROCESSANDO DADOS ###############################
 
-### escolha um trait
-trait_name = "Skull_length"
+### escolha uma característica
+trait_name = "skull_length"
 
-### trait, com escala padronizanda
-xmean = mean(data[,trait_name])
-xsd = sd(data[,trait_name])
-trait = (data[,trait_name] - xmean) /xsd
+### transformação logarítimica (facilita comparação entre escalas)
+trait = log(data[,trait_name]) 
 
 ### vetor nomeado
-names(trait) = data$Genus_species
+names(trait) = row.names(data)
 trait
 
 ### verificando correspondência entre dados e filogenia
@@ -82,6 +80,7 @@ aic = setNames(c(fitPunctual$opt$aic,
 ### ver valores de AIC
 aic
 
+
 ### estimativas de taxa evolutiva
 sigma.sq = setNames(c(fitPunctual$opt$sigsq,
                       fitRWalk$opt$sigsq,
@@ -127,6 +126,6 @@ plot(kbloom,las=1,cex.axis=0.9)
 # O valor de P foi significativo? O que isso indica?
 
 ##################################### TAREFA ####################################
-# Infira os valores de sigma, lambda e K de Bloomber para as demais características. 
+# Infira os valores de sigma, lambda e K  para as demais características. 
 # Os valores de sigma e de sinal filogenético parecem ter alguma relação? 
 
