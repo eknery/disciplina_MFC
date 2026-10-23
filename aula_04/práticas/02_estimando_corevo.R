@@ -12,46 +12,54 @@ if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("nlme")) install.packages("nlme"); library("nlme")
 
 ### carregando dados fenotípicos
-anole.morphology<-read.csv("dados/anole.data.csv",
-                           row.names=1)
-### verificando dados
-anole.morphology
+data = read.csv("dados/centrarchidae_data.csv",  h= T,  row.names=1)
+head(data)
 
-### carregando dados de hábito
-anole.ecomorph<-read.csv("dados/ecomorph.csv",
-                         row.names=1,
-                         stringsAsFactors=TRUE)
-### verificando dados de hábito
-anole.ecomorph
+### carregando filogenia
+tree = read.nexus("dados/centrarchidae_tree.nexus")
+print(tree)
 
-### carregando árvore filogenética 'mapeada'
-anole.tree<-read.simmap(file="dados/anolis_mapped.nexus",
-                        format="nexus",
-                        version=1.5)
-### verificando árvore
-anole.tree
-
-############################# TRATANDO OS DADOS ################################
+############################## PROCESSANDO DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
-chk<-name.check(anole.tree,anole.morphology)
-summary(chk)
-
-### retirando dados das espécies ausentes na árvore
-anole.data<-anole.morphology[-which(rownames(anole.morphology)%in%chk$data_not_tree),]
-
-### verificando correspondência entre dados e árvore
-chk<-name.check(anole.tree,anole.data)
+chk = name.check(tree,data)
 chk
+
+### nomes das variáveis preditora e resposta
+xname = "gape.width"
+yname = "buccal.length"
+### extraíndo variáveis
+xvar = data[,xname]
+yvar = data[,yname]
+### nomeando valores por espécie
+names(xvar) = names(yvar) = row.names(data)
+### verificando vetores
+xvar
+yvar 
 
 ############################## VISUALIZANDO DADOS ##############################
 
 ### visualizando a distribuição dos dados 
-plot(LAM~FLL, data=anole.data,
-     xlab="comprimeto do membro anterior (cm)",
-     ylab="número de lamelas",
-     pch=21,bg="gray",cex=1.2,log="xy",las=1,cex.axis=0.7,
-     cex.lab=0.9,bty="n")
+plot(
+  buccal.length~gape.width, 
+  data = data,
+  xlab="log largura bucal (mm)",
+  ylab="log comprimento da boca (mm)",
+  pch =21,
+  bg ="gray",
+  cex = 1.2,
+  las =1,
+  cex.axis = 0.7,
+  cex.lab = 0.9
+  )
+
+### visualizando a árvores filogenética
+plotTree(
+  tree, 
+  ftype="i",
+  fsize=0.7,
+  lwd=1)
+nodelabels(bg="white",cex=0.5,frame="circle")
 
 # PARA PENSAR:
 #   Baseado no gráfico, existe uma relação entre o tamanho das inflorescências e 
@@ -60,7 +68,7 @@ plot(LAM~FLL, data=anole.data,
 ##################### INFERÊNCIA POR REGRESSÃO ORDINÁRIA ######################
 
 ### ajustando regressão linear ordinária
-fit.ols<-lm(LAM~FLL, data=anole.data)
+fit.ols<-lm(LAM~FLL, data= data)
 
 ### verificando Normalidade dos resíduos
 shapiro.test(resid(fit.ols))
@@ -83,9 +91,7 @@ abline(fit.ols, lwd=2,col="darkgray")
 
 ############################ INFERÊNCIA POR CONTRASTES ########################
 
-### visualizando a árvores filogenética
-plotTree(anole.tree,ftype="i",fsize=0.7,lwd=1)
-nodelabels(bg="white",cex=0.5,frame="circle")
+
 
 ### gerando vetores distintos para fenótipo 
 fll<-setNames(anole.data[,"FLL"], rownames(anole.data))
@@ -125,11 +131,11 @@ abline(fit.pic,lwd=2,col="darkgray")
 ############################# INFERÊNCIA POR PGLS #############################
 
 ### ajustando modelos evolutivos
-fitBM = fitContinuous(phy = anole.tree, 
-                      dat = lam,  
+fitBM = fitContinuous(phy = tree, 
+                      dat = data[,y],  
                       model = "BM")
 
-fitOU = fitContinuous(phy = anole.tree, 
+fitOU = fitContinuous(phy = tree, 
                       dat = lam,  
                       model = "OU")
 

@@ -17,7 +17,7 @@ head(data)
 
 ### carregando filogenia
 tree = read.tree("dados/primate_tree.nwk")
-print(tree,printlen=2)
+print(tree)
 
 ############################## PROCESSANDO DADOS ###############################
 
