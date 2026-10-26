@@ -39,14 +39,16 @@ names(xvar) = names(yvar) = spp
 xvar
 yvar 
 
-### retirando estados das linhagens atuais
+### estados das linhagens atuais
 tipstates = data[tree$tip.label,"feeding.mode"]
 names(tipstates) = tree$tip.label
+### estados das linhagens ancestrais
+nodestates = tree$node.label
 
 ### mapeando cores para categorias
 color_map = c(
-  "pisc" = "black", 
-  "non" = "darkgray"
+  "non" = "lightgray",
+  "pisc" = "black"
 )
 
 ############################## VISUALIZANDO DADOS ##############################
@@ -58,8 +60,8 @@ plot(
   buccal.length~gape.width, 
   data = data,
   col = color_map[data$feeding.mode],
-  xlab="log largura bucal (mm)",
-  ylab="log comprimento bucal (mm)",
+  xlab= "log largura bucal (mm)",
+  ylab= "log comprimento bucal (mm)",
   pch = 19,
   cex = 1.2,
   las =1,
@@ -79,6 +81,11 @@ tiplabels(
   piecol = color_map, 
   cex=0.40
   )
+nodelabels(
+  pie = to.matrix(nodestates, sort(unique(nodestates))), 
+  piecol = color_map, 
+  cex=0.40
+)
 axisPhylo()
 ## retornar visualização única
 par(mfrow=c(1,1))
@@ -88,31 +95,77 @@ par(mfrow=c(1,1))
 
 ############################ INFERÊNCIA POR CONTRASTES ########################
 
-### calculando os contrastes para cada fenótipo
-pic.fll<-pic(fll, anole.tree)
-pic.lam<-pic(lam, anole.tree)
-
+### calculando os contrastes para cada característica
+xpic = pic(xvar, tree)
+ypic = pic(yvar, tree)
 ### verificar valores dos contrastes
-pic.fll
-pic.lam
+xpic
+ypic
 
-### ajustando regressão linear - passando pela origem
-fit.pic<-lm(pic.lam~pic.fll+0)
-
+### ajustando regressão simples (sem efeito do modo de alimentação)
+fit.pic1 = lm(ypic~xpic+0)
 ### verificando Normalidade dos resíduos
-shapiro.test(resid(fit.pic))
+shapiro.test(resid(fit.pic1))
+### calculando sustentação do modelo
+sum.fit.pic1 = summary(fit.pic1)
+### verificando parâmetros e sustentação
+sum.fit.pic1
 
-### verificando sustentação 
-summary(fit.pic)
+### ajustando regressão aninhada (com efeito do modo de alimentação)
+fit.pic2 = lm(ypic~xpic:nodestates+0)
+### verificando Normalidade dos resíduos
+shapiro.test(resid(fit.pic2))
+### calculando sustentação do modelo
+sum.fit.pic2 = summary(fit.pic2)
+### verificando parâmetros e sustentação
+sum.fit.pic2
 
-plot(pic.lam~pic.fll,
-     xlab="PIC comprimeto do membro anterior",
-     ylab="PIC número de lamelas",
-     pch=21,bg="gray",cex=1.2,las=1,
-     cex.axis=0.7,cex.lab=0.9,bty="n"
-     )
-## graph our fitted line
+### visualizando modelos PGLS 
+## dividir visualização
+par(mfrow=c(1,2))
+## primeiro modelo 
+plot(
+  ypic~xpic,
+  col = "darkgray",
+  main = "PIC simples",
+  xlab="PIC largura bucal",
+  ylab="PIC comprimento bucal",
+  pch = 19,
+  cex = 1.2,
+  las =1,
+  cex.axis = 0.7,
+  cex.lab = 0.9
+)
 abline(fit.pic,lwd=2,col="darkgray")
+## segundo modelo 
+plot(
+  ypic~xpic,
+  col = color_map[nodestates],
+  main = "PIC aninhado",
+  xlab="PIC largura bucal",
+  ylab="PIC comprimento bucal",
+  pch = 19,
+  cex = 1.2,
+  las =1,
+  cex.axis = 0.7,
+  cex.lab = 0.9
+)
+abline(
+  a = 0, 
+  b = fit.pic2$coefficients[1],
+  lty = 3,
+  lwd = 2,
+  col = "darkgray"
+)
+abline(
+  a = 0, 
+  b = fit.pic2$coefficients[2],
+  lty = 1,
+  lwd = 2,
+  col = "black"
+)
+## retornar visualização única
+par(mfrow=c(1,1))
 
 # PARA PENSAR:
 #   Comparando os modelo com dados brutos e com PICs, existe diferença na 
@@ -185,7 +238,6 @@ aic
 # PARA PENSAR:
 #   Qual modelo de PGLS teve o melhor ajuste aos dados?
 #   O que esse modelo indica sobre a correlaçãoe evolutiva entre as características?
-
 
 ### visualizando modelos PGLS 
 ## dividir visualização
