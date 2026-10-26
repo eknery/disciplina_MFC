@@ -25,6 +25,8 @@ print(tree)
 chk = name.check(tree,data)
 chk
 
+### nome das espécies
+spp = row.names(data)
 ### nomes das variáveis preditora e resposta
 xname = "gape.width"
 yname = "buccal.length"
@@ -32,70 +34,59 @@ yname = "buccal.length"
 xvar = data[,xname]
 yvar = data[,yname]
 ### nomeando valores por espécie
-names(xvar) = names(yvar) = row.names(data)
+names(xvar) = names(yvar) = spp
 ### verificando vetores
 xvar
 yvar 
 
+### retirando estados das linhagens atuais
+tipstates = data[tree$tip.label,"feeding.mode"]
+names(tipstates) = tree$tip.label
+
+### mapeando cores para categorias
+color_map = c(
+  "pisc" = "black", 
+  "non" = "darkgray"
+)
+
 ############################## VISUALIZANDO DADOS ##############################
 
+## dividir visualização
+par(mfrow=c(1,2))
 ### visualizando a distribuição dos dados 
 plot(
   buccal.length~gape.width, 
   data = data,
+  col = color_map[data$feeding.mode],
   xlab="log largura bucal (mm)",
-  ylab="log comprimento da boca (mm)",
-  pch =21,
-  bg ="gray",
+  ylab="log comprimento bucal (mm)",
+  pch = 19,
   cex = 1.2,
   las =1,
   cex.axis = 0.7,
   cex.lab = 0.9
-  )
-
+)
 ### visualizando a árvores filogenética
-plotTree(
+par(mar = c(2, 1, 1, 1))
+plot(
   tree, 
-  ftype="i",
-  fsize=0.7,
-  lwd=1)
-nodelabels(bg="white",cex=0.5,frame="circle")
+  ftype = "i",
+  fsize = 0.7,
+  lwd = 1
+  )
+tiplabels(
+  pie = to.matrix(tipstates, sort(unique(tipstates))), 
+  piecol = color_map, 
+  cex=0.40
+  )
+axisPhylo()
+## retornar visualização única
+par(mfrow=c(1,1))
 
 # PARA PENSAR:
-#   Baseado no gráfico, existe uma relação entre o tamanho das inflorescências e 
-#   das folhas nesse clado de plantas?
-
-##################### INFERÊNCIA POR REGRESSÃO ORDINÁRIA ######################
-
-### ajustando regressão linear ordinária
-fit.ols<-lm(LAM~FLL, data= data)
-
-### verificando Normalidade dos resíduos
-shapiro.test(resid(fit.ols))
-
-### verificando sustentação
-summary(fit.ols)
-
-### visualizando modelo ordinário
-plot(LAM~FLL, data=anole.data,
-     xlab="comprimeto do membro anterior (cm)",
-     ylab="número de lamelas",
-     pch=21,bg="gray",cex=1.2,las=1,
-     cex.axis=0.7,cex.lab=0.9,bty="n")
-abline(fit.ols, lwd=2,col="darkgray")
-
-# PARA PENSAR:
-#   A relação entre o tamanho da inflorescência e o tamanho da folha
-#   tem sustentação estatística? O modelo de regressão (a reta) parece 
-#   descrever a relação entre os dois fenótipos?
+#   Baseado no gráfico, existe uma relação entre a largura e o comprimento bucal? 
 
 ############################ INFERÊNCIA POR CONTRASTES ########################
-
-
-
-### gerando vetores distintos para fenótipo 
-fll<-setNames(anole.data[,"FLL"], rownames(anole.data))
-lam<-setNames(anole.data[,"LAM"], rownames(anole.data))
 
 ### calculando os contrastes para cada fenótipo
 pic.fll<-pic(fll, anole.tree)
@@ -130,62 +121,120 @@ abline(fit.pic,lwd=2,col="darkgray")
 
 ############################# INFERÊNCIA POR PGLS #############################
 
-### ajustando modelos evolutivos
-fitBM = fitContinuous(phy = tree, 
-                      dat = data[,y],  
-                      model = "BM")
-
-fitOU = fitContinuous(phy = tree, 
-                      dat = lam,  
-                      model = "OU")
-
+### ajustando modelo BM
+fitBM = fitContinuous(
+  phy = tree, 
+  dat = yvar,  
+  model = "BM"
+  )
+### ajustando modelo OU
+fitOU = fitContinuous(
+  phy = tree, 
+  dat = yvar,  
+  model = "OU"
+  )
 ### comparando modelos evolutivos
 aic = setNames(c(AIC(fitBM) , AIC(fitOU)), c("BM", "OU"))
-aicw = aic.w(aic)
-aicw
+aic
 
 # PARA PENSAR:
-#   Qual modelo melhor representa a evolução do tamanho da área de ocorrência?
-#   Esse modelo difere do modelo que é assumido no métodos dos contrastes?
-
-### vetor com o nome das espécies
-spp = rownames(anole.data)
-
-### nome do melhor modelo
-best_model = names(which(aicw == max(aicw)))
+#   Qual modelo melhor representa a evolução do tamanho da boca?
+#   Esse modelo difere do modelo que é assumido no método dos contrastes?
 
 ### CALCULANDO VCV: 
-
 ## Se BM for o melhor modelo:
 sigma_sq = fitBM$opt$sigsq
-cor_str = corBrownian(value = sigma_sq, phy=anole.tree, form=~spp)
-
+cor_str = corBrownian(value = sigma_sq, phy = tree, form=~spp)
 ## Se OU for o melhor modelo:
 alpha = fitOU$opt$alpha
-cor_str = corMartins(value = alpha, phy=miconia.tree, form=~spp, fixed = T)
-
+cor_str = corMartins(value = alpha, phy = tree, form=~spp, fixed = T)
 # IPORTANTE:
 #   Note que a estrutura de correlação é calculada com base em diferentes parâmetros
 #   dependendo do modelo que foi escolhido para representar a evolução da característica. 
 
-### ajustando PGLS aos dados
-fit.pgls<-gls(lam~fll,
-              data = anole.data,
-              correlation = cor_str)
-
+### ajustando PGLS simples (sem efeito do modo de alimentação)
+fit.pgls1 = gls(
+  buccal.length~gape.width,
+  data = data,
+  correlation = cor_str
+  )
 ### verificando normalidade dos resíduos
-shapiro.test(resid(fit.pgls))
+shapiro.test(resid(fit.pgls1))
+### calculando sustentação do modelo
+sum.fit.pgls1 = summary(fit.pgls1)
+### verificando parâmetros e sustentação
+sum.fit.pgls1
 
-### verificando sustentação do modelo
-summary(fit.pgls)
+### ajustando PGLS aninhado (com efeito do modo de alimentação)
+fit.pgls2 = gls(
+  buccal.length~gape.width:feeding.mode,
+  data = data,
+  correlation = cor_str
+)
+### verificando normalidade dos resíduos
+shapiro.test(resid(fit.pgls2))
+### calculando sustentação do modelo
+sum.fit.pgls2 = summary(fit.pgls2)
+### verificando parâmetros e sustentação
+sum.fit.pgls2
 
-### visualizando modelo PGLS
-plot(lam~fll,data=miconia.data,
-     xlab="comprimeto do membro anterior (cm)",
-     ylab="número de lamelas",
-     pch=21,bg="gray",cex=1.2,las=1,
-     cex.axis=0.7,cex.lab=0.9,bty="n")
-abline(fit.pgls, lwd=2,col="darkgray")
+### comparando PGLS
+aic = setNames(c(sum.fit.pgls1$AIC, sum.fit.pgls2$AIC), c("Simples", "Aninhado"))
+aic
+
+# PARA PENSAR:
+#   Qual modelo de PGLS teve o melhor ajuste aos dados?
+#   O que esse modelo indica sobre a correlaçãoe evolutiva entre as características?
+
+
+### visualizando modelos PGLS 
+## dividir visualização
+par(mfrow=c(1,2))
+## primeiro modelo 
+plot(
+  buccal.length~gape.width, 
+  data = data,
+  col = "darkgray",
+  xlab="log largura bucal (mm)",
+  ylab="log comprimento bucal (mm)",
+  main = "PGLS simples",
+  pch = 19,
+  cex = 1.2,
+  las =1,
+  cex.axis = 0.7,
+  cex.lab = 0.9
+)
+abline(fit.pgls1, lwd=2,col="darkgray")
+## segundo modelo 
+plot(
+  buccal.length~gape.width, 
+  data = data,
+  col = color_map[data$feeding.mode],
+  xlab="log largura bucal (mm)",
+  ylab="log comprimento bucal (mm)",
+  main = "PGLS aninhada",
+  pch = 19,
+  cex = 1.2,
+  las =1,
+  cex.axis = 0.7,
+  cex.lab = 0.9
+)
+abline(
+  a = fit.pgls2$coefficients[1], 
+  b = fit.pgls2$coefficients[2],
+  lty = 3,
+  lwd = 2,
+  col = "darkgray"
+  )
+abline(
+  a = fit.pgls2$coefficients[1], 
+  b = fit.pgls2$coefficients[3],
+  lty = 1,
+  lwd = 2,
+  col = "black"
+  )
+## retornar visualização única
+par(mfrow=c(1,1))
 
 # PARA PENSAR:
 #   Comparando os modelos, existe diferença na sustentação estatística?
