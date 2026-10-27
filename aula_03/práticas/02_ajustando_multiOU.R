@@ -15,14 +15,14 @@ if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("OUwie")) install.packages("OUwie"); library("OUwie")
 
 ### carregando dados fenotípicos
-data=read.csv("dados/anolis_data.csv", row.names=1)
+data = read.csv("dados/anolis_data.csv", row.names=1)
 ### verificando dados
 data
 
 ### carregando dados de hábito atual
 regime = read.csv("dados/anolis_ecomorph.csv", row.names=1,  stringsAsFactors=TRUE)
 ### verificando dados de hábito
-regime
+head(regime)
 
 ### As siglas dos hábitos (regimes) são:
 # CG = Crown-giant
@@ -33,21 +33,21 @@ regime
 # Tw = Twig
 
 ### carregando árvore filogenética 'mapeada'
-tree_map=read.simmap(file="dados/anolis_tree.nexus",  format="nexus", version=1.5)
+tree = read.simmap(file="dados/anolis_tree.nexus",  format="nexus", version=1.5)
 ### verificando árvore filogenética
-tree_map
+tree
 
 ############################# TRATANDO OS DADOS ################################
 
 ### verificando correspondência entre dados e árvore
-chk = name.check(tree_map,data)
+chk = name.check(tree,data)
 summary(chk)
 
 ### retirando dados das espécies ausentes na árvore
 data_fix = data[-which(rownames(data) %in% chk$data_not_tree),]
 
 ### verificando correspondência entre dados e árvore
-chk = name.check(tree_map,data_fix)
+chk = name.check(tree,data_fix)
 chk
 
 ############################# ORGANIZANDO OS DADOS ##############################
@@ -87,13 +87,13 @@ cols = c(
 )
 
 ### estados das espécies atuais
-tips = getStates(tree_map,"tips")
+tips = getStates(tree,"tips")
 ## cores para as espécies atuais
 tip_cols = cols[tips]
 
 ### visualizar estados de hábito
 plotSimmap(
-  tree = tree_map,
+  tree = tree,
   colors = cols,
   fsize= 0.5,
   )
@@ -108,7 +108,7 @@ legend(
 
 ### visualizar a característica
 plotTree.barplot(
-  tree = tree_map,
+  tree = tree,
   x = trait,
   args.plotTree = list(fsize=0.3),
   args.barplot = list(col=tip_cols, cex.lab=0.5)
@@ -132,7 +132,7 @@ legend(
 
 ### ajustando "Ruído branco"
 fitWN = fitContinuous(
-  phy = tree_map,
+  phy = tree,
   dat = trait,
   model ="white"
   )
@@ -141,7 +141,7 @@ fitWN
 
 ### ajustando BM com uma única taxa de variação
 fitBM = OUwie(
-  phy = tree_map,
+  phy = tree,
   data = ouwie_table,
   model ="BM1",
   simmap.tree = TRUE
@@ -151,7 +151,7 @@ fitBM
 
 ### ajustando BM com múltiplas taxas de variação
 fitBMS = OUwie(
-  phy = tree_map,
+  phy = tree,
   data = ouwie_table,
   model ="BMS",
   simmap.tree = TRUE
@@ -161,7 +161,7 @@ fitBMS
 
 ### ajustando OU com múltiplos ótimos
 fitOUM = OUwie(
-  phy = tree_map,
+  phy = tree,
   data = ouwie_table,
   model ="OUM",
   simmap.tree = TRUE
@@ -172,12 +172,12 @@ fitOUM
 ############################## COMPARANDO MODELOS ##############################
 
 ### extraindo valores de AIC 
-aic=setNames(c(fitWN$opt$aic,fitBM$AIC,fitBMS$AIC,fitOUM$AIC),
-              c("WN","BM","BMS","OUM"))
+aic = setNames(
+  c(fitWN$opt$aic,fitBM$AIC,fitBMS$AIC,fitOUM$AIC),
+  c("WN","BM","BMS","OUM")
+  )
+### verificando valores de AIC
 aic
-
-### peso ralativo dos modelos
-aic.w(aic)
 
 # PARA PENSAR: 
 # Qual modelo teve o melhor ajuste aos dados? 
