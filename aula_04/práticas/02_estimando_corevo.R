@@ -1,8 +1,8 @@
 # Nesta prática vamos investigar se a evolução da cavidade bucal de espécies 
-# de peixes foi influenciada pelo hábitos alimentar. Nós hipotetizamos que 
+# de peixes foi influenciada pelo seu hábitos alimentar. Nós hipotetizamos que 
 # espécies piscívoras teriam uma maior dificuldade de capturar presas caso sua
-# cavidade bucal não fosse proporcional, enquanto que espécies sugadoras teriam
-# menor dificuldade de se alimentar mesmo com uma cavidade bucal desproporcional. 
+# cavidade bucal fosse desproporcional, enquanto que espécies sugadoras teriam
+# menor dificuldade de se alimentar com uma cavidade bucal desproporcional. 
 # Assim, nossa expectativa é que espécies piscívoras tenham uma maior correlação 
 # evolutiva entre a largura e o comprimento da cavidade bucal do que 
 # espécies com hábito sugador. Para isso, vamos considerar três métodos:

@@ -36,11 +36,12 @@ name.check(tree, trait)
 
 ############################### VISUALIZANDO DADOS #############################
 
-### gráfico da filogenia
+### visualizando filogenia e característica
 plotTree.barplot(
   tree = tree,
   x = trait,
-  args.plotTree =list(fsize=0.4)
+  args.plotTree = list(fsize = 0.4),
+  args.barplot = list(xlab = trait_name)
 )
 
 # PARA PENSAR:
