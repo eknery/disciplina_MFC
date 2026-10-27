@@ -1,9 +1,9 @@
-# Nessa prática vamos investigar o sinal filogenético de diferentes caracteríticas
-# medidas em linhagens de primatas. Nós hipotezimaos que características que
-# evoluem mais rápido terão uma menor similaridade entre linhagens próximas.
-# Assim, nossa expectativa é que taxas evolutivas maiores estejam associadas
-# com valores menores de sinal filogenético. Nós vamos considerar duas medidas 
-# de sinal filogenético: lambda de Pagel e K de Bloomberg.
+# Nessa prática vamos investigar se a similaridade entre espécies de primatas 
+# está associada com a velocidade com que as suas características evoluem.
+# Nós hipotetizamos que características que evoluíram mais rápido terão 
+# uma menor similaridade entre espécies próximas. Assim, nossa expectativa é 
+# que características com taxas evolutivas maiores tenham menor sinal filogenético. 
+# Nós vamos considerar duas medidas de sinal: lambda de Pagel e K de Bloomberg.
 
 ######################## CARREGANDO BIBLIOTECAS E DADOS #######################
 
@@ -22,7 +22,7 @@ print(tree)
 ############################## PROCESSANDO DADOS ###############################
 
 ### escolha uma característica
-trait_name = "skull_length"
+trait_name = "skull.length"
 
 ### transformação logarítimica (facilita comparação entre escalas)
 trait = log(data[,trait_name]) 

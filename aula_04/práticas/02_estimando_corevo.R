@@ -1,8 +1,14 @@
-# Nesta prática vamos investigar se existe uma correlaçao evolutiva entre
-# o número de lamelas e o comprimento dos membros anteriores nos lagartos Anolis.
-# A expectativa é que a evolução de membros maiores aumentou o número de lamelas
-# devido ao efeito de genes que atuam na formação das duas características.
-# Para isso, vamos usar diferentes métodos para inferir a correlação evolutiva.
+# Nesta prática vamos investigar se a evolução da cavidade bucal de espécies 
+# de peixes foi influenciada pelo hábitos alimentar. Nós hipotetizamos que 
+# espécies piscívoras teriam uma maior dificuldade de capturar presas caso sua
+# cavidade bucal não fosse proporcional, enquanto que espécies sugadoras teriam
+# menor dificuldade de se alimentar mesmo com uma cavidade bucal desproporcional. 
+# Assim, nossa expectativa é que espécies piscívoras tenham uma maior correlação 
+# evolutiva entre a largura e o comprimento da cavidade bucal do que 
+# espécies com hábito sugador. Para isso, vamos considerar três métodos:
+# Contrastes Filogenéticos Independentes (PIC);
+# Quadrados Mínimos Generalizados Filogenéticos (PGLS);
+# Matrizes de taxas evolutivas (R);
 
 ####################### CARREGANDO BIBLIOTECAS E DADOS #########################
 
@@ -10,8 +16,6 @@
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("nlme")) install.packages("nlme"); library("nlme")
-if (!require("MASS")) install.packages("MASS"); library("MASS")
-if (!require("mnormt")) install.packages("mnormt"); library("mnormt")
 
 ### carregando dados fenotípicos
 data = read.csv("dados/centrarchidae_data.csv",  h= T,  row.names=1)
