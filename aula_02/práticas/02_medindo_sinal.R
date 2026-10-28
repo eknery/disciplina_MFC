@@ -1,7 +1,7 @@
 # Nessa prática vamos investigar se a similaridade entre espécies de primatas 
 # está associada com a velocidade com que as suas características evoluem.
 # Nós hipotetizamos que características que evoluíram mais rápido terão 
-# uma menor similaridade entre espécies próximas. Assim, nossa expectativa é 
+# uma menor similaridade entre as espécies. Assim, nossa expectativa é 
 # que características com taxas evolutivas maiores tenham menor sinal filogenético. 
 # Nós vamos considerar duas medidas de sinal: lambda de Pagel e K de Bloomberg.
 
@@ -10,7 +10,6 @@
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
-
 
 ### carregando filogenia
 tree = read.tree("dados/primate_tree.nwk")
@@ -24,9 +23,14 @@ head(data)
 
 ### escolhendo uma característica
 trait_name = "skull.length"
-### transformação logarítimica (facilita comparação entre escalas)
-trait = log(data[,trait_name]) 
-### nomenado vetor
+## skull.length
+## optic.foramen.area
+## orbit.area
+## activity.pattern.code
+
+### extraíndo valores da característica e padronizando escala
+trait = as.numeric(scale(data[,trait_name]))
+### nomeando vetor
 names(trait) = row.names(data)
 ### verificando vetor da característica
 trait
@@ -36,12 +40,30 @@ name.check(tree, trait)
 
 ############################### VISUALIZANDO DADOS #############################
 
-### visualizando filogenia e característica
+### dividindo visualização
+par(mfrow=c(1,2))
+### visualizando árvore filogenética
+plotTree(
+  tree,
+  fsize= 0.4,
+  mar = c(2, 1, 1, 1)
+)
+axisPhylo()
+### visualizando distribuição da característica
+hist(
+  trait,
+  main= trait_name
+)
+### retornando visualização única
+par(mfrow=c(1,1))
+
+### visualizando árvore filogenética e característica juntas
 plotTree.barplot(
   tree = tree,
   x = trait,
   args.plotTree = list(fsize = 0.4),
-  args.barplot = list(xlab = trait_name)
+  args.barplot = list(xlab = trait_name),
+  mar = c(2, 1, 1, 1)
 )
 
 # PARA PENSAR:
@@ -131,3 +153,25 @@ plot(kbloom,las=1,cex.axis=0.9)
 # Infira os valores de sigma, lambda e K  para as demais características. 
 # Os valores de sigma e de sinal filogenético parecem ter alguma relação? 
 
+sigma_vals = c() # anote aqui os valores de sigma
+lambda_vals = c() # anote aqui os valores de lambda
+kbloom_vals = c() # anote aqui os valores de K
+
+### dividindo visualização
+par(mfrow=c(1,2))
+### visualizando relação sigma x lambda de Pagel
+plot(
+ sigma_vals,
+ lambda_vals,
+ xlab = "sigma quadrado",
+ ylab = "lambda de Pagel"
+)
+### visualizando relação sigma x K de Bloomberg
+plot(
+  sigma_vals,
+  kbloom_vals, 
+  xlab = "sigma quadrado",
+  ylab = "K de Bloomberg"
+)
+### retornando visualização única
+par(mfrow=c(1,1))
