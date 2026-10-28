@@ -1,11 +1,10 @@
 # Nesta prática vamos investigar se o hábito de vida influenciou a evolução 
-# dos lagartos do gênero Anolis. Nós hipotetizamos que lagartos que habitam
-# a copa das árvores foram selecionadas para uma maior capacidade de escalada 
-# do que lagartos que habitam o chão. Assim, esperamos que os linhagens das copas 
-# das árvores tenham evoluído em direção a um ótimo de membros maiores e patas
-# com maior capacidade de atrito do que as linhagens que habitam o chão. 
-# Para isso, vamos inferir o modo e o tempo de evolução do comprimento dos
-# membros anteriores e posteriores e do número de lamelas da patas.
+# da capacidade de escalada das espécies de lagartos Anolis. Nós hipotetizamos 
+# que espécies na copa das árvores sofreram uma seleção que favoreceu uma maior 
+# capacidade de escalada, enquanto que espécies habitando o chão não sofreram
+# esse mesmo tipo de seleção. Assim, esperamos que espécies na copa das árvores 
+# tenham um ótimo adaptativo de membros maiores e patas com maior atrito, 
+# enquanto que espécies habitando o chão tenham um ótimo adaptativo menor.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS #######################
 
@@ -14,30 +13,22 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("OUwie")) install.packages("OUwie"); library("OUwie")
 
-### carregando dados fenotípicos
-data = read.csv("dados/anolis_data.csv", row.names=1)
-### verificando dados
-data
-
-### carregando dados de hábito atual
-regime = read.csv("dados/anolis_ecomorph.csv", row.names=1,  stringsAsFactors=TRUE)
-### verificando dados de hábito
-head(regime)
-
-### As siglas dos hábitos (regimes) são:
-# CG = Crown-giant
-# GB = Grass-bush
-# TC = Trunk-crown
-# TG = Trunk-ground
-# Tr = Trunk
-# Tw = Twig
-
 ### carregando árvore filogenética 'mapeada'
-tree = read.simmap(file="dados/anolis_tree.nexus",  format="nexus", version=1.5)
+tree = readRDS("dados/anolis_tree.RDS")
 ### verificando árvore filogenética
 tree
 
-############################# TRATANDO OS DADOS ################################
+### carregando dados fenotípicos
+data = read.csv("dados/anolis_data.csv", row.names=1)
+### verificando dados
+head(data)
+
+### carregando dados de hábito 
+regime = read.csv("dados/anolis_habitat.csv", row.names=1,  stringsAsFactors=TRUE)
+### verificando dados de hábito
+head(regime)
+
+############################# VERIFICANDO OS DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
 chk = name.check(tree,data)
@@ -50,7 +41,7 @@ data_fix = data[-which(rownames(data) %in% chk$data_not_tree),]
 chk = name.check(tree,data_fix)
 chk
 
-############################# ORGANIZANDO OS DADOS ##############################
+############################# PROCESSANDO OS DADOS #############################
 
 ### selecionando característica de interesse
 trait = data_fix[,"FLL"]
@@ -60,7 +51,7 @@ trait = data_fix[,"FLL"]
 # o comprimento dos membros anteriores (forelimb, FLL) 
 # o comprimento dos membros posteriores (hindlimb, HLL)
 # o número de lamelas (lamellae number, LAM).
-# Essa variáveis representa o fenótipo das patas.
+# Essa variáveis representam o fenótipo das patas.
 
 ### organizando dados na tabela OUwie
 ouwie_table= data.frame(
@@ -68,8 +59,8 @@ ouwie_table= data.frame(
   regime = regime[rownames(data_fix),],
   trait = trait
  )
-### vendo tabela
-ouwie_table
+### verificando tabela
+head(ouwie_table)
 
 ### nomeando vetor da característica
 names(trait) = rownames(data_fix)
@@ -77,55 +68,41 @@ names(trait) = rownames(data_fix)
 ############################### VISUALIZANDO DADOS ##############################
 
 ### cores para cada hábito
-cols = c(
-  "CG" = "lightblue", 
-  "GB" = "orchid",
-  "TC" = "darkblue", 
-  "TG" = "darkred",
-  "Tr" = "orange", 
-  "Tw" = "darkgreen"
+color_map  = c(
+  "Crown" = "forestgreen", 
+  "Ground" = "goldenrod",
+  "Trunk" = "brown" 
 )
 
-### estados das espécies atuais
-tips = getStates(tree,"tips")
-## cores para as espécies atuais
-tip_cols = cols[tips]
-
+### dividir visualização
+par(mfrow=c(1,2))
 ### visualizar estados de hábito
 plotSimmap(
-  tree = tree,
-  colors = cols,
+  tree = maps[[100]],
+  colors = color_map ,
   fsize= 0.5,
+  mar = c(2, 1, 1, 1)
   )
 legend(
-  "topright",
+  "bottomleft",
    levels(regime[,1]),
-   pch=22,
-   pt.bg=cols,
-   pt.cex=1,
+   pch = 22,
+   pt.bg = color_map ,
+   pt.cex = 1,
    cex=0.5
   )
-
-### visualizar a característica
-plotTree.barplot(
-  tree = tree,
-  x = trait,
-  args.plotTree = list(fsize=0.3),
-  args.barplot = list(col=tip_cols, cex.lab=0.5)
-  )
-legend(
-  "bottomright",
-  levels(regime[,1]),
-  pch=22,
-  pt.bg=cols,
-  pt.cex=1,
-  cex=0.5
-  )
-
+axisPhylo()
+### visualizando a distribuição dos dados 
+plot(
+  ouwie_table$regime,
+  ouwie_table$trait,
+  col = color_map,
+)
+### retornar visualização única
+par(mfrow=c(1,1))
 
 # PARA PENSAR: 
-# Como os valores estão distribuídos entre as linhagens?
-# Os valores tendem a serem iguais entre linhagens próximas filogeneticamente? 
+# Qual é o hábito ancestral? Os demais hábitos evoluíram mais de uma vez?
 # O tipo de hábito parece ter alguma relação com os valores da característica?
 
 ############################### AJUSTANDO MODELOS #############################
@@ -185,5 +162,7 @@ aic
 # O que indicam as estimativas dos parâmetros desse modelo?
 
 ################################### TAREFA ####################################
+
 # Descubra o melhor modelo e os parâmetros para as demais características. 
-# Existe similaridade de modelos e parâmetros entre as características? 
+# Existe similaridade do melhor modelo entre as características? 
+# Existe similaridade nas estimativas dos parâmetros?

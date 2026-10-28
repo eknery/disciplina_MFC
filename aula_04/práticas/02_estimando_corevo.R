@@ -59,8 +59,23 @@ color_map = c(
 
 ############################## VISUALIZANDO DADOS ##############################
 
-## dividir visualização
+### dividir visualização
 par(mfrow=c(1,2))
+### visualizando a árvores filogenética
+plotSimmap(
+  tree,
+  colors = color_map,
+  mar = c(2, 1, 1, 1)
+  )
+legend(
+  "topleft",
+  levels(data[,"feeding.mode"]),
+  pch = 22,
+  pt.bg = color_map,
+  pt.cex = 1,
+  cex=0.5
+)
+axisPhylo()
 ### visualizando a distribuição dos dados 
 plot(
   buccal.length~gape.width, 
@@ -74,14 +89,7 @@ plot(
   cex.axis = 0.7,
   cex.lab = 0.9
 )
-### visualizando a árvores filogenética
-plotSimmap(
-  tree,
-  colors = color_map,
-  mar = c(2, 1, 1, 1)
-  )
-axisPhylo()
-## retornar visualização única
+### retornar visualização única
 par(mfrow=c(1,1))
 
 # PARA PENSAR:
