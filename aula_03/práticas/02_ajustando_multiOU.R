@@ -45,9 +45,13 @@ chk
 
 ### selecionando característica de interesse
 trait = data_fix[,"FLL"]
+### nomeando vetor da característica
+names(trait) = rownames(data_fix)
+### verificando vetor das características 
+trait
 
 ## IMPORTANTE:
-# Para testar nossa hipótese, mas investigar três características:
+# Para testar nossa hipótese, vamas investigar três características:
 # o comprimento dos membros anteriores (forelimb, FLL) 
 # o comprimento dos membros posteriores (hindlimb, HLL)
 # o número de lamelas (lamellae number, LAM).
@@ -61,9 +65,6 @@ ouwie_table= data.frame(
  )
 ### verificando tabela
 head(ouwie_table)
-
-### nomeando vetor da característica
-names(trait) = rownames(data_fix)
 
 ############################### VISUALIZANDO DADOS ##############################
 
