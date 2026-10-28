@@ -148,7 +148,7 @@ plot(kbloom,las=1,cex.axis=0.9)
 # O valor de K foi alto ou baixo? O que isso indica? 
 # O valor de P foi significativo? O que isso indica?
 
-##################################### TAREFA ####################################
+##################################### TAREFA ###################################
 
 # Infira os valores de sigma, lambda e K  para as demais características. 
 # Os valores de sigma e de sinal filogenético parecem ter alguma relação? 

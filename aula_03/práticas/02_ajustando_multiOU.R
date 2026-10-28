@@ -1,10 +1,11 @@
 # Nesta prática vamos investigar se o hábito de vida influenciou a evolução 
 # da capacidade de escalada das espécies de lagartos Anolis. Nós hipotetizamos 
-# que espécies na copa das árvores sofreram uma seleção que favoreceu uma maior 
-# capacidade de escalada, enquanto que espécies habitando o chão não sofreram
-# esse mesmo tipo de seleção. Assim, esperamos que espécies na copa das árvores 
-# tenham um ótimo adaptativo de membros maiores e patas com maior atrito, 
-# enquanto que espécies habitando o chão tenham um ótimo adaptativo menor.
+# que espécies habitando a copa das árvores sofreram uma seleção favorecendo
+# uma maior capacidade de escalada, enquanto que espécies habitando o chão 
+# não sofreram esse mesmo tipo de seleção. Assim, esperamos que espécies 
+# habitando a copa das árvores tenham um ótimo adaptativo de membros maiores e 
+# patas com maior atrito, enquanto que espécies habitando o chão tenham 
+# um ótimo adaptativo de membros menores e patas com menor atrito.
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS #######################
 
@@ -70,9 +71,9 @@ head(ouwie_table)
 
 ### cores para cada hábito
 color_map  = c(
-  "Crown" = "forestgreen", 
-  "Ground" = "goldenrod",
-  "Trunk" = "brown" 
+  "Crown" = "blue", 
+  "Ground" = "red",
+  "Trunk" = "darkgray" 
 )
 
 ### dividir visualização

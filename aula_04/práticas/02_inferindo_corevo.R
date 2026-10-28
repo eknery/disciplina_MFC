@@ -1,14 +1,11 @@
-# Nesta prática vamos investigar se a evolução da cavidade bucal de espécies 
-# de peixes foi influenciada pelo seu hábitos alimentar. Nós hipotetizamos que 
+# Nesta prática vamos investigar se o hábitos alimentar influenciou a evolução 
+# da cavidade bucal das espécies de peixes Centrarchidae. Nós hipotetizamos que 
 # espécies piscívoras teriam uma maior dificuldade de capturar presas caso sua
-# cavidade bucal fosse desproporcional, enquanto que espécies sugadoras teriam
-# menor dificuldade de se alimentar com uma cavidade bucal desproporcional. 
+# cavidade bucal fosse desproporcional, enquanto que espécies com outros hábitos 
+# não sofreriam essa dificuldade com uma cavidade bucal desproporcional. 
 # Assim, nossa expectativa é que espécies piscívoras tenham uma maior correlação 
 # evolutiva entre a largura e o comprimento da cavidade bucal do que 
-# espécies com hábito sugador. Para isso, vamos considerar três métodos:
-# Contrastes Filogenéticos Independentes (PIC);
-# Quadrados Mínimos Generalizados Filogenéticos (PGLS);
-# Matrizes de taxas evolutivas (R);
+# espécies com hábito outros hábitos alimentares. 
 
 ####################### CARREGANDO BIBLIOTECAS E DADOS #########################
 
@@ -45,17 +42,14 @@ names(xvar) = names(yvar) = spp
 xvar
 yvar 
 
-### estados das linhagens atuais
-tipstates = data[tree$tip.label,"feeding.mode"]
-names(tipstates) = tree$tip.label
-### estados das linhagens ancestrais
+### extraíndo hábitos ancestrais
 nodestates = tree$node.label
-
-### mapeando cores para categorias
+### mapeando cores para hábito
 color_map = c(
-  "non" = "lightgray",
-  "pisc" = "black"
+  "pisc" = "red",
+  "non" = "darkblue"
 )
+
 
 ############################## VISUALIZANDO DADOS ##############################
 
@@ -69,7 +63,7 @@ plotSimmap(
   )
 legend(
   "topleft",
-  levels(data[,"feeding.mode"]),
+  unique(data[,"feeding.mode"]),
   pch = 22,
   pt.bg = color_map,
   pt.cex = 1,
@@ -83,17 +77,15 @@ plot(
   col = color_map[data$feeding.mode],
   xlab= "log largura bucal (mm)",
   ylab= "log comprimento bucal (mm)",
-  pch = 19,
-  cex = 1.2,
-  las =1,
-  cex.axis = 0.7,
-  cex.lab = 0.9
+  pch = 19
 )
 ### retornar visualização única
 par(mfrow=c(1,1))
 
 # PARA PENSAR:
-#   Baseado no gráfico, existe uma relação entre a largura e o comprimento bucal? 
+# Qual o hábito alimentar ancestral desse grupo de peixes?
+# Visualmente, existe uma relação entre a largura e o comprimento bucal?
+# Essa relação parece ser influenciada pelo hábito alimentar?
 
 ############################ INFERÊNCIA POR CONTRASTES ########################
 
@@ -157,14 +149,14 @@ abline(
   b = fit.pic2$coefficients[1],
   lty = 3,
   lwd = 2,
-  col = "darkgray"
+  col = "darkblue"
 )
 abline(
   a = 0, 
   b = fit.pic2$coefficients[2],
   lty = 1,
   lwd = 2,
-  col = "black"
+  col = "red"
 )
 ## retornar visualização única
 par(mfrow=c(1,1))
@@ -194,7 +186,7 @@ fitBM = fitContinuous(
 fitOU = fitContinuous(
   phy = tree, 
   dat = yvar,  
-  model = "OU"
+  model = "OU",
   )
 ### extraindo valores de AIC
 aic = setNames(c(AIC(fitBM) , AIC(fitOU)), c("BM", "OU"))
@@ -202,7 +194,7 @@ aic = setNames(c(AIC(fitBM) , AIC(fitOU)), c("BM", "OU"))
 aic
 
 # PARA PENSAR:
-#   Qual modelo melhor representa a evolução do tamanho da boca?
+#   Qual modelo melhor representa a evolução do comprimento da boca?
 #   Esse modelo difere do modelo que é assumido no método dos contrastes?
 
 ### calculando VCV: 
@@ -279,14 +271,14 @@ abline(
   b = fit.pgls2$coefficients[2],
   lty = 3,
   lwd = 2,
-  col = "darkgray"
+  col = "darkblue"
   )
 abline(
   a = fit.pgls2$coefficients[1], 
   b = fit.pgls2$coefficients[3],
   lty = 1,
   lwd = 2,
-  col = "black"
+  col = "red"
   )
 ## retornar visualização única
 par(mfrow=c(1,1))
@@ -348,3 +340,6 @@ aic
 # PARA PENSAR:
 #   Comparando as matrizes de correlação, qual possui o melhor ajuste?
 #   Baseado na melhor matriz, como é a correlação evolutiva das características?
+
+################################### TAREFA #####################################
+
