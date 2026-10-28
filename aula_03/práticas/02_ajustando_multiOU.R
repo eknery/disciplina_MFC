@@ -79,7 +79,7 @@ color_map  = c(
 par(mfrow=c(1,2))
 ### visualizar estados de hábito
 plotSimmap(
-  tree = maps[[100]],
+  tree = tree,
   colors = color_map ,
   fsize= 0.5,
   mar = c(2, 1, 1, 1)

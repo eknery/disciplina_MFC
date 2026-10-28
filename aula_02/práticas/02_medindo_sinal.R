@@ -11,24 +11,24 @@
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
-### carregando dados fenotípicos
-data = read.csv("dados/primate_data.csv",  h= T,  row.names=1)
-head(data)
 
 ### carregando filogenia
 tree = read.tree("dados/primate_tree.nwk")
 print(tree)
 
+### carregando dados fenotípicos
+data = read.csv("dados/primate_data.csv",  h= T,  row.names=1)
+head(data)
+
 ############################## PROCESSANDO DADOS ###############################
 
-### escolha uma característica
+### escolhendo uma característica
 trait_name = "skull.length"
-
 ### transformação logarítimica (facilita comparação entre escalas)
 trait = log(data[,trait_name]) 
-
-### vetor nomeado
+### nomenado vetor
 names(trait) = row.names(data)
+### verificando vetor da característica
 trait
 
 ### verificando correspondência entre dados e filogenia
@@ -72,23 +72,23 @@ fitDirectional = fitContinuous(
 
 ################################ COMPARANDO MODELOS ############################
 
-### valores de AIC
+### extraíndo valores de AIC
 aic = setNames(c(fitPunctual$opt$aic,
                  fitRWalk$opt$aic,
                  fitDirectional$opt$aic),
                c("Punctual","Random Walk","Directional")
 )
-### ver valores de AIC
+### verificando valores de AIC
 aic
 
 
-### estimativas de taxa evolutiva
+### extraíndo estimativas de taxa evolutiva
 sigma.sq = setNames(c(fitPunctual$opt$sigsq,
                       fitRWalk$opt$sigsq,
                       fitDirectional$opt$sigsq),
                     c("Punctual","Random Walk","Directional")
 )
-### ver taxas evolutivas
+### verificando taxas evolutivas
 sigma.sq
 
 ################################ MEDINDO SINAL #################################
@@ -115,7 +115,7 @@ kbloom = phylosig(
   x = trait,
   method= "K",
   test = TRUE,
-  nsim = 10000
+  nsim = 1000
   )
 
 ### verificando resultados
@@ -127,6 +127,7 @@ plot(kbloom,las=1,cex.axis=0.9)
 # O valor de P foi significativo? O que isso indica?
 
 ##################################### TAREFA ####################################
+
 # Infira os valores de sigma, lambda e K  para as demais características. 
 # Os valores de sigma e de sinal filogenético parecem ter alguma relação? 
 
