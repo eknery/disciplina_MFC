@@ -8,6 +8,7 @@
 ### bibliotecas
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
+if (!require("corHMM")) install.packages("corHMM");library("corHMM")
 
 ### carregando árvore filogenética
 phy = read.tree("dados/arecaceae_phy.tre")
@@ -33,12 +34,17 @@ names(trait) = row.names(data)
 ### verificando vetor de estados
 trait
 
+### vector with name of states
+state_names = colnames(data)
+### numbers of states
+state_n = length(state_names)
+  
 ############################# VISUALIZANDO DADOS ##############################
 
 ### cores para cada estado
 col_map =c(
-  "absent" = "yellow",
-  "present" = "darkblue"
+  "armless" = "yellow",
+  "spiny" = "darkblue"
   )
 
 ### plotando árvore com estados
@@ -66,64 +72,164 @@ axisPhylo()
 # PARA PENSAR:
 #   Baseado na figura, o estado de nenhum dígito (0) teria evoluído mais de uma vez?
 
-####################### AJUSTANDO MATRIZES DE TRANSIÇÂO ########################S
+####################### AJUSTANDO MATRIZES DE TRANSIÇÂO ########################
 
-### ajustando matriz com uma única taxa
+### matriz com taxa única (equal rates, ER)
+er.mtx = matrix(c(
+  0,1,
+  1,0
+),state_n,state_n,byrow=TRUE,
+dimnames = list(state_names,state_names))
+### ajustando matriz com taxa única
 fitER = fitDiscrete(
   phy = phy_fix,
   dat = trait,
-  model = "ER"
+  model = er.mtx
   )
 ### visualizando matriz
 plot(fitER, show.zeros=FALSE)
 
+### matriz com taxa diferentes (all rates different, ARD)
+ard.mtx = matrix(c(
+  0,1,
+  2,0
+),state_n,state_n,byrow=TRUE,
+dimnames = list(state_names,state_names))
 ### ajustando matriz com todas as taxas diferentes
-fitARD=fitDiscrete(
+fitARD = fitDiscrete(
   phy = phy_fix,
   dat = trait,
-  model = "ARD"
+  model = ard.mtx
   )
 ### visualizando matriz
 plot(fitARD, show.zeros=FALSE)
 
-######################## AJUSTANDO MATRIZ CUSTOMIZADA ##########################
+### matriz com 'ganhos' apenas
+gain.mtx = matrix(c(
+  0,1,
+  0,0
+  ),state_n,state_n,byrow=TRUE,
+  dimnames = list(state_names,state_names))
+### ajustando matriz de 'ganhos' apenas
+fitGain = fitDiscrete(
+  phy = phy_fix,
+  dat = trait,
+  model = gain.mtx
+)
+### visualizando matriz
+plot(fitGain, show.zeros=FALSE)
 
-### matriz com estados ordenados
-ordered.model=matrix(c(
-  0,1,0,0,0,0,
-  2,0,3,0,0,0,
-  0,4,0,5,0,0,
-  0,0,6,0,7,0,
-  0,0,0,8,0,9,
-  0,0,0,0,10,0),6,6,byrow=TRUE,
-  dimnames=list(0:5,0:5))
+### matriz com 'perdas' apenas
+loss.mtx = matrix(c(
+  0,0,
+  1,0
+),state_n,state_n,byrow=TRUE,
+dimnames = list(state_names,state_names))
+### ajustando matriz de 'ganhos' apenas
+fitLoss = fitDiscrete(
+  phy = phy_fix,
+  dat = trait,
+  model = loss.mtx
+)
+### visualizando matriz
+plot(fitLoss, show.zeros=FALSE)
 
-### ver matriz
-ordered.model
-
-# IMPORTANTE:
-#   Os números NÃO indicam os valores das taxas de transição, mas sim o 'grupo' 
-#   de taxas ao qual aquela transição pertence. Números iguais indicam que as 
-#   transições seguem a mesma taxa. Apenas o zero (0) indica que a taxa é nula.
-
-## ajustando matriz ordenada
-fitOrdered=fitDiscrete(phy = phy_fix,
-                        dat = trait,
-                        model = ordered.model,
-                        surpressWarnings=TRUE)
-
-plot(fitOrdered, show.zeros=FALSE)
-
-############################### COMPARANDO MODELOS #############################
-
-### extraindo valores de AIC
-aic=setNames(c(AIC(fitER),AIC(fitSYM),AIC(fitARD), AIC(fitOrdered)),
-              c("ER","SYM","ARD", "Ordered"))
+### extraíndo valores de AIC
+aic = setNames(
+  c(fitER$opt$aic,fitARD$opt$aic,fitGain$opt$aic, fitLoss$opt$aic),
+  c("ER","ARD","just Gain","just Loss")
+)
+### verificar valores de AIC
 aic
 
-### peso relativo dos modelos
-aic.w(aic)
-
 # PARA PENSAR: 
-#   Qual modelo obeteve maior sustentação? Com base nesse modelo, o que podemos 
-#   inferir sobre a evolução dos dígitos nas linhagens de lagartos?
+# Qual modelo teve o melhor ajuste aos dados? 
+# Que processo evolutivo esse modelo representa? 
+# O que indicam as estimativas dos parâmetros desse modelo?
+
+########################### RECONSTRUÇÃO COM CORHMM ############################
+
+### função para extrair estado mais provável
+get_state = function(prob_data) {
+  if (is.null(colnames(prob_data))) {
+    stop("Input data must have column names representing the states.")
+  }
+  apply(prob_data, 1, function(row) {
+    max_prob = max(row, na.rm = TRUE)
+    best_states = names(row)[which(row == max_prob)]
+    paste(best_states, collapse = "&")
+  })
+}
+
+### tabela de entrada no CorHMM
+corhmm_table = data.frame( rownames(data), get_state(data))
+
+### reconstrução global
+rec.joint = corHMM(
+  phy = phy_fix,
+  data = corhmm_table,
+  node.states = "joint",
+  rate.cat = 1,
+  rate.mat = er.mtx
+)
+### verificar recosntrução global
+rec.joint
+
+### reconstrução global
+rec.marg = corHMM(
+  phy = phy_fix,
+  data = corhmm_table,
+  node.states = "marginal",
+  rate.cat = 1,
+  rate.mat = er.mtx
+)
+### verificar recosntrução global
+rec.marg
+
+### dividir visualização
+par(mfrow=c(1,2))
+### plotando recosntrução global
+plotTree(
+  tree = phy_fix,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+  )
+tiplabels(
+  pie = data,
+  piecol = col_map,
+  cex = 0.4
+  )
+nodelabels(
+  pie = to.matrix(state_names[rec.joint$phy$node.label], state_names ),
+  piecol = col_map,
+  cex=0.6
+  )
+legend(
+  "bottomleft",
+  legend = colnames(data),
+  pch = 22,
+  pt.cex = 1.5,
+  pt.bg = col_map,
+  bty= "n",
+  cex=1
+)
+title("Reconstrução global")
+### plotando recosntrução marginal
+plotTree(
+  tree = phy_fix,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+)
+tiplabels(
+  pie = data,
+  piecol = col_map,
+  cex = 0.4
+)
+nodelabels(
+  pie = as.data.frame(rec.marg$states, col.names = state_names),
+  piecol = col_map,
+  cex=0.6
+)
+title("Reconstrução marginal")
+### retornar visualização única
+par(mfrow=c(1,1))
