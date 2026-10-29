@@ -70,8 +70,8 @@ head(ouwie_table)
 ### cores para cada hábito
 color_map  = c(
   "Crown" = "darkgreen", 
-  "Ground" = "orchid",
-  "Trunk" = "darkgray" 
+  "Ground" = "darkorchid",
+  "Trunk" = "gray" 
 )
 
 ### dividir visualização
@@ -145,8 +145,6 @@ fitOUM = OUwie(
   )
 ## verificar resultados
 fitOUM
-
-############################## COMPARANDO MODELOS ##############################
 
 ### extraindo valores de AIC 
 aic = setNames(
