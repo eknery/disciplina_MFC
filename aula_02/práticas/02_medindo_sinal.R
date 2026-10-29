@@ -23,6 +23,8 @@ head(data)
 
 ### escolhendo uma característica
 trait_name = "skull.length"
+
+### IMPORTANTE: nome das características:
 ## skull.length
 ## optic.foramen.area
 ## orbit.area
@@ -91,8 +93,6 @@ fitDirectional = fitContinuous(
   dat = trait,
   model ="mean_trend"
 )
-
-################################ COMPARANDO MODELOS ############################
 
 ### extraíndo valores de AIC
 aic = setNames(c(fitPunctual$opt$aic,
@@ -163,13 +163,17 @@ par(mfrow=c(1,2))
 plot(
  sigma_vals,
  lambda_vals,
+ pch = 19,
+ color = "darkgray",
  xlab = "sigma quadrado",
  ylab = "lambda de Pagel"
 )
 ### visualizando relação sigma x K de Bloomberg
 plot(
   sigma_vals,
-  kbloom_vals, 
+  kbloom_vals,
+  pch = 19,
+  color = "darkgray",
   xlab = "sigma quadrado",
   ylab = "K de Bloomberg"
 )

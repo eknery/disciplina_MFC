@@ -17,7 +17,7 @@ phy
 data = read.csv("dados/arecaceae_data.csv",  h= T,  row.names=1)
 head(data)
 
-############################# TRATANDO OS DADOS ################################
+############################# PROCESSANDO DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
 chk = name.check(phy,data)
@@ -26,11 +26,11 @@ summary(chk)
 ### retirando terminais ausentes nos dados fenotípicos
 phy_fix = drop.tip(phy,chk$tree_not_data)
 
-### vetor com a característica mais provável
+### vetor com o estado mais provável
 trait = colnames(data)[max.col(data)]
 ### nomeando vetor
 names(trait) = row.names(data)
-### verificando vetor de característica
+### verificando vetor de estados
 trait
 
 ############################# VISUALIZANDO DADOS ##############################
@@ -72,7 +72,7 @@ axisPhylo()
 fitER = fitDiscrete(
   phy = phy_fix,
   dat = trait,
-  model= "ER"
+  model = "ER"
   )
 ### visualizando matriz
 plot(fitER, show.zeros=FALSE)
@@ -81,7 +81,7 @@ plot(fitER, show.zeros=FALSE)
 fitARD=fitDiscrete(
   phy = phy_fix,
   dat = trait,
-  model= "ARD"
+  model = "ARD"
   )
 ### visualizando matriz
 plot(fitARD, show.zeros=FALSE)

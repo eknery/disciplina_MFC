@@ -14,7 +14,7 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("OUwie")) install.packages("OUwie"); library("OUwie")
 
-### carregando árvore filogenética 'mapeada'
+### carregando árvore filogenética
 phy = readRDS("dados/anolis_phy.RDS")
 ### verificando árvore filogenética
 phy
@@ -24,12 +24,19 @@ data = read.csv("dados/anolis_data.csv", row.names=1)
 ### verificando dados
 head(data)
 
+## IMPORTANTE:
+# Para testar nossa hipótese, vamas investigar três características:
+# o comprimento dos membros anteriores (forelimb, FLL) 
+# o comprimento dos membros posteriores (hindlimb, HLL)
+# o número de lamelas (lamellae number, LAM).
+# Essa variáveis representam a capacidade de escalada dos lagartos
+
 ### carregando dados de hábito 
 regime = read.csv("dados/anolis_habitat.csv", row.names=1,  stringsAsFactors=TRUE)
 ### verificando dados de hábito
 head(regime)
 
-############################# VERIFICANDO OS DADOS ###############################
+############################# PROCESSANDO OS DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
 chk = name.check(phy,data)
@@ -42,21 +49,12 @@ data_fix = data[-which(rownames(data) %in% chk$data_not_tree),]
 chk = name.check(phy,data_fix)
 chk
 
-############################# PROCESSANDO OS DADOS #############################
-
 ### selecionando característica de interesse
 trait = data_fix[,"FLL"]
 ### nomeando vetor da característica
 names(trait) = rownames(data_fix)
-### verificando vetor das características 
+### verificando vetor da característica 
 trait
-
-## IMPORTANTE:
-# Para testar nossa hipótese, vamas investigar três características:
-# o comprimento dos membros anteriores (forelimb, FLL) 
-# o comprimento dos membros posteriores (hindlimb, HLL)
-# o número de lamelas (lamellae number, LAM).
-# Essa variáveis representam o fenótipo das patas.
 
 ### organizando dados na tabela OUwie
 ouwie_table= data.frame(

@@ -28,8 +28,6 @@ head(data)
 chk = name.check(phy,data)
 chk
 
-### nome das espécies
-spp = row.names(data)
 ### nomes das variáveis preditora e resposta
 xname = "gape.width"
 yname = "buccal.length"
@@ -42,16 +40,18 @@ names(xvar) = names(yvar) = spp
 xvar
 yvar 
 
+### nome das espécies
+spp = row.names(data)
 ### extraíndo hábitos ancestrais
 nodestates = phy$node.label
+
+############################## VISUALIZANDO DADOS ##############################
+
 ### mapeando cores para hábito
 color_map = c(
   "pisc" = "darkred",
   "non" = "turquoise"
 )
-
-
-############################## VISUALIZANDO DADOS ##############################
 
 ### dividir visualização
 par(mfrow=c(1,2))
@@ -74,10 +74,10 @@ axisPhylo()
 plot(
   buccal.length~gape.width, 
   data = data,
+  pch = 19,
   col = color_map[data$feeding.mode],
   xlab= "log largura bucal (mm)",
-  ylab= "log comprimento bucal (mm)",
-  pch = 19
+  ylab= "log comprimento bucal (mm)"
 )
 ### retornar visualização única
 par(mfrow=c(1,1))
@@ -120,29 +120,29 @@ par(mfrow=c(1,2))
 ## primeiro modelo 
 plot(
   ypic~xpic,
-  col = "darkgray",
-  main = "PIC simples",
-  xlab="PIC largura bucal",
-  ylab="PIC comprimento bucal",
   pch = 19,
+  col = "darkgray",
   cex = 1.2,
-  las =1,
+  las = 1,
   cex.axis = 0.7,
-  cex.lab = 0.9
+  cex.lab = 0.9,
+  main = "PIC simples",
+  xlab = "PIC largura bucal",
+  ylab = "PIC comprimento bucal"
 )
 abline(fit.pic1,lwd=2,col="darkgray")
 ## segundo modelo 
 plot(
   ypic~xpic,
-  col = color_map[nodestates],
-  main = "PIC aninhado",
-  xlab="PIC largura bucal",
-  ylab="PIC comprimento bucal",
   pch = 19,
+  col = color_map[nodestates],
   cex = 1.2,
   las =1,
   cex.axis = 0.7,
-  cex.lab = 0.9
+  cex.lab = 0.9,
+  main = "PIC aninhado",
+  xlab = "PIC largura bucal",
+  ylab = "PIC comprimento bucal"
 )
 abline(
   a = 0, 
@@ -172,7 +172,6 @@ r2
 # PARA PENSAR:
 #   Comparando os modelos PIC, qual possui o melhor ajuste?
 #   Baseado no melhor modelo, como é a correlação evolutiva das características?
-
 
 ############################# INFERÊNCIA POR PGLS #############################
 
@@ -241,15 +240,15 @@ par(mfrow=c(1,2))
 plot(
   buccal.length~gape.width, 
   data = data,
-  col = "darkgray",
-  xlab="log largura bucal (mm)",
-  ylab="log comprimento bucal (mm)",
-  main = "PGLS simples",
   pch = 19,
+  col = "darkgray",
   cex = 1.2,
-  las =1,
+  las = 1,
   cex.axis = 0.7,
-  cex.lab = 0.9
+  cex.lab = 0.9,
+  xlab = "log largura bucal (mm)",
+  ylab = "log comprimento bucal (mm)",
+  main = "PGLS simples"
 )
 abline(fit.pgls1, lwd=2,col="darkgray")
 ## segundo modelo 
@@ -257,14 +256,14 @@ plot(
   buccal.length~gape.width, 
   data = data,
   col = color_map[data$feeding.mode],
-  xlab="log largura bucal (mm)",
-  ylab="log comprimento bucal (mm)",
-  main = "PGLS aninhada",
   pch = 19,
   cex = 1.2,
-  las =1,
+  las = 1,
   cex.axis = 0.7,
-  cex.lab = 0.9
+  cex.lab = 0.9,
+  xlab = "log largura bucal (mm)",
+  ylab = "log comprimento bucal (mm)",
+  main = "PGLS aninhada"
 )
 abline(
   a = fit.pgls2$coefficients[1], 
