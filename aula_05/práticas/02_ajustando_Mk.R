@@ -147,7 +147,7 @@ aic
 # Que processo evolutivo esse modelo representa? 
 # O que indicam as estimativas dos parâmetros desse modelo?
 
-########################### RECONSTRUÇÃO COM CORHMM ############################
+############### RECONSTRUÇÃO CORHMM - APENAS ESTADOS OBSERVADOS ################
 
 ### função para extrair estado mais provável
 get_state = function(prob_data) {
@@ -162,7 +162,10 @@ get_state = function(prob_data) {
 }
 
 ### tabela de entrada no CorHMM
-corhmm_table = data.frame( rownames(data), get_state(data))
+corhmm_table = data.frame( rownames(data), get_state(data) )
+names(corhmm_table) = c("species", "state")
+### verificar tabela
+corhmm_table
 
 ### reconstrução global
 rec.joint = corHMM(
@@ -175,7 +178,7 @@ rec.joint = corHMM(
 ### verificar recosntrução global
 rec.joint
 
-### reconstrução global
+### reconstrução marginal
 rec.marg = corHMM(
   phy = phy_fix,
   data = corhmm_table,
@@ -214,7 +217,7 @@ legend(
   cex=1
 )
 title("Reconstrução global")
-### plotando recosntrução marginal
+### plotando reconstrução marginal
 plotTree(
   tree = phy_fix,
   fsize = 0.4,
@@ -235,5 +238,92 @@ title("Reconstrução marginal")
 par(mfrow=c(1,1))
 
 # PARA PENSAR: 
-# Qual o estado do último ancestral comum nas duas formas de reconstrução? 
-# Quantas vezes a defesa por espinhos evoluiu em cada forma de reconstrução?
+# Qual o estado do último ancestral comum nas duas reconstruções? 
+# Quantas vezes a defesa por espinhos evoluiu em cada reconstrução?
+
+################### RECONSTRUÇÃO CORHMM - COM ESTADOS OCULTOS ##################
+
+### matriz com estados ocultos
+hidd.mtx = matrix(c(
+  0,0,1,0,
+  0,0,0,1,
+  1,0,0,1,
+  0,1,1,0
+),4,4,byrow=TRUE)
+
+### reconstrução marginal
+rec.marg2 = corHMM(
+  phy = phy_fix,
+  data = corhmm_table,
+  node.states = "marginal",
+  rate.cat = 2,
+  rate.mat = hidd.mtx
+)
+### verificar recosntrução global
+rec.marg2
+
+### extraíndo valores de AIC
+aic = setNames(
+  c(rec.marg$AIC, rec.marg2$AIC),
+  c("ER obs","ER hid")
+  )
+### verificar valores de AIC
+aic
+
+### dividir visualização
+par(mfrow=c(1,2))
+### plotando reconstrução apenas com estados observados
+plotTree(
+  tree = phy_fix,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+)
+tiplabels(
+  pie = data,
+  piecol = col_map,
+  cex = 0.4
+)
+nodelabels(
+  pie = as.data.frame(rec.marg2$states[,c(1,2)], col.names = state_names),
+  piecol = col_map,
+  cex=0.6
+)
+legend(
+  "bottomleft",
+  legend = colnames(data),
+  pch = 22,
+  pt.cex = 1.5,
+  pt.bg = col_map,
+  bty= "n",
+  cex=1
+)
+title("Estados observados")
+### plotando reconstrução com estados ocultos
+plotTree(
+  tree = phy_fix,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+)
+tiplabels(
+  pie = data,
+  piecol = col_map,
+  cex = 0.4
+)
+nodelabels(
+  pie = as.data.frame(rec.marg2$states[,c(3,4)]),
+  piecol = c("(1,R2)" = "darkgray", "(2,R2)" = "black"),
+  cex=0.6
+)
+legend(
+  "bottomleft",
+  legend = c("(1,R2)", "(2,R2)"),
+  pch = 22,
+  pt.cex = 1.5,
+  pt.bg = c("(1,R2)" = "darkgray", "(2,R2)" = "black"),
+  bty= "n",
+  cex=1
+)
+title("Estados ocultos")
+### retornar visualização única
+par(mfrow=c(1,1))
+
