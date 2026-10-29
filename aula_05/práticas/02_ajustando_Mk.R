@@ -266,13 +266,43 @@ rec.marg2
 aic = setNames(
   c(rec.marg$AIC, rec.marg2$AIC),
   c("ER obs","ER hid")
-  )
+)
 ### verificar valores de AIC
 aic
 
+# PARA PENSAR: 
+# Qual modelo teve o melhor ajuste aos dados? 
+# Que processo evolutivo esse modelo representa? 
+
 ### dividir visualização
 par(mfrow=c(1,2))
-### plotando reconstrução apenas com estados observados
+### plotando reconstrução marginal
+plotTree(
+  tree = phy_fix,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+)
+tiplabels(
+  pie = data,
+  piecol = col_map,
+  cex = 0.4
+)
+nodelabels(
+  pie = as.data.frame(rec.marg$states, col.names = state_names),
+  piecol = col_map,
+  cex=0.6
+)
+legend(
+  "bottomleft",
+  legend = colnames(data),
+  pch = 22,
+  pt.cex = 1.5,
+  pt.bg = col_map,
+  bty= "n",
+  cex=1
+)
+title("Sem estados ocultos")
+### plotando reconstrução com estados ocultos
 plotTree(
   tree = phy_fix,
   fsize = 0.4,
@@ -288,42 +318,10 @@ nodelabels(
   piecol = col_map,
   cex=0.6
 )
-legend(
-  "bottomleft",
-  legend = colnames(data),
-  pch = 22,
-  pt.cex = 1.5,
-  pt.bg = col_map,
-  bty= "n",
-  cex=1
-)
-title("Estados observados")
-### plotando reconstrução com estados ocultos
-plotTree(
-  tree = phy_fix,
-  fsize = 0.4,
-  mar = c(2, 1, 1, 1)
-)
-tiplabels(
-  pie = data,
-  piecol = col_map,
-  cex = 0.4
-)
-nodelabels(
-  pie = as.data.frame(rec.marg2$states[,c(3,4)]),
-  piecol = c("(1,R2)" = "darkgray", "(2,R2)" = "black"),
-  cex=0.6
-)
-legend(
-  "bottomleft",
-  legend = c("(1,R2)", "(2,R2)"),
-  pch = 22,
-  pt.cex = 1.5,
-  pt.bg = c("(1,R2)" = "darkgray", "(2,R2)" = "black"),
-  bty= "n",
-  cex=1
-)
-title("Estados ocultos")
+title("Com estados ocultos")
 ### retornar visualização única
 par(mfrow=c(1,1))
 
+# PARA PENSAR: 
+# Qual o estado do último ancestral comum nas duas reconstruções? 
+# Quantas vezes a defesa por espinhos evoluiu em cada reconstrução?
