@@ -14,18 +14,18 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("nlme")) install.packages("nlme"); library("nlme")
 
+### carregando filogenia
+phy = readRDS("dados/centrarchidae_phy.RDS")
+phy
+
 ### carregando dados fenotípicos
 data = read.csv("dados/centrarchidae_data.csv",  h= T,  row.names=1)
 head(data)
 
-### carregando filogenia
-tree = readRDS("dados/centrarchidae_tree.RDS")
-print(tree)
-
 ############################## PROCESSANDO DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
-chk = name.check(tree,data)
+chk = name.check(phy,data)
 chk
 
 ### nome das espécies
@@ -43,11 +43,11 @@ xvar
 yvar 
 
 ### extraíndo hábitos ancestrais
-nodestates = tree$node.label
+nodestates = phy$node.label
 ### mapeando cores para hábito
 color_map = c(
-  "pisc" = "red",
-  "non" = "darkblue"
+  "pisc" = "darkred",
+  "non" = "turquoise"
 )
 
 
@@ -57,7 +57,7 @@ color_map = c(
 par(mfrow=c(1,2))
 ### visualizando a árvores filogenética
 plotSimmap(
-  tree,
+  phy,
   colors = color_map,
   mar = c(2, 1, 1, 1)
   )
@@ -68,7 +68,7 @@ legend(
   pt.bg = color_map,
   pt.cex = 1,
   cex=0.5
-)
+  )
 axisPhylo()
 ### visualizando a distribuição dos dados 
 plot(
@@ -90,8 +90,8 @@ par(mfrow=c(1,1))
 ############################ INFERÊNCIA POR CONTRASTES ########################
 
 ### calculando os contrastes para cada característica
-xpic = pic(xvar, tree)
-ypic = pic(yvar, tree)
+xpic = pic(xvar, phy)
+ypic = pic(yvar, phy)
 ### verificar valores dos contrastes
 xpic
 ypic
@@ -149,14 +149,14 @@ abline(
   b = fit.pic2$coefficients[1],
   lty = 3,
   lwd = 2,
-  col = "darkblue"
+  col = "turquoise"
 )
 abline(
   a = 0, 
   b = fit.pic2$coefficients[2],
   lty = 1,
   lwd = 2,
-  col = "red"
+  col = "darkred"
 )
 ## retornar visualização única
 par(mfrow=c(1,1))
@@ -178,13 +178,13 @@ r2
 
 ### ajustando modelo BM
 fitBM = fitContinuous(
-  phy = tree, 
+  phy = phy, 
   dat = yvar,  
   model = "BM"
   )
 ### ajustando modelo OU
 fitOU = fitContinuous(
-  phy = tree, 
+  phy = phy, 
   dat = yvar,  
   model = "OU",
   )
@@ -200,10 +200,10 @@ aic
 ### calculando VCV: 
 ## Se BM for o melhor modelo:
 sigma_sq = fitBM$opt$sigsq
-cor_str = corBrownian(value = sigma_sq, phy = tree, form=~spp)
+cor_str = corBrownian(value = sigma_sq, phy = phy, form=~spp)
 ## Se OU for o melhor modelo:
 alpha = fitOU$opt$alpha
-cor_str = corMartins(value = alpha, phy = tree, form=~spp, fixed = T)
+cor_str = corMartins(value = alpha, phy = phy, form=~spp, fixed = T)
 # IPORTANTE:
 #   Note que a estrutura de correlação é calculada com base em diferentes parâmetros
 #   dependendo do modelo que foi escolhido para representar a evolução da característica. 
@@ -271,14 +271,14 @@ abline(
   b = fit.pgls2$coefficients[2],
   lty = 3,
   lwd = 2,
-  col = "darkblue"
+  col = "turquoise"
   )
 abline(
   a = fit.pgls2$coefficients[1], 
   b = fit.pgls2$coefficients[3],
   lty = 1,
   lwd = 2,
-  col = "red"
+  col = "darkred"
   )
 ## retornar visualização única
 par(mfrow=c(1,1))
@@ -299,7 +299,7 @@ aic
 
 ### ajustando matriz com taxas e correlação fixas (sem efeito do modo de alimentação)
 fit.r1 = evolvcv.lite(
-  tree = tree, 
+  tree = phy, 
   X = data[,c(xname,yname)],
   models = "1"
 )
@@ -315,7 +315,7 @@ r1.corevo
 
 ### ajustando matriz matriz com taxas e correlação variáveis (com efeito do modo de alimentação)
 fit.r2 = evolvcv.lite(
-  tree = tree, 
+  tree = phy, 
   X = data[,c(xname,yname)],
   models = "3"
 )

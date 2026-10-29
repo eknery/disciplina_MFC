@@ -15,9 +15,9 @@ if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("OUwie")) install.packages("OUwie"); library("OUwie")
 
 ### carregando árvore filogenética 'mapeada'
-tree = readRDS("dados/anolis_tree.RDS")
+phy = readRDS("dados/anolis_phy.RDS")
 ### verificando árvore filogenética
-tree
+phy
 
 ### carregando dados fenotípicos
 data = read.csv("dados/anolis_data.csv", row.names=1)
@@ -32,14 +32,14 @@ head(regime)
 ############################# VERIFICANDO OS DADOS ###############################
 
 ### verificando correspondência entre dados e árvore
-chk = name.check(tree,data)
+chk = name.check(phy,data)
 summary(chk)
 
 ### retirando dados das espécies ausentes na árvore
 data_fix = data[-which(rownames(data) %in% chk$data_not_tree),]
 
 ### verificando correspondência entre dados e árvore
-chk = name.check(tree,data_fix)
+chk = name.check(phy,data_fix)
 chk
 
 ############################# PROCESSANDO OS DADOS #############################
@@ -71,8 +71,8 @@ head(ouwie_table)
 
 ### cores para cada hábito
 color_map  = c(
-  "Crown" = "blue", 
-  "Ground" = "red",
+  "Crown" = "darkgreen", 
+  "Ground" = "orchid",
   "Trunk" = "darkgray" 
 )
 
@@ -80,7 +80,7 @@ color_map  = c(
 par(mfrow=c(1,2))
 ### visualizar estados de hábito
 plotSimmap(
-  tree = tree,
+  tree = phy,
   colors = color_map ,
   fsize= 0.5,
   mar = c(2, 1, 1, 1)
@@ -111,7 +111,7 @@ par(mfrow=c(1,1))
 
 ### ajustando "Ruído branco"
 fitWN = fitContinuous(
-  phy = tree,
+  phy = phy,
   dat = trait,
   model ="white"
   )
@@ -120,7 +120,7 @@ fitWN
 
 ### ajustando BM com uma única taxa de variação
 fitBM = OUwie(
-  phy = tree,
+  phy = phy,
   data = ouwie_table,
   model ="BM1",
   simmap.tree = TRUE
@@ -130,7 +130,7 @@ fitBM
 
 ### ajustando BM com múltiplas taxas de variação
 fitBMS = OUwie(
-  phy = tree,
+  phy = phy,
   data = ouwie_table,
   model ="BMS",
   simmap.tree = TRUE
@@ -140,7 +140,7 @@ fitBMS
 
 ### ajustando OU com múltiplos ótimos
 fitOUM = OUwie(
-  phy = tree,
+  phy = phy,
   data = ouwie_table,
   model ="OUM",
   simmap.tree = TRUE

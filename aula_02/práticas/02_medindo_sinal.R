@@ -12,8 +12,8 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando filogenia
-tree = read.tree("dados/primate_tree.nwk")
-print(tree)
+phy = read.tree("dados/primate_phy.nwk")
+print(phy)
 
 ### carregando dados fenotípicos
 data = read.csv("dados/primate_data.csv",  h= T,  row.names=1)
@@ -36,7 +36,7 @@ names(trait) = row.names(data)
 trait
 
 ### verificando correspondência entre dados e filogenia
-name.check(tree, trait)
+name.check(phy, trait)
 
 ############################### VISUALIZANDO DADOS #############################
 
@@ -44,7 +44,7 @@ name.check(tree, trait)
 par(mfrow=c(1,2))
 ### visualizando árvore filogenética
 plotTree(
-  tree,
+  phy,
   fsize= 0.4,
   mar = c(2, 1, 1, 1)
 )
@@ -59,7 +59,7 @@ par(mfrow=c(1,1))
 
 ### visualizando árvore filogenética e característica juntas
 plotTree.barplot(
-  tree = tree,
+  tree = phy,
   x = trait,
   args.plotTree = list(fsize = 0.4),
   args.barplot = list(xlab = trait_name),
@@ -73,21 +73,21 @@ plotTree.barplot(
 
 ### ajustando modelo Pontuado
 fitPunctual = fitContinuous(
-  phy = tree,
+  phy = phy,
   dat = trait,
   model ="kappa"
 )
 
 ### ajustando modelo de Caminhada Aleatória
 fitRWalk = fitContinuous(
-  phy = tree,
+  phy = phy,
   dat = trait,
   model ="BM"
 )
 
 ### ajustando modelo Direcional
 fitDirectional = fitContinuous(
-  phy = tree,
+  phy = phy,
   dat = trait,
   model ="mean_trend"
 )
@@ -117,7 +117,7 @@ sigma.sq
 
 ### testando sinal filogenético por lambda de Pagel
 lambda = phylosig(
-  tree = tree,
+  tree = phy,
   x = trait,
   method="lambda",
   test = TRUE
@@ -133,7 +133,7 @@ plot(lambda,las=1,cex.axis=0.9)
 
 ### testando sinal filogenético por K de Bloomberg
 kbloom = phylosig(
-  tree = tree,
+  tree = phy,
   x = trait,
   method= "K",
   test = TRUE,
