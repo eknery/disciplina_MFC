@@ -233,3 +233,7 @@ nodelabels(
 title("Reconstrução marginal")
 ### retornar visualização única
 par(mfrow=c(1,1))
+
+# PARA PENSAR: 
+# Qual o estado do último ancestral comum nas duas formas de reconstrução? 
+# Quantas vezes a defesa por espinhos evoluiu em cada forma de reconstrução?
