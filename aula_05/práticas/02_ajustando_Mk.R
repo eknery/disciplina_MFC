@@ -1,7 +1,10 @@
-# Nesta prática vamos investigar a evolução do número de dígitos nas patas 
-# dos lagartos (Squamata).Mais especificamente queremos saber se a ausência
-# de dígitos evoluiu de forma gradativa (perdas consecutivas de dígitos) ou 
-# de forma abrupta (perda total de todos os dígitos)
+# Nesta prática vamos investigar se a evolução de defesas mecânicas é uma grande 
+# vantagem para as plantas.Para isso, vamos analisar dados sobre a presença 
+# de espinhos foliares em espécies de palmeiras (Arecaceae). Nós hipotetizamos 
+# que espécies que evoluíram espinhos diminuiram a herbivoria e conseguiram 
+# uma maior persistência, transmitindo os espinhos para as próximas gerações. 
+# Assim, esperamos que as taxas de ganho de espinhos sejam maiores do que a 
+# taxas de perda de espinhos. 
 
 ######################## CARREGANDO DADOS E BIBLIOTECAS ########################
 
@@ -167,7 +170,7 @@ names(corhmm_table) = c("species", "state")
 ### verificar tabela
 corhmm_table
 
-### reconstrução global
+### reconstrução conjunta
 rec.joint = corHMM(
   phy = phy_fix,
   data = corhmm_table,
@@ -175,7 +178,7 @@ rec.joint = corHMM(
   rate.cat = 1,
   rate.mat = er.mtx
 )
-### verificar recosntrução global
+### verificar recosntrução conjunta
 rec.joint
 
 ### reconstrução marginal
@@ -186,12 +189,12 @@ rec.marg = corHMM(
   rate.cat = 1,
   rate.mat = er.mtx
 )
-### verificar recosntrução global
+### verificar recosntrução conjunta
 rec.marg
 
 ### dividir visualização
 par(mfrow=c(1,2))
-### plotando recosntrução global
+### plotando recosntrução conjunta
 plotTree(
   tree = phy_fix,
   fsize = 0.4,
@@ -216,7 +219,8 @@ legend(
   bty= "n",
   cex=1
 )
-title("Reconstrução global")
+axisPhylo()
+title("Reconstrução conjunta")
 ### plotando reconstrução marginal
 plotTree(
   tree = phy_fix,
@@ -233,6 +237,7 @@ nodelabels(
   piecol = col_map,
   cex=0.6
 )
+axisPhylo()
 title("Reconstrução marginal")
 ### retornar visualização única
 par(mfrow=c(1,1))
@@ -259,7 +264,7 @@ rec.marg2 = corHMM(
   rate.cat = 2,
   rate.mat = hidd.mtx
 )
-### verificar recosntrução global
+### verificar recosntrução marginal
 rec.marg2
 
 ### extraíndo valores de AIC
@@ -301,6 +306,8 @@ legend(
   bty= "n",
   cex=1
 )
+axisPhylo()
+
 title("Sem estados ocultos")
 ### plotando reconstrução com estados ocultos
 plotTree(
@@ -318,6 +325,7 @@ nodelabels(
   piecol = col_map,
   cex=0.6
 )
+axisPhylo()
 title("Com estados ocultos")
 ### retornar visualização única
 par(mfrow=c(1,1))
