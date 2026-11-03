@@ -1,9 +1,9 @@
 # Nessa prática vamos investigar se a similaridade fenotípica entre espécies 
 # próximas está associada com a velocidade com que as suas características evoluem. 
-# Para isso, vamos analisar dados sobre anatomia e comportamento de espécies de primatas. 
-# Nós hipotetizamos que características que evoluíram mais rápido criam maior 
-# divergência fenotípica entre espécies próximas, diminuindo a similaridade 
-# entre essas espécies. Assim, esperamos que características com taxas evolutivas
+# Para isso, vamos analisar dados sobre a anatomia e o comportamento de primatas. 
+# Nós hipotetizamos que características que evoluíram mais rápido criaram uma
+# maior divergência fenotípica entre espécies próximas, diminuindo a similaridade 
+# entre as mesmas. Assim, esperamos que características com taxas evolutivas
 # maiores tenham um sinal filogenético menor. 
 
 ######################## CARREGANDO BIBLIOTECAS E DADOS #######################
