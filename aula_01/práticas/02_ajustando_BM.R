@@ -1,11 +1,13 @@
-# Nessa prática vamos investigar qual foi o modo e o tempo de evolução 
-# do tamanho e das folhas e das inflorescências dentro de um clado de Miconia. 
-# Essas plantas são lenhosas e ocorrem tanto em ambientes abertos quanto 
-# em florestas úmidas da América do Sul. Nossa expectativa é que as folhas 
-# teriam evoluído mais rápido do que as inflorescências
-# em resposta aos diferentes ambientes ocupados pelas espécies. 
-# Nós vamos considerar três modos de evolução: equilibrio pontuado, 
-# caminhada aleatória e evolução direcional.
+# Nessa prática vamos investigar se características reprodutivas possuem maior 
+# estabilidade evolutiva do que características vegetativas em plantas. Para isso, 
+# vamos analisar dados sobre o tamanho do corpo, das folhas, das inflorescências 
+# e das flores de um clado do gênero Miconia. Nós hipotetizamos que as 
+# carcaterísticas reprodutivas teriam evoluído principalmente na especiação 
+# devido ao seu papel no isolamento reprodutivo, enquanto que as características 
+# vegetativas teriam evoluído ao longo das gerações por processos estocásticos. 
+# Assim, esperamos que o tamanho das inflorescências e das flores tenham um melhor 
+# ajuste com o modelo pontuado, enquanto que o tamanho da planta e da folhas 
+# tenham um melhor ajuste com o modelo de caminhada aleatória. 
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS ########################
 
@@ -14,31 +16,52 @@ if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 
 ### carregando dados fenotípicos
-miconia.data<-read.csv("dados/miconia.csv", row.names=1, h= T)
-head(miconia.data)
+data = read.csv("dados/miconia_data.csv",  row.names=1, h= T)
+head(data)
 
 ### carregando filogenia
-miconia.tree<-read.tree("dados/miconia.nwk")
-print(miconia.tree,printlen=2)
+phy = read.tree("dados/miconia_tree.nwk")
+print(phy)
 
-############################## VISUALIZANDO DADOS ###############################
+############################## PROCESSANDO DADOS ###############################
 
-### valores de interesse em um vetor nomeado
-trait<- miconia.data[,"leaf.size"]
-names(trait)<-rownames(miconia.data)
+### verificando correspondência entre dados e árvore
+chk = name.check(phy,data)
+chk
+
+### retirando terminais ausentes nos dados fenotípicos
+phy_fix = drop.tip(phy, chk$tree_not_data)
+### verificando correspondência após ajuste
+chk = name.check(phy_fix ,data)
+chk
+
+############################## VISUALIZANDO DADOS ##############################
+
+### selecionando uma característica
+trait_name = "leaf.length.cm"
+
+### selecionando uma característica
+trait = data[,trait_name]
+names(trait) = rownames(data)
+### verificando vetor
 trait
 
-### verificando a distribuição dos valores
-hist(trait)
-
-### verificando correspondência entre dados e filogenia
-name.check(miconia.tree, miconia.data)
-
-### gráfico da filogenia
-plotTree.barplot(tree = miconia.tree,
-                 x = trait,
-                 args.plotTree=list(fsize=0.4)
+### dividindo visualização
+par(mfrow=c(1,2))
+### visualizando árvore filogenética
+plotTree(
+  phy,
+  fsize= 0.5,
+  mar = c(2, 1, 1, 1)
 )
+axisPhylo()
+### visualizando distribuição da característica
+hist(
+  trait,
+  main= trait_name
+)
+### retornando visualização única
+par(mfrow=c(1,1))
 
 # PARA PENSAR:
 # A característica parece ter seguido alguma tendência? 
@@ -46,21 +69,24 @@ plotTree.barplot(tree = miconia.tree,
 ############################### AJUSTANDO MODELOS ##############################
 
 ### ajustando modelo Pontuado
-fitPunctual <- fitContinuous(phy = miconia.tree,
-                            dat = trait,
-                            model ="kappa"
+fitPunctual = fitContinuous(
+  phy = phy_fix,
+  dat = trait,
+  model ="kappa"
 )
 
 ### ajustando modelo de Caminhada Aleatória
-fitRWalk <- fitContinuous(phy = miconia.tree,
-                         dat = trait,
-                         model ="BM"
+fitRWalk = fitContinuous(
+  phy = phy_fix,
+  dat = trait,
+  model ="BM"
 )
 
 ### ajustando modelo Direcional
-fitDirectional <-fitContinuous(phy = miconia.tree,
-                               dat = trait,
-                               model ="mean_trend"
+fitDirectional =fitContinuous(
+  phy = phy_fix,
+  dat = trait,
+  model ="mean_trend"
 )
 
 ################################ COMPARANDO MODELOS ############################
@@ -75,9 +101,8 @@ aic = setNames(c(fitPunctual$opt$aic,
 aic
 
 # PARA PENSAR:
-#   Baseado apenas no AIC, qual modelo evolutivo teve o melhor ajuste a
-#   característica nesse clado de Miconia? As diferernças de AIC são 
-#   contrastantes?
+#   Baseado apenas no AIC, qual modelo evolutivo teve o melhor ajuste?
+#   As diferernças de AIC são contrastantes?
 
 ### número de parâmetros dos modelos
 k = setNames(c(fitPunctual$opt$k,
@@ -105,7 +130,7 @@ sigma.sq
 # As estimativas de taxas evolutivas diferiram muito entre os modelos? 
 
 ### estimativas de fenótipo ancestral
-z0= setNames(c(fitPunctual$opt$z0,
+z0 = setNames(c(fitPunctual$opt$z0,
                fitRWalk$opt$z0,
                fitDirectional$opt$z0),
              c("Punctual","Random Walk","Directional")
@@ -114,5 +139,11 @@ z0= setNames(c(fitPunctual$opt$z0,
 z0
 
 ## PARA PENSAR:
-# As estimativas de fenótipo ancestral diferiram muito? Essas estimativas 
-# fazem sentido biologicamente?
+# As estimativas de fenótipo ancestral diferiram muito? 
+# Essas estimativas fazem sentido biologicamente?
+
+#################################### TAREFA ####################################
+
+# Repita o processo de ajuste de modelos para as demais características.
+# Qual é o melhor modelo para cada característica? Suas estimativas são razoáveis?
+# Esses modelos corroboram ou refutam a nossa hipótese inicial?

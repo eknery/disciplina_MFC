@@ -29,6 +29,9 @@ summary(chk)
 
 ### retirando terminais ausentes nos dados fenotípicos
 phy_fix = drop.tip(phy,chk$tree_not_data)
+### verificando correspondência após ajuste
+chk = name.check(phy_fix ,data)
+chk
 
 ### vetor com o estado mais provável
 trait = colnames(data)[max.col(data)]
