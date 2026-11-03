@@ -1,11 +1,11 @@
 # Nesta prática vamos investigar se o hábitos alimentar influenciou a evolução 
-# da cavidade bucal das espécies de peixes Centrarchidae. Nós hipotetizamos que 
-# espécies piscívoras teriam uma maior dificuldade de capturar presas caso sua
-# cavidade bucal fosse desproporcional, enquanto que espécies com outros hábitos 
-# não sofreriam essa dificuldade com uma cavidade bucal desproporcional. 
-# Assim, nossa expectativa é que espécies piscívoras tenham uma maior correlação 
-# evolutiva entre a largura e o comprimento da cavidade bucal do que 
-# espécies com hábito outros hábitos alimentares. 
+# do aparato bucal dos peixes. Para isso, vamos analisar dados sobre a largura e
+# o comprimento da cavidade bucal das espécies da família Centrarchidae. 
+# Nós hipotetizamos que espécies piscívoras teriam uma maior dificuldade de 
+# capturar presas caso sua cavidade bucal fosse desproporcional, enquanto que 
+# espécies com outros hábitos não sofreriam essa dificuldade. Assim, esperamos
+# que espécies piscívoras tenham uma maior correlação evolutiva entre a largura 
+# e o comprimento da cavidade bucal do que espécies com hábito outros hábitos. 
 
 ####################### CARREGANDO BIBLIOTECAS E DADOS #########################
 

@@ -1,6 +1,6 @@
 # Nesta prática vamos investigar se a evolução de defesas mecânicas é uma grande 
 # vantagem para as plantas.Para isso, vamos analisar dados sobre a presença 
-# de espinhos foliares em espécies de palmeiras (Arecaceae). Nós hipotetizamos 
+# de espinhos foliares em espécies da família Arecaceae. Nós hipotetizamos 
 # que espécies que evoluíram espinhos diminuiram a herbivoria e conseguiram 
 # uma maior persistência, transmitindo os espinhos para as próximas gerações. 
 # Assim, esperamos que as taxas de ganho de espinhos sejam maiores do que a 
