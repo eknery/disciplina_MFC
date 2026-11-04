@@ -1,13 +1,13 @@
 # Nessa prática vamos investigar se características reprodutivas possuem maior 
 # estabilidade evolutiva do que características vegetativas em plantas. Para isso, 
-# vamos analisar dados sobre o tamanho do corpo, das folhas, das inflorescências 
-# e das flores de um clado do gênero Miconia. Nós hipotetizamos que as 
-# carcaterísticas reprodutivas teriam evoluído principalmente na especiação 
-# devido ao seu papel no isolamento reprodutivo, enquanto que as características 
-# vegetativas teriam evoluído ao longo das gerações por processos estocásticos. 
-# Assim, esperamos que o tamanho das inflorescências e das flores tenham um melhor 
-# ajuste com o modelo pontuado, enquanto que o tamanho da planta e da folhas 
-# tenham um melhor ajuste com o modelo de caminhada aleatória. 
+# vamos analisar características do corpo, folhas, inflorescências e flores 
+# de um clado do gênero Miconia. Nós hipotetizamos que as carcaterísticas 
+# reprodutivas teriam evoluído principalmente na especiação devido ao seu papel 
+# no isolamento reprodutivo, enquanto que as características vegetativas teriam 
+# evoluído ao longo das gerações por processos estocásticos. Assim, esperamos que
+# características das inflorescências e das flores tenham um melhor ajuste 
+# com o modelo de equilíbrio pontuado, enquanto que as características do corpo
+# e da folhas tenham um melhor ajuste com o modelo de caminhada aleatória. 
 
 ######################### CARREGANDO BIBLIOTECAS E DADOS ########################
 
