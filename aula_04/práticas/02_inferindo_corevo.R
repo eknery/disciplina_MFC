@@ -13,6 +13,7 @@
 if (!require("phytools")) install.packages("phytools"); library("phytools")
 if (!require("geiger")) install.packages("geiger"); library("geiger")
 if (!require("nlme")) install.packages("nlme"); library("nlme")
+if (!require("mvtnorm")) install.packages("mvtnorm"); library("mvtnorm")
 
 ### carregando filogenia
 phy = readRDS("dados/centrarchidae_phy.RDS")
@@ -28,6 +29,8 @@ head(data)
 chk = name.check(phy,data)
 chk
 
+### nome das espécies
+spp = row.names(data)
 ### nomes das variáveis preditora e resposta
 xname = "gape.width"
 yname = "buccal.length"
@@ -40,8 +43,6 @@ names(xvar) = names(yvar) = spp
 xvar
 yvar 
 
-### nome das espécies
-spp = row.names(data)
 ### extraíndo hábitos ancestrais
 nodestates = phy$node.label
 
@@ -126,7 +127,7 @@ plot(
   las = 1,
   cex.axis = 0.7,
   cex.lab = 0.9,
-  main = "PIC simples",
+  main = "Sem efeito do hábito",
   xlab = "PIC largura bucal",
   ylab = "PIC comprimento bucal"
 )
@@ -140,7 +141,7 @@ plot(
   las =1,
   cex.axis = 0.7,
   cex.lab = 0.9,
-  main = "PIC aninhado",
+  main = "Com efeito do hábito",
   xlab = "PIC largura bucal",
   ylab = "PIC comprimento bucal"
 )
@@ -164,7 +165,7 @@ par(mfrow=c(1,1))
 ### extraindo valores de R2
 r2 = setNames(
   c(sum.fit.pic1$r.squared , sum.fit.pic2$r.squared), 
-  c("Simples", "Aninhado")
+  c("Sem hábito", "Com hábito")
 )
 ### comparando modelos PIC
 r2
@@ -246,9 +247,9 @@ plot(
   las = 1,
   cex.axis = 0.7,
   cex.lab = 0.9,
+  main = "Sem efeito do hábito",
   xlab = "log largura bucal (mm)",
-  ylab = "log comprimento bucal (mm)",
-  main = "PGLS simples"
+  ylab = "log comprimento bucal (mm)"
 )
 abline(fit.pgls1, lwd=2,col="darkgray")
 ## segundo modelo 
@@ -261,9 +262,9 @@ plot(
   las = 1,
   cex.axis = 0.7,
   cex.lab = 0.9,
+  main = "Com efeito do hábito",
   xlab = "log largura bucal (mm)",
-  ylab = "log comprimento bucal (mm)",
-  main = "PGLS aninhada"
+  ylab = "log comprimento bucal (mm)"
 )
 abline(
   a = fit.pgls2$coefficients[1], 
@@ -285,7 +286,7 @@ par(mfrow=c(1,1))
 ### extraíndo valores de AIC
 aic = setNames(
   c(sum.fit.pgls1$AIC, sum.fit.pgls2$AIC), 
-  c("Simples", "Aninhado")
+  c("Sem hábito", "Com hábito")
 )
 ### comparando modelos de PGLS
 aic
@@ -328,10 +329,62 @@ r2.corevo =  setNames(
 ### verificando correlação evolutiva
 r2.corevo 
 
+### visualizando modelos de correlação evolutiva 
+## limites
+x = y = seq(-0.05, 0.05, length.out = 100)
+## dividir visualização
+par(mfrow=c(1,2))
+## primeiro modelo 
+plot(
+  NA, 
+  xlim = range(x), 
+  ylim = range(y), 
+  main = "Sem efeito do hábito"
+  )
+contour(
+  x, 
+  y, 
+  z = outer(x, y, function(x, y)
+    {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r1$model$R)}), 
+  add = TRUE,          
+  col = "darkgray",    
+  lwd = 1.5,           
+  nlevels = 10
+  ) 
+## segundo modelo
+plot(
+  NA, 
+  xlim = range(x), 
+  ylim = range(y), 
+  main = "Com efeito do hábito"
+)
+contour(
+  x, 
+  y, 
+  z = outer(x, y, function(x, y)
+    {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r2$model3$R$non)}), 
+  add = TRUE,          
+  col = "turquoise",     
+  lwd = 1.5,           
+  nlevels = 10
+) 
+contour(
+  x, 
+  y, 
+  z = outer(x, y, function(x, y)
+    {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r2$model3$R$pisc)}), 
+  add = TRUE,          
+  col = "darkred",    
+  lwd = 1.5,           
+  nlevels = 10
+) 
+## retornar visualização única
+par(mfrow=c(1,1))
+
 ### extraíndo valores de AIC
 aic = setNames(
   c(fit.r1$model$AIC, fit.r2$model$AIC), 
-  c("Fixo", "Variável")
+  c("Sem hábito", "Com hábito")
 )
 ### comparando modelos de correlação evolutiva
 aic
