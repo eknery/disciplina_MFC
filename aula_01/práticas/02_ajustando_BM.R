@@ -32,16 +32,16 @@ chk
 ### retirando terminais ausentes nos dados fenotípicos
 phy_fix = drop.tip(phy, chk$tree_not_data)
 ### verificando correspondência após ajuste
-chk = name.check(phy_fix ,data)
+chk = name.check(phy_fix, data)
 chk
 
 ############################## VISUALIZANDO DADOS ##############################
 
 ### selecionando uma característica
-trait_name = "leaf.length.cm"
+trait_name = "plant.height"
 
 ### selecionando uma característica
-trait = data[,trait_name]
+trait =  data[,trait_name]
 names(trait) = rownames(data)
 ### verificando vetor
 trait
