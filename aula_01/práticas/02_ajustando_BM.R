@@ -145,5 +145,5 @@ z0
 #################################### TAREFA ####################################
 
 # Repita o processo de ajuste de modelos para as demais características.
-# Qual é o melhor modelo para cada característica? Suas estimativas são razoáveis?
+# Qual é o melhor modelo para cada característica? Seus parâmetros são razoáveis?
 # Esses modelos corroboram ou refutam a nossa hipótese inicial?
