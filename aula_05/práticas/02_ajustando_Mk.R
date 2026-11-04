@@ -1,5 +1,5 @@
 # Nesta prática vamos investigar se a evolução de defesas mecânicas é uma grande 
-# vantagem para as plantas.Para isso, vamos analisar dados sobre a presença 
+# vantagem para as plantas. Para isso, vamos analisar dados sobre a presença 
 # de espinhos foliares em espécies da família Arecaceae. Nós hipotetizamos 
 # que espécies que evoluíram espinhos diminuiram a herbivoria e conseguiram 
 # uma maior persistência, transmitindo os espinhos para as próximas gerações. 
@@ -48,8 +48,8 @@ state_n = length(state_names)
 ############################# VISUALIZANDO DADOS ##############################
 
 ### cores para cada estado
-col_map =c(
-  "armless" = "yellow",
+color_map =c(
+  "armless" = "goldenrod",
   "spiny" = "darkblue"
   )
 
@@ -61,7 +61,7 @@ plotTree(
   )
 tiplabels(
   pie = data,
-  piecol = col_map,
+  piecol = color_map,
   cex = 0.2
   )
 legend(
@@ -69,7 +69,7 @@ legend(
    legend = colnames(data),
    pch = 22,
    pt.cex = 1.5,
-   pt.bg = col_map,
+   pt.bg = color_map,
    bty= "n",
    cex=1
   )
@@ -152,6 +152,7 @@ aic
 # Qual modelo teve o melhor ajuste aos dados? 
 # Que processo evolutivo esse modelo representa? 
 # O que indicam as estimativas dos parâmetros desse modelo?
+# Essas estimativas corroboram ou refutam a nossa hipóteses inicial?
 
 ############### RECONSTRUÇÃO CORHMM - APENAS ESTADOS OBSERVADOS ################
 
@@ -205,12 +206,12 @@ plotTree(
   )
 tiplabels(
   pie = data,
-  piecol = col_map,
+  piecol = color_map,
   cex = 0.4
   )
 nodelabels(
   pie = to.matrix(state_names[rec.joint$phy$node.label], state_names ),
-  piecol = col_map,
+  piecol = color_map,
   cex=0.6
   )
 legend(
@@ -218,7 +219,7 @@ legend(
   legend = colnames(data),
   pch = 22,
   pt.cex = 1.5,
-  pt.bg = col_map,
+  pt.bg = color_map,
   bty= "n",
   cex=1
 )
@@ -232,12 +233,12 @@ plotTree(
 )
 tiplabels(
   pie = data,
-  piecol = col_map,
+  piecol = color_map,
   cex = 0.4
 )
 nodelabels(
   pie = as.data.frame(rec.marg$states, col.names = state_names),
-  piecol = col_map,
+  piecol = color_map,
   cex=0.6
 )
 axisPhylo()
@@ -292,12 +293,12 @@ plotTree(
 )
 tiplabels(
   pie = data,
-  piecol = col_map,
+  piecol = color_map,
   cex = 0.4
 )
 nodelabels(
   pie = as.data.frame(rec.marg$states, col.names = state_names),
-  piecol = col_map,
+  piecol = color_map,
   cex=0.6
 )
 legend(
@@ -305,7 +306,7 @@ legend(
   legend = colnames(data),
   pch = 22,
   pt.cex = 1.5,
-  pt.bg = col_map,
+  pt.bg = color_map,
   bty= "n",
   cex=1
 )
@@ -320,12 +321,12 @@ plotTree(
 )
 tiplabels(
   pie = data,
-  piecol = col_map,
+  piecol = color_map,
   cex = 0.4
 )
 nodelabels(
   pie = as.data.frame(rec.marg2$states[,c(1,2)], col.names = state_names),
-  piecol = col_map,
+  piecol = color_map,
   cex=0.6
 )
 axisPhylo()
@@ -336,3 +337,31 @@ par(mfrow=c(1,1))
 # PARA PENSAR: 
 # Qual o estado do último ancestral comum nas duas reconstruções? 
 # Quantas vezes a defesa por espinhos evoluiu em cada reconstrução?
+
+################################## SIMMAP ######################################
+
+### simulando mapeamentos
+all_maps = phytools::make.simmap(
+  tree = phy_fix, 
+  x = as.matrix(data), 
+  model = er.mtx,
+  nsim = 100
+) 
+
+### visualizando um mapa - aleatoriamente
+plotSimmap(
+  all_maps[[runif(1, min = 0, max= 100)]],
+  colors = color_map,
+  fsize = 0.4,
+  mar = c(2, 1, 1, 1)
+)
+legend(
+  "bottomleft",
+  state_names,
+  pch = 22,
+  pt.bg = color_map,
+  pt.cex = 1,
+  cex=0.5
+)
+axisPhylo()
+
