@@ -348,8 +348,8 @@ contour(
     {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r1$model$R)}), 
   add = TRUE,          
   col = "darkgray",    
-  lwd = 1.5,           
-  nlevels = 10
+  lwd = 2,           
+  nlevels = 5
   ) 
 ## segundo modelo
 plot(
@@ -365,8 +365,8 @@ contour(
     {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r2$model3$R$non)}), 
   add = TRUE,          
   col = "turquoise",     
-  lwd = 1.5,           
-  nlevels = 10
+  lwd = 2,           
+  nlevels = 5
 ) 
 contour(
   x, 
@@ -375,8 +375,8 @@ contour(
     {dmvnorm(cbind(x, y), mean = c(0,0), sigma = fit.r2$model3$R$pisc)}), 
   add = TRUE,          
   col = "darkred",    
-  lwd = 1.5,           
-  nlevels = 10
+  lwd = 2,           
+  nlevels = 5
 ) 
 ## retornar visualização única
 par(mfrow=c(1,1))
