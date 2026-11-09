@@ -75,9 +75,6 @@ legend(
   )
 axisPhylo()
 
-# PARA PENSAR:
-#   Baseado na figura, o estado de nenhum dígito (0) teria evoluído mais de uma vez?
-
 ####################### AJUSTANDO MATRIZES DE TRANSIÇÂO ########################
 
 ### matriz com taxa única (equal rates, ER)
