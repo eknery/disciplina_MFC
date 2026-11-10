@@ -171,8 +171,9 @@ r2 = setNames(
 r2
 
 # PARA PENSAR:
-#   Comparando os modelos PIC, qual possui o melhor ajuste?
-#   Baseado no melhor modelo, como é a correlação evolutiva das características?
+# Comparando os modelos PIC, qual possui o melhor ajuste?
+# Baseado no melhor modelo, como é a correlação evolutiva das características?
+# As estimativas do melhor modelo corroboram ou refutam nossa hipótese?
 
 ############################# INFERÊNCIA POR PGLS #############################
 
@@ -292,8 +293,9 @@ aic = setNames(
 aic
 
 # PARA PENSAR:
-#   Comparando os modelos PGLS, qual possui o melhor ajuste?
-#   Baseado no melhor modelo, como é a correlação evolutiva das características?
+# Comparando os modelos PIC, qual possui o melhor ajuste?
+# Baseado no melhor modelo, como é a correlação evolutiva das características?
+# As estimativas do melhor modelo corroboram ou refutam nossa hipótese?
 
 ############################# INFERÊNCIA POR MATRIZ R ##########################
 
@@ -390,8 +392,12 @@ aic = setNames(
 aic
 
 # PARA PENSAR:
-#   Comparando as matrizes de correlação, qual possui o melhor ajuste?
-#   Baseado na melhor matriz, como é a correlação evolutiva das características?
+# Comparando os modelos PIC, qual possui o melhor ajuste?
+# Baseado no melhor modelo, como é a correlação evolutiva das características?
+# As estimativas do melhor modelo corroboram ou refutam nossa hipótese?
 
 ################################### TAREFA #####################################
+
+# Compare as estimativas de correlação evolutiva entre os diferentes métodos. 
+# Existe similaridade entre os métodos? Eles corroboram ou refutam a hipótese? 
 

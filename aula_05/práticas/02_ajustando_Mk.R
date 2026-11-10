@@ -149,7 +149,7 @@ aic
 # Qual modelo teve o melhor ajuste aos dados? 
 # Que processo evolutivo esse modelo representa? 
 # O que indicam as estimativas dos parâmetros desse modelo?
-# Essas estimativas corroboram ou refutam a nossa hipóteses inicial?
+# Essas estimativas corroboram ou refutam a nossa hipótese inicial?
 
 ############### RECONSTRUÇÃO CORHMM - APENAS ESTADOS OBSERVADOS ################
 
