@@ -1,4 +1,4 @@
-## Hipóteses para testar:
+## Opções de projetos pré-formulados:
 
 1) As síndromes de dispersão têm sido sugeridas como um fator determinante para 
 a distribuição geográfica e permanência das linhagens de plantas na escala macroevolutiva.

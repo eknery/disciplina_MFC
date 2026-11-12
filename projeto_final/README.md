@@ -4,7 +4,7 @@ O projeto final da disciplina consiste em testar uma hipótese evolutiva utiliza
 métodos filogenéticos comparativos. Os estudantes poderão testar uma hipótese 
 de interesse pessoal a partir dos seus próprios dados, ou testar uma hipótese 
 pré-formulada a partir de dados disponíveis neste repositório. Em ambos casos, 
-os estudantes deverão apresentar os scripts utilizados em sala se aula, devendo:
+os estudantes deverão apresentar os scripts utilizados em sala de aula, devendo:
 
  - Explicar a hipótese evolutiva que foi testada;
  - Justificar os métodos utilizados;
