@@ -16,9 +16,8 @@ organismos. Sob essa outra perspectiva, o conteúdo CG aumentaria principalmente
 em linhagens sob maior pressão de seleção estabilizadora, quando mutações em 
 regiões gênicas teriam maiores chances de reduzir a aptidão dos organismos. 
 Qual dessas perspectivas alternativas sobre a função do conteúdo CG parece
-mais provável? Para investigar essa pergunta, utilize a filogenia de um grupo de 
-de bactérias patogênicas (`bac_phy.nwk`) e os dados sobre o genoma dessas
-espécies (`bac_data.csv`).
+mais provável? Para investigar essa pergunta, utilize a filogenia de um grupo 
+de bactérias (`bac_phy.nwk`) e os dados sobre o genoma dessas espécies (`bac_data.csv`).
 
 2) As síndromes de dispersão têm sido sugeridas como um fator determinante para 
 a distribuição geográfica e a permanência das linhagens de plantas.
