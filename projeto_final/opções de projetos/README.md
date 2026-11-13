@@ -12,8 +12,8 @@ moléculas de DNA.
 Por outro lado, o conteúdo CG teria a função de proteção do genoma contra 
 a seleção estabilizadora, visto que o aumento de regiões ricas em CG 
 diminuiria as chances de mutações em regiões gênicas necessárias à aptidão dos
-organismos. Sob essa perspectiva, o conteúdo CG aumentaria principalmente em 
-linhagens sob maior pressão de seleção estabilizadora, quando mutações em 
+organismos. Sob essa outra perspectiva, o conteúdo CG aumentaria principalmente 
+em linhagens sob maior pressão de seleção estabilizadora, quando mutações em 
 regiões gênicas teriam maiores chances de reduzir a aptidão dos organismos. 
 Qual dessas perspectivas alternativas sobre a função do conteúdo CG parece
 mais provável? Para investigar essa pergunta, utilize a filogenia de um grupo de 
