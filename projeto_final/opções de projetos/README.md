@@ -41,14 +41,13 @@ diversas vezes a partir de um desenvovlimento dentro de ovos depositados no ambi
 (oviparidade), sendo raramente perdido na evolução, o que sugere uma vantagem 
 adaptativa importante para os animais terrestres.
 Primeiro, a vivaparidade teria facilitado a reprodução animal em ambientes montanos,
-visto que o corpo da fêmea facilitaria as trocas gasosas do embrião mesmo nas
-condições de menor disponibilidade de oxigênio (hipóxia) em altitudes extremas.
+visto que o corpo da fêmea facilitaria as trocas gasosas do embrião sob
+a menor disponibilidade de oxigênio (hipóxia) das altitudes extremas, condição 
+que restringiria as trocas gasosas de ovos depositados no ambiente.
 Segundo, a vivaparidade teria facilitado  a reprodução animal em ambientes frios,
-visto que o corpo da fêmea protegeria o embrião de baixas temperaturas ambientes,
+visto que o corpo da fêmea protegeria o embrião das baixas temperaturas,
 condição que não permitiria a eclosão de ovos depositados no ambiente.
 Será que a viviparidade trouxe essas vantagens adaptativas? Para investigar essa
 pergunta, utilize a filogenia da família de iguanas Liolaemidae (`liolaemidae_phy.nex`) 
 e os dados sobre modo de desenvolvimento e preferências ambientais 
 das suas espécies (`liolaemidae_data.csv`).
-
-
