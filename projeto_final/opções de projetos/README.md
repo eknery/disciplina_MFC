@@ -19,8 +19,8 @@ Qual dessas perspectivas alternativas sobre a função do conteúdo CG parece
 mais provável? Para investigar essa pergunta, utilize a filogenia de um grupo 
 de bactérias (`bac_phy.nwk`) e os dados sobre o genoma dessas espécies (`bac_data.csv`).
 
-2) As síndromes de dispersão têm sido sugeridas como um fator determinante para 
-a distribuição geográfica e a permanência das linhagens de plantas.
+2) O modo de dispersão têm sido sugerido como um fator determinante para 
+a distribuição geográfica e a permanência das linhagens de plantas com semente.
 Por um lado, a dispersão abiótica é sugerida como uma facilitadora do aumento da
 distribuição geográfica, permitindo que as plantas propaguem seus descendentes 
 mesmo na ausência de animais dispersores. Sob essa perspectiva, a dispersão 
@@ -31,8 +31,24 @@ aumento da distribuição geográfica, permitindo que as plantas propaguem seus
 descendentes por maiores distâncias e (re)colonizem ambientes mais rápido. 
 Sob essa outra perspectiva, a dispersão biótica teria trazido maior vantagem 
 para as plantas, tornando-se uma característica mais estável. 
-Qual dessas perspectivas alternativas sobre as síndromes de dispersão parece
+Qual dessas perspectivas alternativas sobre o modo de dispersão parece
 mais provável? Para investigar essa pergunta, utilize a filogenia da família 
-de plantas Melastomataceae (`melastome_phy.nwk`) e os dados de síndrome de 
+de angiospermas Melastomataceae (`melastome_phy.nwk`) e os dados sobre modo de 
 dispersão das suas espécies (`melastome_data.csv`).
+
+3) O desenvolvimento do embrião dentro do corpo da fêmea (viviparidade) evoluiu
+diversas vezes a partir de um desenvovlimento dentro de ovos depositados no ambiente
+(oviparidade), sendo raramente perdido na evolução, o que sugere uma vantagem 
+adaptativa importante para os animais terrestres.
+Primeiro, a vivaparidade teria facilitado a reprodução animal em ambientes montanos,
+visto que o corpo da fêmea facilitaria as trocas gasosas do embrião mesmo nas
+condições de menor disponibilidade de oxigênio (hipóxia) em altitudes extremas.
+Segundo, a vivaparidade teria facilitado  a reprodução animal em ambientes frios,
+visto que o corpo da fêmea protegeria o embrião de baixas temperaturas ambientes,
+condição que não permitiria a eclosão de ovos depositados no ambiente.
+Será que a viviparidade trouxe essas vantagens adaptativas? Para investigar essa
+pergunta, utilize a filogenia da família de iguanas Liolaemidae (`liolaemidae_phy.nex`) 
+e os dados sobre modo de desenvolvimento e preferências ambientais 
+das suas espécies (`liolaemidae_data.csv`).
+
 

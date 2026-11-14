@@ -1,0 +1,529 @@
+#NEXUS
+[R-package APE, Sun Aug 23 16:44:53 2020]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 258;
+	TAXLABELS
+		Ctenoblepharys_adspersa
+		Liolaemus_abaucan
+		Liolaemus_koslowskyi
+		Liolaemus_albiceps
+		Liolaemus_irregularis
+		Liolaemus_ornatus
+		Liolaemus_calchaqui
+		Liolaemus_crepuscularis
+		Liolaemus_lavillai
+		Liolaemus_espinozai
+		Liolaemus_quilmes
+		Liolaemus_uspallatensis
+		Liolaemus_chacoensis
+		Liolaemus_darwinii
+		Liolaemus_laurenti
+		Liolaemus_grosseorum
+		Liolaemus_olongasta
+		Liolaemus_boulengeri
+		Liolaemus_senguer
+		Liolaemus_inacayali
+		Liolaemus_telsen
+		Liolaemus_sagei
+		Liolaemus_tehuelche
+		Liolaemus_loboi
+		Liolaemus_rothi
+		Liolaemus_hermannunezi
+		Liolaemus_tromen
+		Liolaemus_sitesi
+		Liolaemus_canqueli
+		Liolaemus_melanops
+		Liolaemus_morenoi
+		Liolaemus_goetschi
+		Liolaemus_martorii
+		Liolaemus_chehuachekenk
+		Liolaemus_fitzingerii
+		Liolaemus_xanthoviridis
+		Liolaemus_cuyanus
+		Liolaemus_donosobarrosi
+		Liolaemus_mapuche
+		Liolaemus_josei
+		Liolaemus_puelche
+		Liolaemus_anomalus
+		Liolaemus_lentus
+		Liolaemus_pseudoanomalus
+		Liolaemus_azarai
+		Liolaemus_wiegmannii
+		Liolaemus_scapularis
+		Liolaemus_cuyumhue
+		Liolaemus_multimaculatus
+		Liolaemus_riojanus
+		Liolaemus_salinicola
+		Liolaemus_lutzae
+		Liolaemus_occipitalis
+		Liolaemus_andinus
+		Liolaemus_poecilochromis
+		Liolaemus_multicolor
+		Liolaemus_dorbignyi
+		Liolaemus_insolitus
+		Liolaemus_stolzmanni
+		Liolaemus_molinai
+		Liolaemus_poconchilensis
+		Liolaemus_torresi
+		Liolaemus_annectens
+		Liolaemus_etheridgei
+		Liolaemus_signifer
+		Liolaemus_huacahuasicus
+		Liolaemus_melanogaster
+		Liolaemus_williamsi
+		Liolaemus_polystictus
+		Liolaemus_robustus
+		Liolaemus_ortizii
+		Liolaemus_thomasi
+		Liolaemus_audituvelatus
+		Liolaemus_fabiani
+		Liolaemus_eleodori
+		Liolaemus_vallecurensis
+		Liolaemus_ruibali
+		Liolaemus_famatinae
+		Liolaemus_orientalis
+		Liolaemus_archeforus
+		Liolaemus_chacabucoense
+		Liolaemus_tristis
+		Liolaemus_zullyae
+		Liolaemus_gallardoi
+		Liolaemus_sarmientoi
+		Liolaemus_baguali
+		Liolaemus_escarchadosi
+		Liolaemus_tari
+		Liolaemus_kingii
+		Liolaemus_somuncurae
+		Liolaemus_uptoni
+		Liolaemus_magellanicus
+		Liolaemus_avilai
+		Liolaemus_morandae
+		Liolaemus_lineomaculatus
+		Liolaemus_kolengh
+		Liolaemus_silvanae
+		Liolaemus_hatcheri
+		Liolaemus_abdalai
+		Liolaemus_bibronii_3
+		Liolaemus_bibronii
+		Liolaemus_alticolor
+		Liolaemus_chungara
+		Liolaemus_incaicus
+		Liolaemus_chaltin
+		Liolaemus_puna
+		Liolaemus_bibronii_12
+		Liolaemus_bitaeniatus
+		Liolaemus_bibronii_9
+		Liolaemus_pagaburoi
+		Liolaemus_bibronii_8
+		Liolaemus_gracilis
+		Liolaemus_saxatilis
+		Liolaemus_robertmertensi
+		Liolaemus_ramirezae
+		Liolaemus_yanalcu
+		Liolaemus_leftrarui
+		Liolaemus_villaricensis
+		Liolaemus_araucaniensis
+		Liolaemus_pictus
+		Liolaemus_curicensis
+		Liolaemus_cristiani
+		Liolaemus_riodamas
+		Liolaemus_monticola_ssp.
+		Liolaemus_septentrionalis
+		Liolaemus_bellii
+		Liolaemus_moradoensis
+		Liolaemus_fitzgeraldi
+		Liolaemus_cyanogaster
+		Liolaemus_schroederi
+		Liolaemus_gravenhorstii
+		Liolaemus_chiliensis
+		Liolaemus_coeruleus
+		Liolaemus_neuquensis
+		Liolaemus_antumalguen
+		Liolaemus_sp_MM7
+		Liolaemus_chillanensis
+		Liolaemus_sp_MM6
+		Liolaemus_carlosgarini
+		Liolaemus_scorialis
+		Liolaemus_choique
+		Liolaemus_smaug
+		Liolaemus_crandalli
+		Liolaemus_cf._elongatus
+		Liolaemus_elongatus
+		Liolaemus_janequeoae
+		Liolaemus_burmeisteri
+		Liolaemus_buergeri
+		Liolaemus_kriegi
+		Liolaemus_sp_MMC
+		Liolaemus_sp_MMD
+		Liolaemus_zabalai
+		Liolaemus_tregenzai
+		Liolaemus_sp_MMB
+		Liolaemus_curis
+		Liolaemus_frassinettii
+		Liolaemus_leopardinus
+		Liolaemus_valdesianus
+		Liolaemus_ubaghsi
+		Liolaemus_ramonensis
+		Liolaemus_austromendocinus
+		Liolaemus_parvus
+		Liolaemus_gununakuna
+		Liolaemus_capillitas
+		Liolaemus_umbrifer
+		Liolaemus_heliodermis
+		Liolaemus_dicktracyi
+		Liolaemus_talampaya
+		Liolaemus_tulkas
+		Liolaemus_petrophilus
+		Liolaemus_flavipiceus
+		Liolaemus_punmahuida
+		Liolaemus_atacamensis
+		Liolaemus_nigromaculatus
+		Liolaemus_melaniceps
+		Liolaemus_silvai
+		Liolaemus_zapallarensis
+		Liolaemus_constanzae
+		Liolaemus_isabelae
+		Liolaemus_paulinae
+		Liolaemus_hellmichi
+		Liolaemus_nigrocoeruleus
+		Liolaemus_velosoi
+		Liolaemus_platei
+		Liolaemus_lorenzmuelleri
+		Liolaemus_maldonadae
+		Liolaemus_pseudolemniscatus
+		Liolaemus_confusus
+		Liolaemus_monticola
+		Liolaemus_nitidus
+		Liolaemus_fuscus
+		Liolaemus_nigroviridis
+		Liolaemus_uniformis
+		Liolaemus_lemniscatus
+		Liolaemus_tenuis
+		Liolaemus_chavin
+		Liolaemus_pachacutec
+		Liolaemus_walkeri
+		Liolaemus_wari
+		Liolaemus_tacnae
+		Phymaturus_aguedae
+		Phymaturus_antofagastensis
+		Phymaturus_denotatus
+		Phymaturus_laurenti
+		Phymaturus_mallimaccii
+		Phymaturus_punae
+		Phymaturus_bibronii
+		Phymaturus_williamsi
+		Phymaturus_extrilidus
+		Phymaturus_cf._palluma
+		Phymaturus_verdugo
+		Phymaturus_palluma
+		Phymaturus_sp_10
+		Phymaturus_roigorum
+		Phymaturus_sp_9
+		Phymaturus_sp_7
+		Phymaturus_sp_8
+		Phymaturus_sp_1
+		Phymaturus_tromen
+		Phymaturus_querque
+		Phymaturus_damasense
+		Phymaturus_dorsimaculatus
+		Phymaturus_sp_3
+		Phymaturus_sp_4
+		Phymaturus_vociferator
+		Phymaturus_sp_5
+		Phymaturus_sp_2
+		Phymaturus_sp_6
+		Phymaturus_calcogaster
+		Phymaturus_ceii
+		Phymaturus_somuncurensis
+		Phymaturus_etheridgei
+		Phymaturus_sp_20
+		Phymaturus_sp_22
+		Phymaturus_sp_11
+		Phymaturus_sp_21
+		Phymaturus_tenebrosus
+		Phymaturus_delheyi
+		Phymaturus_nevadoi
+		Phymaturus_payuniae
+		Phymaturus_sp_12
+		Phymaturus_sitesi
+		Phymaturus_sp_16
+		Phymaturus_zapalensis
+		Phymaturus_sp_17
+		Phymaturus_sp_18
+		Phymaturus_sp_19
+		Phymaturus_excelsus
+		Phymaturus_spectabilis
+		Phymaturus_spurcus
+		Phymaturus_sp_13
+		Phymaturus_manuelae
+		Phymaturus_patagonicus
+		Phymaturus_sp_14
+		Phymaturus_sp_15
+		Phymaturus_felixi
+		Phymaturus_indistinctus
+		Phymaturus_videlai
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Ctenoblepharys_adspersa,
+		2	Liolaemus_abaucan,
+		3	Liolaemus_koslowskyi,
+		4	Liolaemus_albiceps,
+		5	Liolaemus_irregularis,
+		6	Liolaemus_ornatus,
+		7	Liolaemus_calchaqui,
+		8	Liolaemus_crepuscularis,
+		9	Liolaemus_lavillai,
+		10	Liolaemus_espinozai,
+		11	Liolaemus_quilmes,
+		12	Liolaemus_uspallatensis,
+		13	Liolaemus_chacoensis,
+		14	Liolaemus_darwinii,
+		15	Liolaemus_laurenti,
+		16	Liolaemus_grosseorum,
+		17	Liolaemus_olongasta,
+		18	Liolaemus_boulengeri,
+		19	Liolaemus_senguer,
+		20	Liolaemus_inacayali,
+		21	Liolaemus_telsen,
+		22	Liolaemus_sagei,
+		23	Liolaemus_tehuelche,
+		24	Liolaemus_loboi,
+		25	Liolaemus_rothi,
+		26	Liolaemus_hermannunezi,
+		27	Liolaemus_tromen,
+		28	Liolaemus_sitesi,
+		29	Liolaemus_canqueli,
+		30	Liolaemus_melanops,
+		31	Liolaemus_morenoi,
+		32	Liolaemus_goetschi,
+		33	Liolaemus_martorii,
+		34	Liolaemus_chehuachekenk,
+		35	Liolaemus_fitzingerii,
+		36	Liolaemus_xanthoviridis,
+		37	Liolaemus_cuyanus,
+		38	Liolaemus_donosobarrosi,
+		39	Liolaemus_mapuche,
+		40	Liolaemus_josei,
+		41	Liolaemus_puelche,
+		42	Liolaemus_anomalus,
+		43	Liolaemus_lentus,
+		44	Liolaemus_pseudoanomalus,
+		45	Liolaemus_azarai,
+		46	Liolaemus_wiegmannii,
+		47	Liolaemus_scapularis,
+		48	Liolaemus_cuyumhue,
+		49	Liolaemus_multimaculatus,
+		50	Liolaemus_riojanus,
+		51	Liolaemus_salinicola,
+		52	Liolaemus_lutzae,
+		53	Liolaemus_occipitalis,
+		54	Liolaemus_andinus,
+		55	Liolaemus_poecilochromis,
+		56	Liolaemus_multicolor,
+		57	Liolaemus_dorbignyi,
+		58	Liolaemus_insolitus,
+		59	Liolaemus_stolzmanni,
+		60	Liolaemus_molinai,
+		61	Liolaemus_poconchilensis,
+		62	Liolaemus_torresi,
+		63	Liolaemus_annectens,
+		64	Liolaemus_etheridgei,
+		65	Liolaemus_signifer,
+		66	Liolaemus_huacahuasicus,
+		67	Liolaemus_melanogaster,
+		68	Liolaemus_williamsi,
+		69	Liolaemus_polystictus,
+		70	Liolaemus_robustus,
+		71	Liolaemus_ortizii,
+		72	Liolaemus_thomasi,
+		73	Liolaemus_audituvelatus,
+		74	Liolaemus_fabiani,
+		75	Liolaemus_eleodori,
+		76	Liolaemus_vallecurensis,
+		77	Liolaemus_ruibali,
+		78	Liolaemus_famatinae,
+		79	Liolaemus_orientalis,
+		80	Liolaemus_archeforus,
+		81	Liolaemus_chacabucoense,
+		82	Liolaemus_tristis,
+		83	Liolaemus_zullyae,
+		84	Liolaemus_gallardoi,
+		85	Liolaemus_sarmientoi,
+		86	Liolaemus_baguali,
+		87	Liolaemus_escarchadosi,
+		88	Liolaemus_tari,
+		89	Liolaemus_kingii,
+		90	Liolaemus_somuncurae,
+		91	Liolaemus_uptoni,
+		92	Liolaemus_magellanicus,
+		93	Liolaemus_avilai,
+		94	Liolaemus_morandae,
+		95	Liolaemus_lineomaculatus,
+		96	Liolaemus_kolengh,
+		97	Liolaemus_silvanae,
+		98	Liolaemus_hatcheri,
+		99	Liolaemus_abdalai,
+		100	Liolaemus_bibronii_3,
+		101	Liolaemus_bibronii,
+		102	Liolaemus_alticolor,
+		103	Liolaemus_chungara,
+		104	Liolaemus_incaicus,
+		105	Liolaemus_chaltin,
+		106	Liolaemus_puna,
+		107	Liolaemus_bibronii_12,
+		108	Liolaemus_bitaeniatus,
+		109	Liolaemus_bibronii_9,
+		110	Liolaemus_pagaburoi,
+		111	Liolaemus_bibronii_8,
+		112	Liolaemus_gracilis,
+		113	Liolaemus_saxatilis,
+		114	Liolaemus_robertmertensi,
+		115	Liolaemus_ramirezae,
+		116	Liolaemus_yanalcu,
+		117	Liolaemus_leftrarui,
+		118	Liolaemus_villaricensis,
+		119	Liolaemus_araucaniensis,
+		120	Liolaemus_pictus,
+		121	Liolaemus_curicensis,
+		122	Liolaemus_cristiani,
+		123	Liolaemus_riodamas,
+		124	Liolaemus_monticola_ssp.,
+		125	Liolaemus_septentrionalis,
+		126	Liolaemus_bellii,
+		127	Liolaemus_moradoensis,
+		128	Liolaemus_fitzgeraldi,
+		129	Liolaemus_cyanogaster,
+		130	Liolaemus_schroederi,
+		131	Liolaemus_gravenhorstii,
+		132	Liolaemus_chiliensis,
+		133	Liolaemus_coeruleus,
+		134	Liolaemus_neuquensis,
+		135	Liolaemus_antumalguen,
+		136	Liolaemus_sp_MM7,
+		137	Liolaemus_chillanensis,
+		138	Liolaemus_sp_MM6,
+		139	Liolaemus_carlosgarini,
+		140	Liolaemus_scorialis,
+		141	Liolaemus_choique,
+		142	Liolaemus_smaug,
+		143	Liolaemus_crandalli,
+		144	Liolaemus_cf._elongatus,
+		145	Liolaemus_elongatus,
+		146	Liolaemus_janequeoae,
+		147	Liolaemus_burmeisteri,
+		148	Liolaemus_buergeri,
+		149	Liolaemus_kriegi,
+		150	Liolaemus_sp_MMC,
+		151	Liolaemus_sp_MMD,
+		152	Liolaemus_zabalai,
+		153	Liolaemus_tregenzai,
+		154	Liolaemus_sp_MMB,
+		155	Liolaemus_curis,
+		156	Liolaemus_frassinettii,
+		157	Liolaemus_leopardinus,
+		158	Liolaemus_valdesianus,
+		159	Liolaemus_ubaghsi,
+		160	Liolaemus_ramonensis,
+		161	Liolaemus_austromendocinus,
+		162	Liolaemus_parvus,
+		163	Liolaemus_gununakuna,
+		164	Liolaemus_capillitas,
+		165	Liolaemus_umbrifer,
+		166	Liolaemus_heliodermis,
+		167	Liolaemus_dicktracyi,
+		168	Liolaemus_talampaya,
+		169	Liolaemus_tulkas,
+		170	Liolaemus_petrophilus,
+		171	Liolaemus_flavipiceus,
+		172	Liolaemus_punmahuida,
+		173	Liolaemus_atacamensis,
+		174	Liolaemus_nigromaculatus,
+		175	Liolaemus_melaniceps,
+		176	Liolaemus_silvai,
+		177	Liolaemus_zapallarensis,
+		178	Liolaemus_constanzae,
+		179	Liolaemus_isabelae,
+		180	Liolaemus_paulinae,
+		181	Liolaemus_hellmichi,
+		182	Liolaemus_nigrocoeruleus,
+		183	Liolaemus_velosoi,
+		184	Liolaemus_platei,
+		185	Liolaemus_lorenzmuelleri,
+		186	Liolaemus_maldonadae,
+		187	Liolaemus_pseudolemniscatus,
+		188	Liolaemus_confusus,
+		189	Liolaemus_monticola,
+		190	Liolaemus_nitidus,
+		191	Liolaemus_fuscus,
+		192	Liolaemus_nigroviridis,
+		193	Liolaemus_uniformis,
+		194	Liolaemus_lemniscatus,
+		195	Liolaemus_tenuis,
+		196	Liolaemus_chavin,
+		197	Liolaemus_pachacutec,
+		198	Liolaemus_walkeri,
+		199	Liolaemus_wari,
+		200	Liolaemus_tacnae,
+		201	Phymaturus_aguedae,
+		202	Phymaturus_antofagastensis,
+		203	Phymaturus_denotatus,
+		204	Phymaturus_laurenti,
+		205	Phymaturus_mallimaccii,
+		206	Phymaturus_punae,
+		207	Phymaturus_bibronii,
+		208	Phymaturus_williamsi,
+		209	Phymaturus_extrilidus,
+		210	Phymaturus_cf._palluma,
+		211	Phymaturus_verdugo,
+		212	Phymaturus_palluma,
+		213	Phymaturus_sp_10,
+		214	Phymaturus_roigorum,
+		215	Phymaturus_sp_9,
+		216	Phymaturus_sp_7,
+		217	Phymaturus_sp_8,
+		218	Phymaturus_sp_1,
+		219	Phymaturus_tromen,
+		220	Phymaturus_querque,
+		221	Phymaturus_damasense,
+		222	Phymaturus_dorsimaculatus,
+		223	Phymaturus_sp_3,
+		224	Phymaturus_sp_4,
+		225	Phymaturus_vociferator,
+		226	Phymaturus_sp_5,
+		227	Phymaturus_sp_2,
+		228	Phymaturus_sp_6,
+		229	Phymaturus_calcogaster,
+		230	Phymaturus_ceii,
+		231	Phymaturus_somuncurensis,
+		232	Phymaturus_etheridgei,
+		233	Phymaturus_sp_20,
+		234	Phymaturus_sp_22,
+		235	Phymaturus_sp_11,
+		236	Phymaturus_sp_21,
+		237	Phymaturus_tenebrosus,
+		238	Phymaturus_delheyi,
+		239	Phymaturus_nevadoi,
+		240	Phymaturus_payuniae,
+		241	Phymaturus_sp_12,
+		242	Phymaturus_sitesi,
+		243	Phymaturus_sp_16,
+		244	Phymaturus_zapalensis,
+		245	Phymaturus_sp_17,
+		246	Phymaturus_sp_18,
+		247	Phymaturus_sp_19,
+		248	Phymaturus_excelsus,
+		249	Phymaturus_spectabilis,
+		250	Phymaturus_spurcus,
+		251	Phymaturus_sp_13,
+		252	Phymaturus_manuelae,
+		253	Phymaturus_patagonicus,
+		254	Phymaturus_sp_14,
+		255	Phymaturus_sp_15,
+		256	Phymaturus_felixi,
+		257	Phymaturus_indistinctus,
+		258	Phymaturus_videlai
+	;
+	TREE * UNTITLED = [&R] (1:43.71502474,(((((((((((2:6.855025207,3:6.855025207):0.5671543438,((((((4:0.6742405857,5:0.6742405857):2.335099437,6:3.009340022):0.7586754132,(7:3.252300972,8:3.252300972):0.5157144635):0.5193450808,9:4.287360516):1.849283917,(10:1.035714827,11:1.035714827):5.100929606):0.3585677284,12:6.495212161):0.9269673891):1.078556033,(13:6.28634669,(((14:1.297438256,15:1.297438256):1.948255046,16:3.245693302):1.474716212,17:4.720409514):1.565937176):2.214388893):3.702343307,(((((18:2.446078946,19:2.446078946):1.683998026,((20:2.204190687,21:2.204190687):0.7713821468,(22:1.596679834,23:1.596679834):1.378892999):1.154504138):1.544071022,24:5.674147994):1.075808462,25:6.749956456):2.357730415,((26:2.703978739,27:2.703978739):1.072704378,28:3.776683116):5.331003755):3.095392019):0.6252976131,((((29:1.604011847,(30:1.230875101,31:1.230875101):0.3731367459):0.3999590444,(32:1.072842041,33:1.072842041):0.9311288501):1.679609719,(34:2.189865944,(35:0.9278233313,36:0.9278233313):1.262042613):1.493714666):3.089363778,(37:5.438215958,((38:2.359041349,39:2.359041349):1.702799078,(40:2.383031226,41:2.383031226):1.678809201):1.376375531):1.334728431):6.055432115):0.7420424464,(((42:0.699191535,43:0.699191535):0.7681268229,44:1.467318358):10.04024865,((((45:3.490740333,46:3.490740333):3.051496916,47:6.542237249):1.040318248,((48:2.111212054,(49:0.5410256071,50:0.5410256071):1.570186447):4.514426959,51:6.625639013):0.956916484):2.179505377,(52:5.834718567,53:5.834718567):3.927342308):1.745506136):2.062851939):1.440035511,(((((((54:2.009838972,55:2.009838972):2.55478346,56:4.564622431):1.982805888,57:6.547428319):0.3924287779,((58:2.158755081,59:2.158755081):3.717166284,(60:4.633993872,(61:1.759888334,62:1.759888334):2.874105538):1.241927493):1.063935733):0.5970622274,((((63:1.358782623,64:1.358782623):2.692115276,65:4.050897899):1.330911492,((66:2.152754958,(67:1.899464557,68:1.899464557):0.2532904013):2.024404963,(69:2.939697495,70:2.939697495):1.237462426):1.20464947):1.198255269,(71:1.360605478,72:1.360605478):5.219459182):0.9568546647):1.263054766,((((73:2.144281622,74:2.144281622):0.2601752866,(75:0.5134882806,76:0.5134882806):1.890968628):2.373509099,77:4.777966008):0.945565876,78:5.723531884):3.076442207):0.4938511586,79:9.29382525):5.716629211):4.622315264,(((((((((80:1.072061686,81:1.072061686):0.1096696549,82:1.181731341):0.330467256,83:1.512198597):0.820133127,(84:1.650484629,85:1.650484629):0.6818470946):0.7652477901,(86:1.357398624,(87:0.733942809,88:0.733942809):0.623455815):1.74018089):1.220462423,89:4.318041937):1.682087013,(90:3.894095877,91:3.894095877):2.106033074):2.48956215,92:8.4896911):2.911601682,((((93:1.843404521,94:1.843404521):1.656231269,95:3.499635789):2.521185668,(96:1.469336677,97:1.469336677):4.551484781):2.452175519,98:8.472996977):2.928295806):8.231476942):5.481340812,(((((((99:2.744977313,100:2.744977313):1.496959655,101:4.241936967):5.664291989,(((((102:1.243252883,103:1.243252883):1.992077228,104:3.235330111):1.180799801,(105:2.910156064,106:2.910156064):1.505973848):2.133094637,(((107:1.299991206,108:1.299991206):2.517560838,109:3.817552045):0.4758763244,110:4.293428369):2.25579618):1.384080336,(((111:3.967475598,(112:0.3118064206,113:0.3118064206):3.655669177):1.618119469,114:5.585595067):1.041943674,(115:1.703024795,116:1.703024795):4.924513946):1.305766144):1.972924071):2.554418876,(117:4.397372712,118:4.397372712):8.06327512):1.140015999,(((((119:2.311549366,120:2.311549366):1.073399604,121:3.38494897):3.329729047,(((122:2.456317996,123:2.456317996):1.647817519,124:4.104135515):1.995640199,125:6.099775713):0.6149023044):1.011855422,((((126:0.2922974314,127:0.2922974314):1.93102822,128:2.223325652):2.107083528,((129:1.477013554,130:1.477013554):0.9707410062,131:2.447754561):1.88265462):2.470946561,132:6.801355741):0.9251776984):3.9861517,(133:0.6097337434,134:0.6097337434):11.1029514):1.887978691):4.177031138,(((((((((135:0.3951274075,136:0.3951274075):1.251434643,(137:1.388232079,138:1.388232079):0.2583299712):0.4574798348,(139:1.162059715,140:1.162059715):0.94198217):0.5538571286,((141:0.4924192151,142:0.4924192151):1.352251339,143:1.844670554):0.8132284592):0.4719049219,((144:1.053692587,145:1.053692587):1.266025691,146:2.319718277):0.8100856579):0.7615515428,147:3.891355478):1.74356222,((((148:1.972937633,((149:1.426791617,(150:0.9488666582,151:0.9488666582):0.4779249586):0.4034537233,152:1.83024534):0.1426922925):0.4900607484,153:2.462998381):0.4817312577,154:2.944729639):0.9142817176,(155:3.537953354,(156:2.04299446,(((157:0.265548489,158:0.265548489):0.1341743556,159:0.3997228446):0.1084427825,160:0.5081656271):1.534828833):1.494958894):0.3210580025):1.775906341):4.00031162,((((161:3.767790342,162:3.767790342):2.227975135,163:5.995765477):1.770266532,(((164:0.4351946494,165:0.4351946494):1.201720956,166:1.636915605):2.94103818,((167:0.561622928,168:0.561622928):1.892157839,169:2.453780767):2.124173018):3.188078224):0.5226786238,170:8.288710632):1.346518685):3.436238885,(171:1.832325728,172:1.832325728):11.23914247):4.706226767):3.809462966,((((((173:3.177193139,174:3.177193139):1.382821919,175:4.560015058):1.699289399,(176:2.563170729,177:2.563170729):3.696133728):8.523209945,((((178:1.000012245,179:1.000012245):2.730787404,180:3.730799649):3.675502515,(((181:4.159840056,((182:0.564994625,183:0.564994625):2.476947685,184:3.04194231):1.117897747):2.006366143,185:6.166206199):0.412163654,186:6.578369853):0.827932311):5.734199466,187:13.14050163):1.642012771):2.821033395,(((188:7.096311664,(189:4.646919852,190:4.646919852):2.449391813):4.933316969,(191:9.388931211,(192:4.620412495,193:4.620412495):4.768518716):2.640697422):2.818653718,194:14.84828235):2.755265445):1.048069416,195:18.65161721):2.935540721):3.526952602):0.9697475235,((196:6.680213673,((197:4.151319046,198:4.151319046):1.021515653,199:5.172834699):1.507378974):2.653468224,200:9.333681897):16.75017616):13.76766472,(((((201:2.012520626,((((202:0.451527901,(203:0.05226673359,204:0.05226673359):0.3992611674):0.2480968525,205:0.6996247534):0.3373128098,206:1.036937563):0.1436384305,((207:0.5549294058,208:0.5549294058):0.1721829306,209:0.7271123363):0.4534636573):0.831944632):0.5028702771,(((((((210:0.1318442704,211:0.1318442704):0.05698447651,212:0.1888287469):0.1122787564,213:0.3011075033):0.2909577924,(214:0.3874331232,215:0.3874331232):0.2046321725):0.0952416549,(216:0.4523398387,217:0.4523398387):0.2349671119):0.2392299321,218:0.9265368827):0.3521114265,219:1.278648309):1.236742594):0.6259864628,220:3.141377366):1.45459468,(221:0.94914031,(((222:0.4382694681,((223:0.3472537781,224:0.3472537781):0.03541896106,225:0.3826727391):0.05559672901):0.2056941064,226:0.6439635745):0.09641593742,(227:0.1403914364,228:0.1403914364):0.5999880755):0.2087607981):3.646831735):12.21129256,((((229:1.666393113,(((230:0.5957680731,231:0.5957680731):0.5485826794,(232:0.8498197291,(233:0.3312185303,234:0.3312185303):0.5186011988):0.2945310234):0.3656720596,(235:1.247450669,236:1.247450669):0.2625721427):0.1563703012):0.5089269864,237:2.1753201):2.375642005,(((238:0.905686699,((239:0.3421251657,(240:0.2787811967,241:0.2787811967):0.06334396891):0.1323552341,242:0.4744803997):0.4312062992):2.052279282,(((243:1.05497654,244:1.05497654):0.5682516932,245:1.623228233):0.2975586587,(246:1.406659811,247:1.406659811):0.5141270804):1.037179089):0.3412618061,(((((248:0.2966908819,(249:0.0687886203,250:0.0687886203):0.2279022616):0.4978085859,251:0.7944994678):0.2159101047,252:1.010409573):0.6586393712,(253:0.9921062324,254:0.9921062324):0.6769427114):1.093189899,255:2.762238843):0.5369889436):1.251734318):0.5554505247,(256:1.334313203,(257:0.2738087942,258:0.2738087942):1.060504409):3.772099426):11.70085197):23.04425818):3.863501958):0;
+END;
