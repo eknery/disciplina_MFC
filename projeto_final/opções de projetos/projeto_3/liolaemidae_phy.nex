@@ -127,7 +127,7 @@ BEGIN TAXA;
 		Liolaemus_curicensis
 		Liolaemus_cristiani
 		Liolaemus_riodamas
-		Liolaemus_monticola_ssp.
+		Liolaemus_monticola_ssp
 		Liolaemus_septentrionalis
 		Liolaemus_bellii
 		Liolaemus_moradoensis
@@ -389,7 +389,7 @@ BEGIN TREES;
 		121	Liolaemus_curicensis,
 		122	Liolaemus_cristiani,
 		123	Liolaemus_riodamas,
-		124	Liolaemus_monticola_ssp.,
+		124	Liolaemus_monticola_ssp,
 		125	Liolaemus_septentrionalis,
 		126	Liolaemus_bellii,
 		127	Liolaemus_moradoensis,

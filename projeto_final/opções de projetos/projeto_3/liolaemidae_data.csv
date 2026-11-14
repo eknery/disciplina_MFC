@@ -1,4 +1,4 @@
-species,parity.mode,max.altitude,preferred.temp
+species,parity.mode,max.altitude,opt.temperature
 Ctenoblepharys_adspersa,Oviparity,750,23.05
 Liolaemus_abaucan,Oviparity,2600,20.2
 Liolaemus_albiceps,Viviparity,4020,12.38
@@ -150,7 +150,7 @@ Liolaemus_lorenzmuelleri,Oviparity,3500,8.13
 Liolaemus_maldonadae,Viviparity,3500,7.96
 Liolaemus_melaniceps,Oviparity,30,21.6
 Liolaemus_monticola,Oviparity,2500,16.25
-Liolaemus_monticola_ssp.,Viviparity,1800,9.92
+Liolaemus_monticola_ssp,Viviparity,1800,9.92
 Liolaemus_moradoensis,Viviparity,4000,7.46
 Liolaemus_neuquensis,Viviparity,2200,14.14
 Liolaemus_nigrocoeruleus,Oviparity,350,19
