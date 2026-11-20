@@ -37,9 +37,9 @@ de angiospermas Melastomataceae (`melastome_phy.nwk`) e os dados sobre modo de
 dispersão das suas espécies (`melastome_data.csv`).
 
 3) O desenvolvimento do embrião dentro do corpo da fêmea (viviparidade) evoluiu
-diversas vezes a partir de um desenvovlimento dentro de ovos depositados no ambiente
-(oviparidade), sendo raramente perdido na evolução, o que sugere uma vantagem 
-adaptativa importante para os animais terrestres.
+diversas vezes a partir do desenvovlimento dentro de ovos depositados no ambiente
+(oviparidade), sendo raramente perdido na evolução dos animais terrestres, o que 
+sugere uma vantagem adaptativa.
 Primeiro, a vivaparidade teria facilitado a reprodução animal em ambientes montanos,
 visto que o corpo da fêmea facilitaria as trocas gasosas do embrião sob
 a menor disponibilidade de oxigênio (hipóxia) das altitudes extremas, condição 
