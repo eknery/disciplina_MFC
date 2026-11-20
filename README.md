@@ -17,7 +17,7 @@ Fundamentar a teoria sobre macroevolução e seus principais métodos de investi
 Estudantes de pós-graduação em biologia e áreas afins.
 
 ## Pré-requisitos: 
-Conhecimentos básicos sobre estatística é necessário para a compreensão do conteúdo teórico.
+Conhecimentos básicos sobre estatística são necessários para a compreensão do conteúdo teórico.
 Familiaridade com a linguagem de programação R é necessária para executar as atividades práticas. 
 
 ## Ementa:
