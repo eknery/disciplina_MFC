@@ -48,6 +48,6 @@ Segundo, a vivaparidade teria facilitado  a reprodução animal em ambientes fri
 visto que o corpo da fêmea protegeria o embrião das baixas temperaturas,
 condição que não permitiria a eclosão de ovos depositados no ambiente.
 Será que a viviparidade trouxe essas vantagens adaptativas? Para investigar essa
-pergunta, utilize a filogenia da família de iguanas Liolaemidae (`liolaemidae_phy.nex`) 
+pergunta, utilize a filogenia da família de iguanas Liolaemidae (`liolaemidae_phy.nwk`) 
 e os dados sobre modo de desenvolvimento e preferências ambientais 
 das suas espécies (`liolaemidae_data.csv`).
